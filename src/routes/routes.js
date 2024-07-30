@@ -3,6 +3,7 @@ import login from "../components/formularios/login.vue";
 import registro from "../components/formularios/registro.vue";
 import RecuperarContrasena from "../components/formularios/RecuperarContrasena.vue";
 import NuevaContrasena from "../components/formularios/NuevaContrasena.vue";
+import menu from "../components/views/menu.vue";
 
 
 const routes = [
@@ -28,6 +29,12 @@ const routes = [
         path: "/NuevaContrasena",
         name: "NuevaContrasena",
         component: NuevaContrasena
+    },
+
+    {
+        path: "/menu",
+        name: "menu",
+        component: menu
     }
 ];
 
