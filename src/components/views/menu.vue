@@ -3213,7 +3213,7 @@
         <p class="text_card">Siembras</p>
       </div>
     </div>
-    <div class="cont_menu_lateral">
+    <div class="cont_menu_lateral" :class="{cont_menu2: true, 'menu2-open': menuOpen}">
       <div>
         <button class="btn">Administradores</button>
         <button class="btn">Analisis de Suelos</button>
@@ -3258,7 +3258,12 @@
 <script setup>
 import { ref } from 'vue';
 
+let menuOpen = ref(false)
+let isChecked = ref(false)
 
+const menu = () => {
+  menuOpen.value = !menuOpen.value
+}
 </script>
   <style scoped>
 * {
@@ -3270,10 +3275,13 @@ import { ref } from 'vue';
 .menu {
   background-color: #66bea4;
   height: 90px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
+  position: fixed;
+  z-index: 2;
+  top: 0;
 }
 
 .cont_menu {
@@ -3289,7 +3297,12 @@ import { ref } from 'vue';
 }
 
 #checkbox {
-  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 100;
+  cursor: pointer;
+  appearance: none;
 }
 
 .toggle {
@@ -3354,9 +3367,10 @@ import { ref } from 'vue';
 .cont {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 30px;
   padding: 20px 5%;
+  margin-top: 90px;
 }
 
 .cards {
@@ -3367,6 +3381,7 @@ import { ref } from 'vue';
   justify-content: center;
   align-items: center;
   border-radius: 10px;
+  position: relative;
 }
 
 .fondo_card {
@@ -3383,6 +3398,9 @@ import { ref } from 'vue';
   font-size: 30px;
   color: #235ba1;
   position: absolute;
+  width: 100%;
+  text-align: center;
+  white-space: normal;
 }
 
 .icono1 {
@@ -3412,13 +3430,21 @@ import { ref } from 'vue';
 }
 
 .cont_menu_lateral {
-  position: absolute;
-  width: 70%;
+  width: 100%;
   background-color: #66bea4;
-  top: 90px;
-  left: 0;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+}
+
+.cont_menu2 {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  transition: all 0.6s ease-in-out;
+}
+
+.menu2-open {
+  top: 90px;
 }
 
 .cont_menu_lateral div{
