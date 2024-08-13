@@ -3,18 +3,46 @@
         <p>Inicio De Sesion</p>
         <form>
             <div class="user-box">
-                <input required="" name="email" type="text" />
+                <input required="" name="email" type="text" v-model="email"/>
                 <label>Correo</label>
             </div>
             <div class="user-box">
-                <input required="" name="password" type="password" />
+                <input required="" name="password" type="password" v-model="password"/>
                 <label>Contraseña</label>
             </div>
-            <button class="boton-elegante">Ingresar</button>
+            <button class="boton-elegante" @click.prevent="iniciar()">Ingresar</button>
         </form>
         <p class="forgot-password"><a href="#" class="a2">¿Olvidaste la Contraseña?</a></p>
     </div>
 </template>
+<script setup>
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useLoginStore } from '../../stores/login.js'
+const router = useRouter()
+
+let useLogin = useLoginStore()
+
+let email = ref('juanperez@example.com')
+let password = ref('password123')
+
+async function iniciar() {
+    try {
+        let data = {
+            email: email.value,
+            password: password.value
+        }
+        let res = await useLogin.login(data)
+        if (res) {
+            router.push("/menu")
+        }else {
+            alert('Usuario o contraseña incorrecta')
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+</script>
 
 <style scoped>
 .login-box {
