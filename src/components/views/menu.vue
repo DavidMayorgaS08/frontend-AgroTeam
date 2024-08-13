@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <div class="menu">
-      <div class="cont_menu" @click="menu()">
+      <div class="cont_menu" @click="menu()" v-if="desplegable">
         <input id="checkbox" type="checkbox" v-model="isChecked" />
         <label class="toggle" for="checkbox">
           <div id="bar1" class="bars"></div>
@@ -9,11 +9,33 @@
           <div id="bar3" class="bars"></div>
         </label>
       </div>
+      <div class="cont_perfil" @click="perfil()">
+        <input id="checkbox2" type="checkbox" v-model="isChecked2">
+        <svg
+          for="checkbox2"
+          version="1.1"
+          viewBox="0 0 2048 2048"
+          width="40"
+          height="40"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            transform="translate(897,1199)"
+            d="m0 0h251l35 1 42 3 32 4 35 6 28 6 32 8 38 12 28 10 32 13 28 13 32 16 24 14 17 10 30 20 18 13 16 12 14 11 13 11 11 9 16 15 8 7 35 35 7 8 11 12 9 11 11 13 13 17 10 13 14 20 12 18 13 21 10 17 13 24 9 17 13 28 13 31 11 30 11 34 10 37 8 36 7 43 4 34 2 23 1 19v43l-4 14-6 11-8 10-13 9-11 5-6 2h-1706l-15-7-10-7-9-9-8-13-4-13-1-10 1-45 4-46 5-36 6-34 9-38 9-32 12-37 17-43 13-29 15-30 13-23 8-14 15-24 13-19 12-17 16-21 11-14 9-10 8-10 3-4h2l2-4 9-9 7-8 6-7h2l2-4h2l2-4h2v-2l8-7 14-14 8-7 10-9 11-9 17-14 13-10 19-14 16-11 17-11 21-13 21-12 23-12 15-8 29-13 27-11 28-10 31-10 38-10 32-7 36-6 44-5 31-2z"
+            fill="#FEFEFE"
+          />
+          <path
+            transform="translate(976)"
+            d="m0 0h103v1l50 8 31 7 28 8 31 11 28 12 29 14 23 13 19 12 19 13 19 14 13 11 11 9 16 15 5 5 7 6 7 8 10 10 9 11 9 10 13 17 14 19 11 17 9 15 12 21 14 28 14 34 12 35 9 34 7 36 5 41 1 16v58l-2 26-4 30-4 23-8 34-11 35-9 24-9 21-15 31-13 23-12 19-13 19-12 16-13 16-9 11-6 7h-2l-2 4-30 30h-2v2l-11 9-11 10-16 12-19 14-17 11-20 12-18 10-19 10-32 14-28 10-25 8-28 7-31 6-29 4-21 2-17 1h-46l-30-2-36-5-31-6-34-9-33-11-27-11-30-14-24-13-18-11-24-16-16-12-14-11-13-11-12-11-8-7-20-20v-2h-2l-7-8-9-10-9-11-8-10-13-18-12-17-12-20-12-21-14-28-12-28-13-37-9-33-7-34-5-36-2-23-1-21v-26l2-35 3-27 7-39 9-36 12-36 11-28 13-28 10-19 16-27 8-12 12-17 12-16 13-16 9-10 7-8 5-6h2l2-4 12-12h2v-2l8-7 13-12 11-9 16-13 17-12 15-10 19-12 23-13 24-12 28-12 27-10 33-10 35-8 36-6z"
+            fill="#FEFEFE"
+          />
+        </svg>
+      </div>
       <p class="text_agro">AgroTeam</p>
     </div>
-    <div class="cont">
+    <div class="cont" v-if="Menu">
       <div class="cards">
-        <div class="fondo_card">
+        <div class="fondo_card" @click="adiministradores()">
           <svg
             class="icono1"
             version="1.1"
@@ -3213,7 +3235,11 @@
         <p class="text_card">Siembras</p>
       </div>
     </div>
-    <div class="cont_menu_lateral" :class="{cont_menu2: true, 'menu2-open': menuOpen}">
+    <router-view />
+    <div
+      class="cont_menu_lateral"
+      :class="{ cont_menu2: true, 'menu2-open': menuOpen }"
+    >
       <div>
         <button class="btn">Administradores</button>
         <button class="btn">Analisis de Suelos</button>
@@ -3250,20 +3276,45 @@
         <button class="btn">Siembras</button>
       </div>
     </div>
+    <div class="cont_perfil_desplegable" :class="{ cont_perfil2: true, 'perfil2-open': perfilOpen }">
+      <div class="cont_nombre">
+        <p class="text_nombre">Jesus</p>
+      </div>
+      <div class="cont_rol">
+        <p class="text_rol">Administrador</p>
+      </div>
+      <div class="cont_salir">
+        <button class="btn_salir">Cerrar Sesion</button>
+      </div>
+    </div>
     <div class="footer">
       <p class="text_footer">Numero de telefono</p>
     </div>
   </div>
 </template>
 <script setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 
-let menuOpen = ref(false)
-let isChecked = ref(false)
+let menuOpen = ref(false);
+let isChecked = ref(false);
+let perfilOpen = ref(false);
+let isChecked2 = ref(false);
 
 const menu = () => {
-  menuOpen.value = !menuOpen.value
-}
+  menuOpen.value = !menuOpen.value;
+};
+
+const perfil = () => {
+  perfilOpen.value = !perfilOpen.value;
+};
+
+let Menu = ref(true);
+let desplegable = ref(false);
+
+let adiministradores = () => {
+  Menu.value = false;
+  desplegable.value = true;
+};
 </script>
   <style scoped>
 * {
@@ -3437,17 +3488,19 @@ const menu = () => {
 }
 
 .cont_menu2 {
-  position: absolute;
-  top: -100%;
+  position: fixed;
+  top: 90px;
+  clip-path: inset(0 0 100% 0);
   left: 0;
-  transition: all 0.6s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .menu2-open {
-  top: 90px;
+  clip-path: inset(0 0 0 0);
+  transition: all 0.3s ease-in-out;
 }
 
-.cont_menu_lateral div{
+.cont_menu_lateral div {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -3468,6 +3521,77 @@ const menu = () => {
 .btn:hover {
   background-color: #81dec2;
   color: white;
+}
+
+.cont_perfil {
+  position: absolute;
+  top: 50%;
+  right: 2%;
+  transform: translateY(-50%);
+  z-index: 2;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.cont_perfil_desplegable {
+  width: 15%;
+  height: auto;
+  padding: 8px 0;
+  border-radius: 10px;
+  position: fixed;
+  top: 98px;
+  right: 1%;
+  background-color: #66bea4;
+  clip-path: circle(0% at 100% 0);
+}
+
+#checkbox2 {
+  display: none;
+}
+
+.cont_perfil2 {
+  clip-path: circle(0% at 100% 0);
+  transition: all 0.4s ease-in-out;
+}
+
+.perfil2-open {
+  clip-path: circle(141.2% at 100% 0);
+}
+
+.cont_nombre, .cont_rol {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 45px;
+}
+
+.cont_salir{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.text_nombre {
+  font-size: 24px;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.text_rol {
+  font-size: 20px;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.btn_salir {
+  background-color: #235ba1;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 12px;
 }
 
 .footer {
