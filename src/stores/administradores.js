@@ -3,7 +3,6 @@ import axios from "axios";
 import { ref } from "vue";
 import { useLoginStore } from '../stores/login.js'
 
-
 export const useAdministradoresStore = defineStore("administradores", () => {
     let token = ref(useLoginStore().token);
     let administradores = ref(null)
@@ -24,7 +23,7 @@ export const useAdministradoresStore = defineStore("administradores", () => {
             return error
         }
     }
-// #2
+
     let getAdministradoresId = async (id) => {
         try {
             let res = await axios.get(`/api/administradores/${id}`,{
@@ -40,7 +39,7 @@ export const useAdministradoresStore = defineStore("administradores", () => {
             
         }
     }
-// #3
+    
     let getActivos = async () => {
         try {
             let res = await axios.get('/api/administradores/listar/activos',
@@ -57,7 +56,7 @@ export const useAdministradoresStore = defineStore("administradores", () => {
             return error
         } 
     }
-// #4
+
     let getInactivos = async () => {
         try {
             let res = await axios.get('/api/administradores/listar/inactivos',
@@ -74,7 +73,7 @@ export const useAdministradoresStore = defineStore("administradores", () => {
             return error
         } 
     }
-// #5
+
     let postAdministradores = async (administrador) => {
         try {
             let res = await axios.post("/api/administradores", administrador,
@@ -91,7 +90,7 @@ export const useAdministradoresStore = defineStore("administradores", () => {
             return error
         }
     }
-// #6
+
     let putAdministradores = async (id, administrador) => {
         try {
             let res = await axios.put(`/api/administradores/${id}`, administrador,
