@@ -111,6 +111,7 @@ export const useAdministradoresStore = defineStore("administradores", () => {
         try {
             let res = await axios.put(`/api/administradores/activar/${id}`,
                 null,{
+                {
                     headers: {
                         "x-token": token.value
                     }
@@ -130,6 +131,7 @@ export const useAdministradoresStore = defineStore("administradores", () => {
         try {
             let res = await axios.put(`/api/administradores/desactivar/${id}`,
                 null,{
+                {
                     headers: {
                         "x-token": token.value
                     }
