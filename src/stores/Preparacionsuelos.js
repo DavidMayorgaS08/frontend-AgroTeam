@@ -3,46 +3,48 @@ import axios from "axios";
 import { ref } from "vue";
 import { useLoginStore } from '../stores/login.js'
 
-export const useAdministradoresStore = defineStore("administradores", () => {
+export const usePreparacionsuelosStore = defineStore("preparacion_suelos", () => {
     let token = ref(useLoginStore().token);
-    let administradores = ref(null)
-// #1
-    let getAdministradores = async () => {
+    let preparacion_suelos = ref(null)
+    // #1
+    let getPreparacion_suelos = async () => {
         try {
-            let res = await axios.get("/api/administradores",
+            let res = await axios.get("/api/preparacion_suelos",
                 {
-                headers: {
-                    "x-token":token.value
+                    headers: {
+                        "x-token": token.value
+                    }
                 }
-            })
-            administradores.value = res.data
+            )
+            preparacion_suelos.value = res.data
             console.log(res);
             return res.data
-        } catch(error){
+        } catch (error) {
             console.log(error);
             return error
         }
     }
-
-    let getAdministradoresId = async (id) => {
+    // #2
+    let getPreparacion_suelosId = async (id) => {
         try {
-            let res = await axios.get(`/api/administradores/${id}`,{
-                headers: {
-                    "x-token": token.value
+            let res = await axios.get(`/api/preparacion_suelos/${id}`,
+                {
+                    headers: {
+                        "x-token": token.value
+                    }
                 }
-            })
+            )
             console.log(res);
-            return res.data            
-        } catch(error){
+            return res.data
+        } catch (error) {
             console.log(error);
             return error
-            
         }
     }
-    
+    // #3
     let getActivos = async () => {
         try {
-            let res = await axios.get('/api/administradores/listar/activos',
+            let res = await axios.get('/api/preparacion_suelos/listar/activos',
                 {
                     headers: {
                         "x-token": token.value
@@ -50,33 +52,16 @@ export const useAdministradoresStore = defineStore("administradores", () => {
                 }
             )
             console.log(res);
-            return res.data           
-        } catch(error){
+            return res.data
+        } catch (error) {
             console.log(error);
             return error
-        } 
+        }
     }
-
+    // #4
     let getInactivos = async () => {
         try {
-            let res = await axios.get('/api/administradores/listar/inactivos',
-                {
-                    headers: {
-                        "x-token": token.value
-                    }
-                }
-            )
-            console.log(res);
-            return res.data           
-        } catch(error){
-            console.log(error);
-            return error
-        } 
-    }
-
-    let postAdministradores = async (administrador) => {
-        try {
-            let res = await axios.post("/api/administradores", administrador,
+            let res = axios.get('/api/preparacion_suelos/listar/inactivos',
                 {
                     headers: {
                         "x-token": token.value
@@ -85,15 +70,15 @@ export const useAdministradoresStore = defineStore("administradores", () => {
             )
             console.log(res);
             return res.data
-        } catch (error){
+        } catch (error) {
             console.log(error);
             return error
         }
     }
-
-    let putAdministradores = async (id, administrador) => {
+    // #5
+    let postPereparacion_suelos = async (preparacion_suelo) => {
         try {
-            let res = await axios.put(`/api/administradores/${id}`, administrador,
+            let res = await axios.post("/api/preparacion_suelos", preparacion_suelos,
                 {
                     headers: {
                         "x-token": token.value
@@ -102,16 +87,32 @@ export const useAdministradoresStore = defineStore("administradores", () => {
             )
             console.log(res);
             return res.data
-        } catch (error){
+        } catch (error) {
             console.log(error);
             return error
         }
     }
-// #7
+    // #6
+    let putPreparacion_suelos = async (id, preparacion_suelos) => {
+        try {
+            let res = await axios.put(`/api/preparacion_suelos/${id}`, preparacion_suelos,
+                {
+                    headers: {
+                        "x-token": token.value
+                    }
+                }
+            )
+            console.log(res);
+            return res.data
+        } catch (error) {
+            console.log(error);
+            return error
+        }
+    }
+    // #7
     let putActivar = async (id) => {
         try {
-            let res = await axios.put(`/api/administradores/activar/${id}`,
-                null,{
+            let res = await axios.put(`/api/preparacion/activar/${id}`,
                 {
                     headers: {
                         "x-token": token.value
@@ -120,35 +121,44 @@ export const useAdministradoresStore = defineStore("administradores", () => {
             )
             console.log(res);
             return res.data
-            
         } catch (error) {
             console.log(error);
             return error
-            
         }
     }
-// #8
+    // #8
     let putDesactivar = async (id) => {
         try {
-            let res = await axios.put(`/api/administradores/desactivar/${id}`,
-                null,{
+            let res = await axios.put(`/api/preparacion_suelos/desactivar/${id}`,
                 {
-                    headers: {
+                    headers:{
                         "x-token": token.value
                     }
                 }
             )
             console.log(res);
             return res.data
-            
-        } catch (error) {
+        } catch (error){
             console.log(error);
             return error
-            
         }
     }
 
     return {
-        getAdministradores, getAdministradoresId, getActivos, getInactivos, postAdministradores, putAdministradores, putActivar, putDesactivar, administradores
+        getPreparacion_suelos,
+        getPreparacion_suelosId,
+        getActivos,
+        getInactivos,
+        postPereparacion_suelos,
+        putPreparacion_suelos,
+        putActivar,
+        putDesactivar,
+        preparacion_suelos
     }
+
+    // falta esta:
+    // router.get("/fechas/:fecha1/:fecha2",[
+    //     validarJWT,
+    //     validarCampos
+    // ], httpPreparacionSuelos.getPreparacionSuelosEntreFechas);
 })
