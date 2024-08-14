@@ -1,32 +1,60 @@
 <template>
-    <div class="app">
-        <div class="q-pa-md">
-        <q-table title="Planes" :rows="rows" :columns="columns" row-key="name">
-          <template v-slot:body-cell-opciones="props">
-            <q-btn
-              flat
-              round
-              dense
-              icon="edit"
-              @click="editRow(props.row)"
+  <div class="app">
+    <div class="q-pa-md">
+      <q-table
+        flat
+        bordered
+        title="Treats"
+        :rows="rows"
+        :columns="columns"
+        row-key="name"
+        :visible-columns="visibleColumns"
+      >
+        <template v-slot:top="props">
+          <div class="col-2 q-table__title">Treats</div>
+
+          <q-space />
+
+          <div v-if="$q.screen.gt.xs" class="col">
+            <q-toggle
+              v-model="visibleColumns"
+              val="calories"
+              label="Calories"
             />
-            <q-btn
-              flat
-              round
-              dense
-              icon="delete"
-              @click="deleteRow(props.row)"
-            />
-          </template>
-          <template v-slot:body-cell-estado="props">
-            <div class="estados">
-              <span v-if="props.row.estado == 1">Activo</span>
-              <span v-else>Inactivo</span>
-            </div>
-          </template>
-        </q-table>
-      </div>
+            <q-toggle v-model="visibleColumns" val="fat" label="Fat" />
+            <q-toggle v-model="visibleColumns" val="carbs" label="Carbs" />
+            <q-toggle v-model="visibleColumns" val="protein" label="Protein" />
+            <q-toggle v-model="visibleColumns" val="sodium" label="Sodium" />
+            <q-toggle v-model="visibleColumns" val="calcium" label="Calcium" />
+            <q-toggle v-model="visibleColumns" val="iron" label="Iron" />
+          </div>
+          <q-select
+            v-else
+            v-model="visibleColumns"
+            multiple
+            borderless
+            dense
+            options-dense
+            :display-value="$q.lang.table.columns"
+            emit-value
+            map-options
+            :options="columns"
+            option-value="name"
+            style="min-width: 150px"
+          />
+
+          <q-btn
+            flat
+            round
+            dense
+            :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
+            @click="props.toggleFullscreen"
+            class="q-ml-md"
+          />
+        </template>
+      </q-table>
     </div>
+  </div>
 </template>
 <script setup>
 </script>

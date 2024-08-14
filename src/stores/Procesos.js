@@ -3,47 +3,45 @@ import axios from "axios";
 import { ref } from "vue";
 import { useLoginStore } from '../stores/login.js'
 
-
-export const useAdministradoresStore = defineStore("administradores", () => {
+export const useProcesosStore = defineStore("procesos", () => {
     let token = ref(useLoginStore().token);
-    let administradores = ref(null)
-// #1
-    let getAdministradores = async () => {
+    let procesos = ref(null)
+    // #1
+    let getProcesos = async () => {
         try {
-            let res = await axios.get("/api/administradores",
-                {
+            let res = await axios.get("/api/procesos", {
                 headers: {
-                    "x-token":token.value
+                    "x-toquen": token.value
                 }
             })
-            administradores.value = res.data
+            procesos.value = res.data
             console.log(res);
             return res.data
-        } catch(error){
+        } catch (error) {
             console.log(error);
             return error
         }
     }
-// #2
-    let getAdministradoresId = async (id) => {
+    // #2
+    let getProcesosId = async () => {
         try {
-            let res = await axios.get(`/api/administradores/${id}`,{
+            let res = await axios.get(`/api/procesos/${id}`, {
                 headers: {
-                    "x-token": token.value
+                    "x-toquen": token.value
                 }
             })
             console.log(res);
-            return res.data            
-        } catch(error){
+            return res.data
+        } catch (error) {
             console.log(error);
             return error
-            
         }
     }
-// #3
+
+    // #3
     let getActivos = async () => {
         try {
-            let res = await axios.get('/api/administradores/listar/activos',
+            let res = await axios.get('/api/procesos/listar/activos',
                 {
                     headers: {
                         "x-token": token.value
@@ -51,13 +49,13 @@ export const useAdministradoresStore = defineStore("administradores", () => {
                 }
             )
             console.log(res);
-            return res.data           
-        } catch(error){
+            return res.data
+        } catch (error) {
             console.log(error);
             return error
-        } 
+        }
     }
-// #4
+    // #4
     let getInactivos = async () => {
         try {
             let res = await axios.get('/api/administradores/listar/inactivos',
@@ -68,16 +66,16 @@ export const useAdministradoresStore = defineStore("administradores", () => {
                 }
             )
             console.log(res);
-            return res.data           
-        } catch(error){
+            return res.data
+        } catch (error) {
             console.log(error);
             return error
-        } 
+        }
     }
-// #5
-    let postAdministradores = async (administrador) => {
+    // #5
+    let postProcesos = async (procesos) => {
         try {
-            let res = await axios.post("/api/administradores", administrador,
+            let res = await axios.post("/api/procesos", procesos,
                 {
                     headers: {
                         "x-token": token.value
@@ -86,15 +84,14 @@ export const useAdministradoresStore = defineStore("administradores", () => {
             )
             console.log(res);
             return res.data
-        } catch (error){
-            console.log(error);
-            return error
+        } catch (error) {
+
         }
     }
-// #6
-    let putAdministradores = async (id, administrador) => {
+    // #6
+    let putProcesos = async (id, procesos) => {
         try {
-            let res = await axios.put(`/api/administradores/${id}`, administrador,
+            let res = await axios.put(`/api/procesos/${id}`, procesos,
                 {
                     headers: {
                         "x-token": token.value
@@ -103,15 +100,15 @@ export const useAdministradoresStore = defineStore("administradores", () => {
             )
             console.log(res);
             return res.data
-        } catch (error){
+        } catch (error) {
             console.log(error);
             return error
         }
     }
-// #7
+    // #7
     let putActivar = async (id) => {
         try {
-            let res = await axios.put(`/api/administradores/activar/${id}`,
+            let res = await axios.put(`/api/procesos/activar/${id}`, null,
                 {
                     headers: {
                         "x-token": token.value
@@ -120,34 +117,38 @@ export const useAdministradoresStore = defineStore("administradores", () => {
             )
             console.log(res);
             return res.data
-            
         } catch (error) {
             console.log(error);
             return error
-            
         }
     }
-// #8
+    // #8
     let putDesactivar = async (id) => {
         try {
-            let res = await axios.put(`/api/administradores/desactivar/${id}`,
+            let res = await axios.put(`/api/procesos/desactivar/${id}`, null,
                 {
                     headers: {
                         "x-token": token.value
                     }
                 }
             )
-            console.log(res);
+            cosole.log(res);
             return res.data
-            
         } catch (error) {
             console.log(error);
             return error
-            
         }
     }
 
     return {
-        getAdministradores, getAdministradoresId, getActivos, getInactivos, postAdministradores, putAdministradores, putActivar, putDesactivar, administradores
+        getProcesos,
+        getProcesosId,
+        getActivos,
+        getInactivos,
+        postProcesos,
+        putProcesos,
+        putActivar,
+        putDesactivar,
+        procesos
     }
 })
