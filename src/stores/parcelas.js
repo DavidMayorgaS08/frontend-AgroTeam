@@ -3,47 +3,44 @@ import axios from "axios";
 import { ref } from "vue";
 import { useLoginStore } from '../stores/login.js'
 
-
-export const useAdministradoresStore = defineStore("administradores", () => {
+export const useParcelasStore = defineStore("parcelas", () => {
     let token = ref(useLoginStore().token);
-    let administradores = ref(null)
-// #1
-    let getAdministradores = async () => {
+    let parcelas = ref(null)
+
+    let getParcelas = async () => {
         try {
-            let res = await axios.get("/api/administradores",
-                {
+            let res = await axios.get("/api/parcelas", {
                 headers: {
-                    "x-token":token.value
+                    "x-token": token.value
                 }
             })
-            administradores.value = res.data
+            parcelas.value = res.data
             console.log(res);
             return res.data
-        } catch(error){
+        } catch (error) {
             console.log(error);
             return error
         }
     }
-// #2
-    let getAdministradoresId = async (id) => {
+
+    let getParcelasId = async (id) => {
         try {
-            let res = await axios.get(`/api/administradores/${id}`,{
+            let res = await axios.get(`/api/parcelas/${id}`, {
                 headers: {
                     "x-token": token.value
                 }
             })
             console.log(res);
-            return res.data            
-        } catch(error){
+            return res.data
+        } catch (error) {
             console.log(error);
             return error
-            
         }
     }
-// #3
+
     let getActivos = async () => {
         try {
-            let res = await axios.get('/api/administradores/listar/activos',
+            let res = await axios.get('/api/parcelas/listar/activos',
                 {
                     headers: {
                         "x-token": token.value
@@ -51,33 +48,16 @@ export const useAdministradoresStore = defineStore("administradores", () => {
                 }
             )
             console.log(res);
-            return res.data           
-        } catch(error){
+            return res.data
+        } catch (error) {
             console.log(error);
             return error
-        } 
+        }
     }
-// #4
+
     let getInactivos = async () => {
         try {
-            let res = await axios.get('/api/administradores/listar/inactivos',
-                {
-                    headers: {
-                        "x-token": token.value
-                    }
-                }
-            )
-            console.log(res);
-            return res.data           
-        } catch(error){
-            console.log(error);
-            return error
-        } 
-    }
-// #5
-    let postAdministradores = async (administrador) => {
-        try {
-            let res = await axios.post("/api/administradores", administrador,
+            let res = await axios.get('/api/parcelas/listar/inactivos',
                 {
                     headers: {
                         "x-token": token.value
@@ -86,15 +66,15 @@ export const useAdministradoresStore = defineStore("administradores", () => {
             )
             console.log(res);
             return res.data
-        } catch (error){
+        } catch (error) {
             console.log(error);
             return error
         }
     }
-// #6
-    let putAdministradores = async (id, administrador) => {
+
+    let postParcelas = async (parcela) => {
         try {
-            let res = await axios.put(`/api/administradores/${id}`, administrador,
+            let res = await axios.post('/api/parcelas', parcela,
                 {
                     headers: {
                         "x-token": token.value
@@ -103,16 +83,32 @@ export const useAdministradoresStore = defineStore("administradores", () => {
             )
             console.log(res);
             return res.data
-        } catch (error){
+        } catch (error) {
             console.log(error);
             return error
         }
     }
-// #7
+
+    let putParcelas = async (id, parcela) => {
+        try {
+            let res = await axios.put(`/api/parcelas/${id}`, parcela,
+                {
+                    headers: {
+                        "x-token": token.value
+                    }
+                }
+            )
+            console.log(res);
+            return res.data
+        } catch (error) {
+            console.log(error);
+            return error
+        }
+    }
+
     let putActivar = async (id) => {
         try {
-            let res = await axios.put(`/api/administradores/activar/${id}`,
-                null,{
+            let res = await axios.put(`/api/parcelas/activar/${id}`, {},
                 {
                     headers: {
                         "x-token": token.value
@@ -121,18 +117,15 @@ export const useAdministradoresStore = defineStore("administradores", () => {
             )
             console.log(res);
             return res.data
-            
         } catch (error) {
             console.log(error);
             return error
-            
         }
     }
-// #8
+
     let putDesactivar = async (id) => {
         try {
-            let res = await axios.put(`/api/administradores/desactivar/${id}`,
-                null,{
+            let res = await axios.put(`/api/parcelas/desactivar/${id}`, {},
                 {
                     headers: {
                         "x-token": token.value
@@ -141,15 +134,21 @@ export const useAdministradoresStore = defineStore("administradores", () => {
             )
             console.log(res);
             return res.data
-            
         } catch (error) {
             console.log(error);
             return error
-            
         }
     }
 
     return {
-        getAdministradores, getAdministradoresId, getActivos, getInactivos, postAdministradores, putAdministradores, putActivar, putDesactivar, administradores
+        getParcelas,
+        getParcelasId,
+        getActivos,
+        getInactivos,
+        postParcelas,
+        putParcelas,
+        putActivar,
+        putDesactivar,
+        parcelas
     }
 })
