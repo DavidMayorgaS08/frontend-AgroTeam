@@ -78,7 +78,7 @@ async function iniciar() {
     width: 100%;
     padding: 15px 0;
     font-size: 16px;
-    color: #fff;
+    color: #000000;
     margin-bottom: 30px;
     border: none;
     border-bottom: 1px solid #fff;
