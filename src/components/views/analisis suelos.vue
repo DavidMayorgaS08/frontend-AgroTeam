@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <div class="q-pa-md">
+    <!-- <div class="q-pa-md">
       <q-table
         flat
         bordered
@@ -53,6 +53,10 @@
           />
         </template>
       </q-table>
-    </div>
+    </div> -->
   </div>
 </template>
+<script setup></script>
+<style scoped>
+
+</style>

@@ -6,40 +6,42 @@ import { useLoginStore } from '../stores/login.js'
 export const useAdministradoresStore = defineStore("administradores", () => {
     let token = ref(useLoginStore().token);
     let administradores = ref(null)
-// #1
+    // #1
     let getAdministradores = async () => {
         try {
             let res = await axios.get("/api/administradores",
                 {
-                headers: {
-                    "x-token":token.value
-                }
-            })
+                    headers: {
+                        "x-token": token.value
+                    }
+                })
             administradores.value = res.data
             console.log(res);
             return res.data
-        } catch(error){
+        } catch (error) {
             console.log(error);
+            console.log(token.value);
+            
             return error
         }
     }
 
     let getAdministradoresId = async (id) => {
         try {
-            let res = await axios.get(`/api/administradores/${id}`,{
+            let res = await axios.get(`/api/administradores/${id}`, {
                 headers: {
                     "x-token": token.value
                 }
             })
             console.log(res);
-            return res.data            
-        } catch(error){
+            return res.data
+        } catch (error) {
             console.log(error);
             return error
-            
+
         }
     }
-    
+
     let getActivos = async () => {
         try {
             let res = await axios.get('/api/administradores/listar/activos',
@@ -50,11 +52,11 @@ export const useAdministradoresStore = defineStore("administradores", () => {
                 }
             )
             console.log(res);
-            return res.data           
-        } catch(error){
+            return res.data
+        } catch (error) {
             console.log(error);
             return error
-        } 
+        }
     }
 
     let getInactivos = async () => {
@@ -67,11 +69,11 @@ export const useAdministradoresStore = defineStore("administradores", () => {
                 }
             )
             console.log(res);
-            return res.data           
-        } catch(error){
+            return res.data
+        } catch (error) {
             console.log(error);
             return error
-        } 
+        }
     }
 
     let postAdministradores = async (administrador) => {
@@ -85,7 +87,7 @@ export const useAdministradoresStore = defineStore("administradores", () => {
             )
             console.log(res);
             return res.data
-        } catch (error){
+        } catch (error) {
             console.log(error);
             return error
         }
@@ -102,16 +104,16 @@ export const useAdministradoresStore = defineStore("administradores", () => {
             )
             console.log(res);
             return res.data
-        } catch (error){
+        } catch (error) {
             console.log(error);
             return error
         }
     }
-// #7
+    // #7
     let putActivar = async (id) => {
         try {
             let res = await axios.put(`/api/administradores/activar/${id}`,
-                null,{
+                null,
                 {
                     headers: {
                         "x-token": token.value
@@ -120,31 +122,30 @@ export const useAdministradoresStore = defineStore("administradores", () => {
             )
             console.log(res);
             return res.data
-            
+
         } catch (error) {
             console.log(error);
             return error
-            
+
         }
     }
-// #8
+    // #8
     let putDesactivar = async (id) => {
         try {
             let res = await axios.put(`/api/administradores/desactivar/${id}`,
-                null,{
-                {
-                    headers: {
-                        "x-token": token.value
-                    }
+                null, {
+                headers: {
+                    "x-token": token.value
                 }
+            }
             )
             console.log(res);
             return res.data
-            
+
         } catch (error) {
             console.log(error);
             return error
-            
+
         }
     }
 

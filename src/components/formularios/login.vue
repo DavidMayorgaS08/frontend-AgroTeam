@@ -1,18 +1,23 @@
 <template>
-    <div class="login-box">
-        <p>Inicio De Sesion</p>
-        <form>
-            <div class="user-box">
-                <input required="" name="email" type="text" v-model="email"/>
-                <label>Correo</label>
-            </div>
-            <div class="user-box">
-                <input required="" name="password" type="password" v-model="password"/>
-                <label>Contraseña</label>
-            </div>
-            <button class="boton-elegante" @click.prevent="iniciar()">Ingresar</button>
-        </form>
-        <p class="forgot-password"><a href="#" class="a2">¿Olvidaste la Contraseña?</a></p>
+    <div class="app">
+        <div class="login-box">
+            <p>Inicio De Sesion</p>
+            <form>
+                <div class="user-box">
+                    <input required="" name="email" type="text" v-model="email"/>
+                    <label>Correo</label>
+                </div>
+                <div class="user-box">
+                    <input required="" name="password" type="password" v-model="password"/>
+                    <label>Contraseña</label>
+                </div>
+                <button class="boton-elegante" @click.prevent="iniciar()">Ingresar</button>
+            </form>
+            <p class="forgot-password"><a href="#" class="a2">¿Olvidaste la Contraseña?</a></p>
+        </div>
+        <div class="cont_spinner" v-if="spinner">
+            <div class="spinner"></div>
+        </div>
     </div>
 </template>
 <script setup>
@@ -23,16 +28,20 @@ const router = useRouter()
 
 let useLogin = useLoginStore()
 
+let spinner = ref(false)
+
 let email = ref('juanperez@example.com')
 let password = ref('password123')
 
 async function iniciar() {
+    spinner.value = true
     try {
         let data = {
             email: email.value,
             password: password.value
         }
         let res = await useLogin.login(data)
+        spinner.value = false
         if (res) {
             router.push("/menu")
         }else {
@@ -40,6 +49,7 @@ async function iniciar() {
         }
     } catch (error) {
         console.log(error)
+        spinner.value = false
     }
 }
 </script>
@@ -78,7 +88,7 @@ async function iniciar() {
     width: 100%;
     padding: 15px 0;
     font-size: 16px;
-    color: #000000;
+    color: #ffffff;
     margin-bottom: 30px;
     border: none;
     border-bottom: 1px solid #fff;
@@ -167,4 +177,83 @@ async function iniciar() {
     color: #aaa;
     border-radius: 5px;
 }
+
+.cont_spinner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.474);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* From Uiverse.io by satyamchaudharydev */ 
+.spinner {
+ --size: 30px;
+ --first-block-clr: #235ba1;
+ --second-block-clr: #66bea4;
+ --clr: #111;
+ width: 100px;
+ height: 100px;
+ position: relative;
+}
+
+.spinner::after,.spinner::before {
+ box-sizing: border-box;
+ position: absolute;
+ content: "";
+ width: var(--size);
+ height: var(--size);
+ top: 50%;
+ animation: up 2.4s cubic-bezier(0, 0, 0.24, 1.21) infinite;
+ left: 50%;
+ background: var(--first-block-clr);
+}
+
+.spinner::after {
+ background: var(--second-block-clr);
+ top: calc(50% - var(--size));
+ left: calc(50% - var(--size));
+ animation: down 2.4s cubic-bezier(0, 0, 0.24, 1.21) infinite;
+}
+
+@keyframes down {
+ 0%, 100% {
+  transform: none;
+ }
+
+ 25% {
+  transform: translateX(100%);
+ }
+
+ 50% {
+  transform: translateX(100%) translateY(100%);
+ }
+
+ 75% {
+  transform: translateY(100%);
+ }
+}
+
+@keyframes up {
+ 0%, 100% {
+  transform: none;
+ }
+
+ 25% {
+  transform: translateX(-100%);
+ }
+
+ 50% {
+  transform: translateX(-100%) translateY(-100%);
+ }
+
+ 75% {
+  transform: translateY(-100%);
+ }
+}
+
 </style>

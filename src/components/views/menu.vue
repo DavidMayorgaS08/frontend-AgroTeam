@@ -34,8 +34,8 @@
       <p class="text_agro">AgroTeam</p>
     </div>
     <div class="cont" v-if="Menu">
-      <div class="cards">
-        <div class="fondo_card" @click="adiministradores()">
+      <div class="cards" @click="adiministradores()">
+        <div class="fondo_card">
           <svg
             class="icono1"
             version="1.1"
@@ -162,7 +162,7 @@
         </div>
         <p class="text_card">Administradores</p>
       </div>
-      <div class="cards">
+      <div class="cards" @click="analisisSuelos()">
         <div class="fondo_card">
           <svg
             class="icono1"
@@ -290,7 +290,7 @@
         </div>
         <p class="text_card">Analisis de Suelos</p>
       </div>
-      <div class="cards">
+      <div class="cards" @click="climas()">
         <div class="fondo_card">
           <svg
             class="icono1"
@@ -418,7 +418,7 @@
         </div>
         <p class="text_card">Climas</p>
       </div>
-      <div class="cards">
+      <div class="cards" @click="compradores()">
         <div class="fondo_card">
           <svg
             class="icono1"
@@ -546,7 +546,7 @@
         </div>
         <p class="text_card">Compradores</p>
       </div>
-      <div class="cards">
+      <div class="cards" @click="controlPlagas()">
         <div class="fondo_card">
           <svg
             class="icono1"
@@ -674,7 +674,7 @@
         </div>
         <p class="text_card">Control Plagas</p>
       </div>
-      <div class="cards">
+      <div class="cards" @click="cultivos()">
         <div class="fondo_card">
           <svg
             class="icono1"
@@ -802,7 +802,7 @@
         </div>
         <p class="text_card">Cultivos</p>
       </div>
-      <div class="cards">
+      <div class="cards" @click="elaboracionSustratos()">
         <div class="fondo_card">
           <svg
             class="icono1"
@@ -930,7 +930,7 @@
         </div>
         <p class="text_card">Elaboración Sustratos</p>
       </div>
-      <div class="cards">
+      <div class="cards" @click="empleados()">
         <div class="fondo_card">
           <svg
             class="icono1"
@@ -1058,7 +1058,7 @@
         </div>
         <p class="text_card">Empleados</p>
       </div>
-      <div class="cards">
+      <div class="cards" @click="facturas()">
         <div class="fondo_card">
           <svg
             class="icono1"
@@ -1186,7 +1186,7 @@
         </div>
         <p class="text_card">Facturas</p>
       </div>
-      <div class="cards">
+      <div class="cards" @click="fertilizaciones()">
         <div class="fondo_card">
           <svg
             class="icono1"
@@ -1314,7 +1314,7 @@
         </div>
         <p class="text_card">Fertilizaciones</p>
       </div>
-      <div class="cards">
+      <div class="cards" @click="fincas()">
         <div class="fondo_card">
           <svg
             class="icono1"
@@ -1442,7 +1442,7 @@
         </div>
         <p class="text_card">Fincas</p>
       </div>
-      <div class="cards">
+      <div class="cards" @click="gastos()">
         <div class="fondo_card">
           <svg
             class="icono1"
@@ -1570,7 +1570,7 @@
         </div>
         <p class="text_card">Gastos</p>
       </div>
-      <div class="cards">
+      <div class="cards" @click="insumos()">
         <div class="fondo_card">
           <svg
             class="icono1"
@@ -1698,7 +1698,7 @@
         </div>
         <p class="text_card">Insumos</p>
       </div>
-      <div class="cards">
+      <div class="cards" @click="inventarios()">
         <div class="fondo_card">
           <svg
             class="icono1"
@@ -1826,7 +1826,7 @@
         </div>
         <p class="text_card">Inventarios</p>
       </div>
-      <div class="cards">
+      <div class="cards" @click="mantenimientos()">
         <div class="fondo_card">
           <svg
             class="icono1"
@@ -1954,7 +1954,7 @@
         </div>
         <p class="text_card">Mantenimientos</p>
       </div>
-      <div class="cards">
+      <div class="cards" @click="maquinariasHerramientas()">
         <div class="fondo_card">
           <svg
             class="icono1"
@@ -2082,7 +2082,7 @@
         </div>
         <p class="text_card">Maquinaria y herramientas</p>
       </div>
-      <div class="cards">
+      <div class="cards" @click="nominas()">
         <div class="fondo_card">
           <svg
             class="icono1"
@@ -2210,7 +2210,7 @@
         </div>
         <p class="text_card">Nominas</p>
       </div>
-      <div class="cards">
+      <div class="cards" @click="parcelas()">
         <div class="fondo_card">
           <svg
             class="icono1"
@@ -2338,7 +2338,7 @@
         </div>
         <p class="text_card">Parcelas</p>
       </div>
-      <div class="cards">
+      <div class="cards" @click="preparacionSuelos()">
         <div class="fondo_card">
           <svg
             class="icono1"
@@ -2466,7 +2466,7 @@
         </div>
         <p class="text_card">Preparación Suelos</p>
       </div>
-      <div class="cards">
+      <div class="cards" @click="procesos()">
         <div class="fondo_card">
           <svg
             class="icono1"
@@ -2594,7 +2594,7 @@
         </div>
         <p class="text_card">Procesos</p>
       </div>
-      <div class="cards">
+      <div class="cards" @click="producciones()">
         <div class="fondo_card">
           <svg
             class="icono1"
@@ -2722,7 +2722,7 @@
         </div>
         <p class="text_card">Producciones</p>
       </div>
-      <div class="cards">
+      <div class="cards" @click="proveedores()">
         <div class="fondo_card">
           <svg
             class="icono1"
@@ -2850,7 +2850,7 @@
         </div>
         <p class="text_card">Proveedores</p>
       </div>
-      <div class="cards">
+      <div class="cards" @click="riegos()">
         <div class="fondo_card">
           <svg
             class="icono1"
@@ -2978,7 +2978,7 @@
         </div>
         <p class="text_card">Riegos</p>
       </div>
-      <div class="cards">
+      <div class="cards" @click="semillas()">
         <div class="fondo_card">
           <svg
             class="icono1"
@@ -3106,7 +3106,7 @@
         </div>
         <p class="text_card">Semillas</p>
       </div>
-      <div class="cards">
+      <div class="cards" @click="siembras()">
         <div class="fondo_card">
           <svg
             class="icono1"
@@ -3241,39 +3241,39 @@
       :class="{ cont_menu2: true, 'menu2-open': menuOpen }"
     >
       <div>
-        <button class="btn">Administradores</button>
-        <button class="btn">Analisis de Suelos</button>
-        <button class="btn">Climas</button>
-        <button class="btn">Compradores</button>
-        <button class="btn">Control Plagas</button>
+        <button class="btn" @click="administrador()">Administradores</button>
+        <button class="btn" @click="analisisSuelo()">Analisis de Suelos</button>
+        <button class="btn" @click="clima()">Climas</button>
+        <button class="btn" @click="comprador()">Compradores</button>
+        <button class="btn" @click="controlPlaga()">Control Plagas</button>
       </div>
       <div>
-        <button class="btn">Cultivos</button>
-        <button class="btn">Elaboración Sustratos</button>
-        <button class="btn">Empleados</button>
-        <button class="btn">Facturas</button>
-        <button class="btn">Fertilizaciones</button>
+        <button class="btn" @click="cultivo()">Cultivos</button>
+        <button class="btn" @click="elaboracionSustrato()">Elaboración Sustratos</button>
+        <button class="btn" @click="empleado()">Empleados</button>
+        <button class="btn" @click="factura()">Facturas</button>
+        <button class="btn" @click="fertilizacion()">Fertilizaciones</button>
       </div>
       <div>
-        <button class="btn">Fincas</button>
-        <button class="btn">Gastos</button>
-        <button class="btn">Insumos</button>
-        <button class="btn">Inventarios</button>
-        <button class="btn">Mantenimientos</button>
+        <button class="btn" @click="finca()">Fincas</button>
+        <button class="btn" @click="gasto()">Gastos</button>
+        <button class="btn" @click="insumo()">Insumos</button>
+        <button class="btn" @click="inventario()">Inventarios</button>
+        <button class="btn" @click="mantenimiento()">Mantenimientos</button>
       </div>
       <div>
-        <button class="btn">Maquinaria y Herramientas</button>
-        <button class="btn">Nominas</button>
-        <button class="btn">Parcelas</button>
-        <button class="btn">Preparación Suelos</button>
-        <button class="btn">Procesos</button>
+        <button class="btn" @click="maquinariaHerramienta()">Maquinaria y Herramientas</button>
+        <button class="btn" @click="nomina()">Nominas</button>
+        <button class="btn" @click="parcela()">Parcelas</button>
+        <button class="btn" @click="preparacionSuelo()">Preparación Suelos</button>
+        <button class="btn" @click="proceso()">Procesos</button>
       </div>
       <div>
-        <button class="btn">Producciones</button>
-        <button class="btn">Proveedores</button>
-        <button class="btn">Riegos</button>
-        <button class="btn">Semillas</button>
-        <button class="btn">Siembras</button>
+        <button class="btn" @click="produccion()">Producciones</button>
+        <button class="btn" @clcik="proveedor()">Proveedores</button>
+        <button class="btn" @click="riego()">Riegos</button>
+        <button class="btn" @clcik="semilla()">Semillas</button>
+        <button class="btn" @clcik="siembra()">Siembras</button>
       </div>
     </div>
     <div class="cont_perfil_desplegable" :class="{ cont_perfil2: true, 'perfil2-open': perfilOpen }">
@@ -3284,7 +3284,7 @@
         <p class="text_rol">Administrador</p>
       </div>
       <div class="cont_salir">
-        <button class="btn_salir">Cerrar Sesion</button>
+        <button class="btn_salir" @click="cerrarSesion()">Cerrar Sesion</button>
       </div>
     </div>
     <div class="footer">
@@ -3294,6 +3294,8 @@
 </template>
 <script setup>
 import { ref } from "vue";
+import { useRouter } from 'vue-router'
+import { router } from "../../routes/routes";
 
 let menuOpen = ref(false);
 let isChecked = ref(false);
@@ -3314,6 +3316,306 @@ let desplegable = ref(false);
 let adiministradores = () => {
   Menu.value = false;
   desplegable.value = true;
+  router.push("/administradores");
+};
+
+let administrador = () => {
+  menu()
+  isChecked.value = false;
+  router.push("/administradores");
+};
+
+let analisisSuelos = () => {
+  Menu.value = false;
+  desplegable.value = true;
+  router.push("/analisisSuelos");
+};
+
+let analisisSuelo = () => {
+  menu()
+  isChecked.value = false;
+  router.push("/analisisSuelos");
+};
+
+let climas = () => {
+  Menu.value = false;
+  desplegable.value = true;
+  router.push("/climas");
+};
+
+let clima = () => {
+  menu()
+  isChecked.value = false;
+  router.push("/climas");
+};
+
+let compradores = () => {
+  Menu.value = false;
+  desplegable.value = true;
+  router.push("/compradores");
+};
+
+let comprador = () => {
+  menu()
+  isChecked.value = false;
+  router.push("/compradores");
+};
+
+let controlPlagas = () => {
+  Menu.value = false;
+  desplegable.value = true;
+  router.push("/controlPlagas");
+};
+
+let controlPlaga = () => {
+  menu()
+  isChecked.value = false;
+  router.push("/controlPlagas");
+};
+
+let cultivos = () => {
+  Menu.value = false;
+  desplegable.value = true;
+  router.push("/cultivos");
+};
+
+let cultivo = () => {
+  menu()
+  isChecked.value = false;
+  router.push("/cultivos");
+};
+
+let elaboracionSustratos = () => {
+  Menu.value = false;
+  desplegable.value = true;
+  router.push("/elaboracionSustratos");
+};
+
+let elaboracionSustrato = () => {
+  menu()
+  isChecked.value = false;
+  router.push("/elaboracionSustratos");
+};
+
+let empleados = () => {
+  Menu.value = false;
+  desplegable.value = true;
+  router.push("/empleados");
+};
+
+let empleado = () => {
+  menu()
+  isChecked.value = false;
+  router.push("/empleados");
+};
+
+let facturas = () => {
+  Menu.value = false;
+  desplegable.value = true;
+  router.push("/facturas");
+};
+
+let factura = () => {
+  menu()
+  isChecked.value = false;
+  router.push("/facturas");
+};
+
+let fertilizaciones = () => {
+  Menu.value = false;
+  desplegable.value = true;
+  router.push("/fertilizaciones");
+};
+
+let fertilizacion = () => {
+  menu()
+  isChecked.value = false;
+  router.push("/fertilizaciones");
+};
+
+let fincas = () => {
+  Menu.value = false;
+  desplegable.value = true;
+  router.push("/fincas");
+};
+
+let finca = () => {
+  menu()
+  isChecked.value = false;
+  router.push("/fincas");
+};
+
+let gastos = () => {
+  Menu.value = false;
+  desplegable.value = true;
+  router.push("/gastos");
+};
+
+let gasto = () => {
+  menu()
+  isChecked.value = false;
+  router.push("/gastos");
+};
+
+let insumos = () => {
+  Menu.value = false;
+  desplegable.value = true;
+  router.push("/insumos");
+};
+
+let insumo = () => {
+  menu()
+  isChecked.value = false;
+  router.push("/insumos");
+};
+
+let inventarios = () => {
+  Menu.value = false;
+  desplegable.value = true;
+  router.push("/inventarios");
+};
+
+let inventario = () => {
+  menu()
+  isChecked.value = false;
+  router.push("/inventarios");
+};
+
+let mantenimientos = () => {
+  Menu.value = false;
+  desplegable.value = true;
+  router.push("/mantenimientos");
+};
+
+let mantenimiento = () => {
+  menu()
+  isChecked.value = false;
+  router.push("/mantenimientos");
+};
+
+let maquinariasHerramientas = () => {
+  Menu.value = false;
+  desplegable.value = true;
+  router.push("/maquinariaHerramientas");
+};
+
+let maquinariaHerramienta = () => {
+  menu()
+  isChecked.value = false;
+  router.push("/maquinariaHerramientas");
+};
+
+let nominas = () => {
+  Menu.value = false;
+  desplegable.value = true;
+  router.push("/nominas");
+};
+
+let nomina = () => {
+  menu()
+  isChecked.value = false;
+  router.push("/nominas");
+};
+
+let parcelas = () => {
+  Menu.value = false;
+  desplegable.value = true;
+  router.push("/parcelas");
+};
+
+let parcela = () => {
+  menu()
+  isChecked.value = false;
+  router.push("/parcelas");
+};
+
+let preparacionSuelos = () => {
+  Menu.value = false;
+  desplegable.value = true;
+  router.push("/preparacionSuelos");
+};
+
+let preparacionSuelo = () => {
+  menu()
+  isChecked.value = false;
+  router.push("/preparacionSuelos");
+};
+
+let procesos = () => {
+  Menu.value = false;
+  desplegable.value = true;
+  router.push("/procesos");
+};
+
+let proceso = () => {
+  menu()
+  isChecked.value = false;
+  router.push("/procesos");
+};
+
+let producciones = () => {
+  Menu.value = false;
+  desplegable.value = true;
+  router.push("/producciones");
+};
+
+let produccion = () => {
+  menu()
+  isChecked.value = false;
+  router.push("/producciones");
+};
+
+let proveedores = () => {
+  Menu.value = false;
+  desplegable.value = true;
+  router.push("/proveedores");
+};
+
+let proveedor = () => {
+  menu()
+  isChecked.value = false;
+  router.push("/proveedores");
+};
+
+let riegos = () => {
+  Menu.value = false;
+  desplegable.value = true;
+  router.push("/riegos");
+};
+
+let riego = () => {
+  menu()
+  isChecked.value = false;
+  router.push("/riegos");
+};
+
+let semillas = () => {
+  Menu.value = false;
+  desplegable.value = true;
+  router.push("/semillas");
+};
+
+let semilla = () => {
+  menu()
+  isChecked.value = false;
+  router.push("/semillas");
+};
+
+let siembras = () => {
+  Menu.value = false;
+  desplegable.value = true;
+  router.push("/siembras");
+};
+
+let siembra = () => {
+  menu()
+  isChecked.value = false;
+  router.push("/siembras");
+};
+
+let cerrarSesion = () => {
+  localStorage.removeItem("login");
+  router.push("/");
 };
 </script>
   <style scoped>
