@@ -3288,7 +3288,7 @@
       </div>
     </div>
     <div class="footer">
-      <p class="text_footer">Numero de telefono</p>
+      <p class="text_footer">©2024 AgroTeam</p>
     </div>
   </div>
 </template>
@@ -3898,11 +3898,13 @@ let cerrarSesion = () => {
 
 .footer {
   background-color: #66bea4;
-  height: 70px;
+  height: 55px;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: fixed;
+  bottom: 0;
 }
 
 .text_footer {
