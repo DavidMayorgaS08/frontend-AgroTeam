@@ -1,58 +1,29 @@
 <template>
-          <div class="app">
-            <div class="q-pa-md">
-              <q-table
-                flat
-                bordered
-                title="Treats"
-                :rows="rows"
-                :columns="columns"
-                row-key="name"
-                :visible-columns="visibleColumns"
-              >
-                <template v-slot:top="props">
-                  <div class="col-2 q-table__title">Treats</div>
-        
-                  <q-space />
-        
-                  <div v-if="$q.screen.gt.xs" class="col">
-                    <q-toggle
-                      v-model="visibleColumns"
-                      val="calories"
-                      label="Calories"
-                    />
-                    <q-toggle v-model="visibleColumns" val="fat" label="Fat" />
-                    <q-toggle v-model="visibleColumns" val="carbs" label="Carbs" />
-                    <q-toggle v-model="visibleColumns" val="protein" label="Protein" />
-                    <q-toggle v-model="visibleColumns" val="sodium" label="Sodium" />
-                    <q-toggle v-model="visibleColumns" val="calcium" label="Calcium" />
-                    <q-toggle v-model="visibleColumns" val="iron" label="Iron" />
-                  </div>
-                  <q-select
-                    v-else
-                    v-model="visibleColumns"
-                    multiple
-                    borderless
-                    dense
-                    options-dense
-                    :display-value="$q.lang.table.columns"
-                    emit-value
-                    map-options
-                    :options="columns"
-                    option-value="name"
-                    style="min-width: 150px"
-                  />
-        
-                  <q-btn
-                    flat
-                    round
-                    dense
-                    :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
-                    @click="props.toggleFullscreen"
-                    class="q-ml-md"
-                  />
-                </template>
-              </q-table>
-            </div>
-          </div>
-        </template>
+  <div class="app">
+    <div class="q-pa-md">
+      <q-table :rows="rows" :columns="columns" row-key="name" />
+    </div>
+  </div>
+</template>
+<script setup>
+import { ref } from "vue";
+import { useEmpleadosStore} from "../../stores/empleados.js";
+
+let useEmpleados = useEmpleadosStore();
+
+let r = null;
+
+let rows = ref([]);
+let columns = ref([])
+</script>
+<style scoped>
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app {
+  margin-top: 90px;
+}
+</style>

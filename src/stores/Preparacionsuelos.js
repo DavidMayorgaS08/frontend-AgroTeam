@@ -3,7 +3,7 @@ import axios from "axios";
 import { ref } from "vue";
 import { useLoginStore } from '../stores/login.js'
 
-export const usePreparacionsuelosStore = defineStore("preparacion_suelos", () => {
+export const usePreparacionsuelosStore = defineStore("preparacionSuelos", () => {
     let token = ref(useLoginStore().token);
     let preparacion_suelos = ref(null)
     // #1
