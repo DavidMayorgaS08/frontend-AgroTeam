@@ -3531,7 +3531,7 @@ let parcela = () => {
 let preparacionSuelos = () => {
   Menu.value = false;
   desplegable.value = true;
-  router.push("/preparacionSuelos");
+  router.push("/preparcionSuelos");
 };
 
 let preparacionSuelo = () => {
