@@ -3734,7 +3734,6 @@ let cerrarSesion = () => {
   align-items: center;
   border-radius: 10px;
   position: relative;
-  border: 1px solid #c58423e5;
 }
 
 .fondo_card {
