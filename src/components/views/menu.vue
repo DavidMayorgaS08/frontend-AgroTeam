@@ -3294,7 +3294,6 @@
 </template>
 <script setup>
 import { ref } from "vue";
-import { useRouter } from 'vue-router'
 import { router } from "../../routes/routes";
 
 let menuOpen = ref(false);
@@ -3626,7 +3625,7 @@ let cerrarSesion = () => {
 }
 
 .menu {
-  background-color: #66bea4;
+  background-color: #e9b27c;
   height: 90px;
   width: 100%;
   display: flex;
@@ -3735,6 +3734,7 @@ let cerrarSesion = () => {
   align-items: center;
   border-radius: 10px;
   position: relative;
+  border: 1px solid #c58423e5;
 }
 
 .fondo_card {
@@ -3749,7 +3749,7 @@ let cerrarSesion = () => {
 
 .text_card {
   font-size: 30px;
-  color: #235ba1;
+  color: #c58423e5;
   position: absolute;
   width: 100%;
   text-align: center;
@@ -3784,7 +3784,7 @@ let cerrarSesion = () => {
 
 .cont_menu_lateral {
   width: 100%;
-  background-color: #66bea4;
+  background-color: #e9b27c;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
 }
@@ -3809,8 +3809,8 @@ let cerrarSesion = () => {
 }
 
 .btn {
-  background-color: #ffffff;
-  color: #4cae90;
+  background-color: #f6e4ab;
+  color: #696969;
   border: none;
   padding: 10px;
   font-size: 20px;
@@ -3821,7 +3821,7 @@ let cerrarSesion = () => {
 }
 
 .btn:hover {
-  background-color: #81dec2;
+  background-color: #eed37a;
   color: white;
 }
 
@@ -3843,7 +3843,7 @@ let cerrarSesion = () => {
   position: fixed;
   top: 98px;
   right: 1%;
-  background-color: #66bea4;
+  background-color: #e9b27c;
   clip-path: circle(0% at 100% 0);
 }
 
@@ -3887,7 +3887,7 @@ let cerrarSesion = () => {
 }
 
 .btn_salir {
-  background-color: #235ba1;
+  background-color: #2b90c8;
   color: white;
   border: none;
   padding: 10px;
@@ -3897,7 +3897,7 @@ let cerrarSesion = () => {
 }
 
 .footer {
-  background-color: #66bea4;
+  background-color: #e9b27c;
   height: 55px;
   width: 100%;
   display: flex;
