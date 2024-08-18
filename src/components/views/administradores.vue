@@ -38,26 +38,62 @@
       </ul>
     </div>
     <div class="cont_btns">
-      <button @click.prevent="listarTodos()">listar todos</button>
-      <button @click.prevent="listarActivos()">listar activos</button>
-      <button @click.prevent="listarInactivos()">listar inactivos</button>
-      <button @click.prevent="crear()">crear</button>
-      <button @click.prevent="contEditar()">editar</button>
-      <button @click.prevent="estados()">cambiar estado</button>
+      <button class="btn" @click.prevent="listarTodos()">listar todos</button>
+      <button class="btn" @click.prevent="listarActivos()">
+        listar activos
+      </button>
+      <button class="btn" @click.prevent="listarInactivos()">
+        listar inactivos
+      </button>
+      <button class="btn" @click.prevent="crear()">crear</button>
+      <button class="btn" @click.prevent="contEditar()">editar</button>
+      <button class="btn" @click.prevent="estados()">cambiar estado</button>
     </div>
     <div class="q-pa-md">
       <q-table :rows="rows" :columns="columns" row-key="name" />
     </div>
-    <div class="cont_estados">
+    <div class="cont_estados" v-if="cont_estados">
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="img_x"
+        @click.prevent="ocultarEstados()"
+      >
+        <path
+          d="M8 8l8 8M8 16l8 -8"
+          stroke="white"
+          stroke-width="2"
+          fill="none"
+        />
+      </svg>
       <div v-for="(admin, index) in administradores" :key="index">
-        <button @click.prevent="cambiarEstado(admin)">
+        <button class="btn_estados" @click.prevent="cambiarEstado(admin)">
           {{ admin.nombre }} - {{ admin.estado }}
         </button>
       </div>
     </div>
-    <div class="cont_editar">
+    <div class="cont_editar" v-if="cont_editar">
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="img_x"
+        @click.prevent="ocultarEditar()"
+      >
+        <path
+          d="M8 8l8 8M8 16l8 -8"
+          stroke="white"
+          stroke-width="2"
+          fill="none"
+        />
+      </svg>
       <div v-for="(admin, index) in administradores" :key="index">
-        <button @click.prevent="editar(admin._id)">
+        <button class="btn_editar" @click.prevent="editar(admin._id)">
           {{ admin.nombre }} - {{ admin.telefono }}
         </button>
       </div>
@@ -153,9 +189,15 @@ let listarInactivos = async () => {
   console.log(r.administradores);
 };
 
+let cont_estados = ref(false);
+let cont_editar = ref(false);
+
 let estados = async () => {
+  spinner.value = true;
   r = await useAdministradores.getAdministradores();
   administradores.value = r.administradores;
+  cont_estados.value = true;
+  spinner.value = false;
   console.log(administradores.value);
 };
 
@@ -172,9 +214,22 @@ let cambiarEstado = async (admin) => {
   }
 };
 
+let ocultarEstados = () => {
+  cont_estados.value = false;
+  listarTodos();
+};
+
+let ocultarEditar = () => {
+  cont_editar.value = false;
+};
+
 let contEditar = async () => {
+  spinner.value = true;
   r = await useAdministradores.getAdministradores();
+  cont_editar.value = true;
+  spinner.value = false;
   administradores.value = r.administradores;
+
   console.log(administradores.value);
 };
 
@@ -406,8 +461,7 @@ let editar = async (id) => {
   }
 }
 
-/* From Uiverse.io by cssbuttons-io */
-button {
+.btn {
   padding: 1.3em 3em;
   font-size: 12px;
   text-transform: uppercase;
@@ -423,14 +477,55 @@ button {
   outline: none;
 }
 
-button:hover {
+.btn:hover {
   background-color: #e9b27c;
   box-shadow: 0px 15px 20px #eed37a;
   color: #fff;
   transform: translateY(-7px);
 }
 
-button:active {
+.btn:active {
   transform: translateY(-1px);
+}
+
+.img_x {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.cont_estados,
+.cont_editar {
+  position: absolute;
+  z-index: 100;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: #f0c295;
+  width: 70%;
+  height: 70%;
+  border-radius: 10px;
+}
+
+.btn_estados,
+.btn_editar {
+  padding: 10px 8px;
+  margin: 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  background-color: #fcedbb;
+  color: #696969;
+}
+
+.btn_estados:hover,
+.btn_editar:hover {
+  background-color: #eed37a;
+  cursor: pointer;
 }
 </style>
