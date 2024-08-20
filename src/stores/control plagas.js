@@ -43,7 +43,7 @@ export const useControlPlagas = defineStore("control plagas", () => {
     let getActivos = async () => {
         try {
             let res = await axios.get('/api/control_plagas/listar/activos',
-                null,{
+                {
                     headers: {
                         "x-token": token.value
                     }
@@ -60,7 +60,7 @@ export const useControlPlagas = defineStore("control plagas", () => {
     let getInactivos = async () => {
         try {
             let res = await axios.get('/api/control_plagas/listar/inactivos',
-                null,{
+                {
                     headers: {
                         "x-token": token.value
                     }

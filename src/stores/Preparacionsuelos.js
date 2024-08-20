@@ -61,7 +61,7 @@ export const usePreparacionsuelosStore = defineStore("preparacionSuelos", () => 
     // #4
     let getInactivos = async () => {
         try {
-            let res = axios.get('/api/preparacion_suelos/listar/inactivos',
+            let res = await axios.get('/api/preparacion_suelos/listar/inactivos',
                 {
                     headers: {
                         "x-token": token.value
@@ -112,8 +112,8 @@ export const usePreparacionsuelosStore = defineStore("preparacionSuelos", () => 
     // #7
     let putActivar = async (id) => {
         try {
-            let res = await axios.put(`/api/preparacion/activar/${id}`,
-                {
+            let res = await axios.put(`/api/preparacion_suelos/activar/${id}`,
+                null,{
                     headers: {
                         "x-token": token.value
                     }
@@ -130,7 +130,7 @@ export const usePreparacionsuelosStore = defineStore("preparacionSuelos", () => 
     let putDesactivar = async (id) => {
         try {
             let res = await axios.put(`/api/preparacion_suelos/desactivar/${id}`,
-                {
+                null,{
                     headers:{
                         "x-token": token.value
                     }
