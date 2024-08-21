@@ -43,7 +43,7 @@ export const useCultivosStore = defineStore("cultivos", () => {
     let getActivos = async () => {
         try {
             let res = await axios.get('/api/cultivos/listar/activos',
-                null,{
+                {
                     headers: {
                         "x-token": token.value
                     }
@@ -60,7 +60,7 @@ export const useCultivosStore = defineStore("cultivos", () => {
     let getInactivos = async () => {
         try {
             let res = await axios.get('/api/cultivos/listar/inactivos',
-                null,{
+                {
                     headers: {
                         "x-token": token.value
                     }

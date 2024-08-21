@@ -18,6 +18,24 @@
     </div>
     <div class="q-pa-md">
       <q-table :rows="rows" :columns="columns" row-key="name">
+        <template v-slot:body-cell-estado="props">
+          <q-td :props="props">
+            <q-chip
+              :label="props.row.estado == 0 ? 'Inactivo' : 'Activo'"
+              :color="props.row.estado == 0 ? 'negative' : 'positive'"
+              text-color="white"
+            />
+          </q-td>
+        </template>
+        <template v-slot:body-cell-rol="props">
+          <q-td :props="props">
+            <q-chip
+              :label="props.row.rol === 1 ? 'Administrador' : props.row.rol === 2 ? 'Usuario 1' : props.row.rol === 3 ? 'Usuario 2' : 'Usuario 3'"
+              :color="props.row.rol === 1 ? 'primary' : props.row.rol === 2 ? 'secondary' : props.row.rol === 3 ? 'accent' : 'positive'"
+              text-color="white"
+            />
+          </q-td>
+        </template>
         <template v-slot:body-cell-acciones="props">
           <q-td :props="props">
             <q-btn
@@ -75,7 +93,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useAdministradoresStore } from "../../stores/administradores.js";
 
 let useAdministradores = useAdministradoresStore();
@@ -180,6 +198,10 @@ let desactivar = async (administrador) => {
     spinner.value = false;
   }
 };
+
+onMounted(() => {
+  listarTodos();
+});
 </script>
 <style scoped>
 * {
