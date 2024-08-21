@@ -162,7 +162,7 @@ let listarActivos = async () => {
 let listarInactivos = async () => {
   spinner.value = true;
   r = await usePreparacionsuelos.getInactivos();
-  rows.value = r;
+  rows.value = r.preparacionSuelos;
   spinner.value = false;
 };
 

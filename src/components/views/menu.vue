@@ -145,10 +145,10 @@
       </div>
       <div>
         <button class="btn" @click="produccion()">Producciones</button>
-        <button class="btn" @clcik="proveedor()">Proveedores</button>
+        <button class="btn" @click="proveedor()">Proveedores</button>
         <button class="btn" @click="riego()">Riegos</button>
-        <button class="btn" @clcik="semilla()">Semillas</button>
-        <button class="btn" @clcik="siembra()">Siembras</button>
+        <button class="btn" @click="semilla()">Semillas</button>
+        <button class="btn" @click="siembra()">Siembras</button>
       </div>
     </div>
     <div class="cont_perfil_desplegable" :class="{ cont_perfil2: true, 'perfil2-open': perfilOpen }">
@@ -412,7 +412,7 @@ let preparacionSuelos = () => {
 let preparacionSuelo = () => {
   menu()
   isChecked.value = false;
-  router.push("/preparacionSuelos");
+  router.push("/preparcionSuelos");
 };
 
 let procesos = () => {
