@@ -106,7 +106,7 @@ export const useSiembrasStore = defineStore("siembras", () => {
     let putActivar = async (id) => {
         try {
             let res = await axios.put(`/api/siembras/activar/${id}`,
-                {
+                null,{
                     headers: {
                         "x-token": token.value
                     }
@@ -125,7 +125,7 @@ export const useSiembrasStore = defineStore("siembras", () => {
     let putDesactivar = async (id) => {
         try {
             let res = await axios.put(`/api/siembras/desactivar/${id}`,
-                {
+                null,{
                     headers: {
                         "x-token": token.value
                     }

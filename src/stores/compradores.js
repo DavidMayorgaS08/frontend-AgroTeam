@@ -42,7 +42,7 @@ export const useCompradores = defineStore("compradores", () => {
     let getActivos = async () => {
         try {
             let res = await axios.get('/api/compradores/listar/activos',
-                null,{
+                {
                     headers: {
                         "x-token": token.value
                     }
@@ -59,7 +59,7 @@ export const useCompradores = defineStore("compradores", () => {
     let getInactivos = async () => {
         try {
             let res = await axios.get('/api/compradores/listar/inactivos',
-                null,{
+                {
                     headers: {
                         "x-token": token.value
                     }

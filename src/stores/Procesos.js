@@ -11,7 +11,7 @@ export const useProcesosStore = defineStore("procesos", () => {
         try {
             let res = await axios.get("/api/procesos", {
                 headers: {
-                    "x-toquen": token.value
+                    "x-token": token.value
                 }
             })
             procesos.value = res.data
@@ -27,7 +27,7 @@ export const useProcesosStore = defineStore("procesos", () => {
         try {
             let res = await axios.get(`/api/procesos/${id}`, {
                 headers: {
-                    "x-toquen": token.value
+                    "x-token": token.value
                 }
             })
             console.log(res);
@@ -58,7 +58,7 @@ export const useProcesosStore = defineStore("procesos", () => {
     // #4
     let getInactivos = async () => {
         try {
-            let res = await axios.get('/api/administradores/listar/inactivos',
+            let res = await axios.get('/api/procesos/listar/inactivos',
                 {
                     headers: {
                         "x-token": token.value

@@ -114,7 +114,7 @@ export const useSemillasStore = defineStore("semillas",()=>
     let putActivar=async (id)=>{
         try {
             let res = await axios.put(`/api/semillas/activar/${id}`,
-                {
+                null,{
                     headers:{
                         "x-token":token.value
                     }
@@ -132,7 +132,7 @@ export const useSemillasStore = defineStore("semillas",()=>
     let putDesactivar= async (id)=>{
         try {
             let res= await axios.put (`/api/semillas/desactivar/${id}`,
-                {
+                null,{
                     headers:{
                         "x-token":token.value
                     }

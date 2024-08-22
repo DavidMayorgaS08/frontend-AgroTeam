@@ -3,40 +3,6 @@
     <div class="cont_spinner" v-if="spinner">
       <div class="spinner"></div>
     </div>
-    <div class="area">
-      <ul class="circles">
-        <li>
-          <img src="https://cdn-icons-png.flaticon.com/512/3248/3248532.png" />
-        </li>
-        <li>
-          <img src="https://cdn-icons-png.flaticon.com/512/3248/3248532.png" />
-        </li>
-        <li>
-          <img src="https://cdn-icons-png.flaticon.com/512/3248/3248532.png" />
-        </li>
-        <li>
-          <img src="https://cdn-icons-png.flaticon.com/512/3248/3248532.png" />
-        </li>
-        <li>
-          <img src="https://cdn-icons-png.flaticon.com/512/3248/3248532.png" />
-        </li>
-        <li>
-          <img src="https://cdn-icons-png.flaticon.com/512/3248/3248532.png" />
-        </li>
-        <li>
-          <img src="https://cdn-icons-png.flaticon.com/512/3248/3248532.png" />
-        </li>
-        <li>
-          <img src="https://cdn-icons-png.flaticon.com/512/3248/3248532.png" />
-        </li>
-        <li>
-          <img src="https://cdn-icons-png.flaticon.com/512/3248/3248532.png" />
-        </li>
-        <li>
-          <img src="https://cdn-icons-png.flaticon.com/512/3248/3248532.png" />
-        </li>
-      </ul>
-    </div>
     <div class="cont_btns">
       <button class="btn" @click.prevent="listarTodos()">listar todos</button>
       <button class="btn" @click.prevent="listarActivos()">
@@ -46,63 +12,88 @@
         listar inactivos
       </button>
       <button class="btn" @click.prevent="crear()">crear</button>
-      <button class="btn" @click.prevent="contEditar()">editar</button>
-      <button class="btn" @click.prevent="estados()">cambiar estado</button>
+    </div>
+    <div class="cont_nombre_vue">
+      <p class="nombre_vue">administradores</p>
     </div>
     <div class="q-pa-md">
-      <q-table :rows="rows" :columns="columns" row-key="name" />
-    </div>
-    <div class="cont_estados" v-if="cont_estados">
-      <svg
-        width="30"
-        height="30"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        class="img_x"
-        @click.prevent="ocultarEstados()"
-      >
-        <path
-          d="M8 8l8 8M8 16l8 -8"
-          stroke="white"
-          stroke-width="2"
-          fill="none"
-        />
-      </svg>
-      <div v-for="(admin, index) in administradores" :key="index">
-        <button class="btn_estados" @click.prevent="cambiarEstado(admin)">
-          {{ admin.nombre }} - {{ admin.estado }}
-        </button>
-      </div>
-    </div>
-    <div class="cont_editar" v-if="cont_editar">
-      <svg
-        width="30"
-        height="30"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        class="img_x"
-        @click.prevent="ocultarEditar()"
-      >
-        <path
-          d="M8 8l8 8M8 16l8 -8"
-          stroke="white"
-          stroke-width="2"
-          fill="none"
-        />
-      </svg>
-      <div v-for="(admin, index) in administradores" :key="index">
-        <button class="btn_editar" @click.prevent="editar(admin._id)">
-          {{ admin.nombre }} - {{ admin.telefono }}
-        </button>
-      </div>
+      <q-table :rows="rows" :columns="columns" row-key="name">
+        <template v-slot:body-cell-estado="props">
+          <q-td :props="props">
+            <q-chip
+              :label="props.row.estado == 0 ? 'Inactivo' : 'Activo'"
+              :color="props.row.estado == 0 ? 'negative' : 'positive'"
+              text-color="white"
+            />
+          </q-td>
+        </template>
+        <template v-slot:body-cell-rol="props">
+          <q-td :props="props">
+            <q-chip
+              :label="props.row.rol === 1 ? 'Administrador' : props.row.rol === 2 ? 'Usuario 1' : props.row.rol === 3 ? 'Usuario 2' : 'Usuario 3'"
+              :color="props.row.rol === 1 ? 'primary' : props.row.rol === 2 ? 'secondary' : props.row.rol === 3 ? 'accent' : 'positive'"
+              text-color="white"
+            />
+          </q-td>
+        </template>
+        <template v-slot:body-cell-acciones="props">
+          <q-td :props="props">
+            <q-btn
+              @click="editar(props.row)"
+              color="primary"
+              label="Editar"
+              :id="props.row.id"
+              :style="{ marginRight: '5px' }"
+            />
+            <q-btn
+              v-if="props.row.estado == 0"
+              @click="activar(props.row)"
+              color="positive"
+              :id="props.row.id"
+            >
+              <svg
+                version="1.1"
+                viewBox="0 0 2048 2048"
+                width="25"
+                height="25"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  transform="translate(1837,280)"
+                  d="m0 0h16l12 3 13 8 14 13 7 8 7 7 7 8 7 7 7 8 7 7v2h2l7 8 15 16 7 7 7 8 12 13 7 10 5 12 1 5v16l-3 12-6 11-11 13-28 28h-2v2l-7 6-86 86h-2l-2 4h-2l-2 4h-2l-2 4h-2v2h-2v2h-2v2h-2v2h-2v2h-2v2l-8 7-89 89-7 6-5 6-8 7-106 106h-2l-1 3-7 6-5 6-7 6-102 102-8 7-89 89h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2v2h-2v2h-2v2h-2v2h-2v2h-2v2l-8 7-85 85-7 6-5 6-7 6-111 111h-2l-1 3-7 6-5 6-7 6-98 98-8 7-93 93h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2v2h-2v2h-2v2h-2v2h-2v2h-2v2l-8 7-85 85-7 6-5 6-7 6-79 79-13 9-14 5-16 1-10-2-10-4-8-6-10-9-550-550-7-10-5-12-1-4v-19l3-10 5-10 7-9h2l2-4 94-94 10-7 11-5 9-2h13l13 3 11 6 13 11 22 22 8 7 34 34 2 1v2l4 2 40 40 8 7 32 32 6 5v2l4 2 26 26 8 7 32 32 8 7 36 36 8 7 32 32 6 5v2l4 2 26 26 8 7 28 28 8 7 21 21 3 1 50-50h2v-2h2v-2l8-7 74-74h2l1-3 7-6 102-102h2l2-4h2l2-4h2l2-4h2v-2h2v-2h2v-2h2v-2h2v-2l8-7 79-79h2l2-4h2l1-3 8-7 90-90h2v-2h2v-2h2v-2h2v-2l8-7 74-74h2l1-3 7-6 102-102h2l2-4h2l2-4h2l2-4h2v-2h2v-2h2v-2h2v-2h2v-2l8-7 79-79h2l2-4h2l1-3 8-7 90-90h2v-2h2v-2h2v-2h2v-2l8-7 74-74h2l2-4h2l1-3 7-6 98-98h2l2-4h2l2-4h2l2-4h2l2-4h2v-2h2v-2h2v-2h2v-2h2v-2l8-7 36-36 13-9 10-4z"
+                  fill="#FEFEFE"
+                />
+              </svg>
+            </q-btn>
+            <q-btn
+              v-else
+              @click="desactivar(props.row)"
+              color="negative"
+              :id="props.row.id"
+            >
+              <svg
+                version="1.1"
+                viewBox="0 0 2048 2048"
+                width="30"
+                height="30"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  transform="translate(503,426)"
+                  d="m0 0h18l15 3 12 5 13 8 13 11 449 449 4-2 453-453 14-10 12-6 14-4 7-1h18l15 3 12 5 13 8 13 11 8 10 8 13 5 13 3 15v15l-3 16-7 16-7 11-8 10h-2l-2 4-352 352h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-28 28h-2l-2 4-6 5-6 7-4 4h-2l-2 4-8 8h-2l-2 4-4 2v2h-2v2h-2l3 5 449 449 11 14 6 10 5 13 3 15v14l-3 16-5 13-8 14-9 11h-2l-1 3-13 10-16 8-16 4-7 1h-13l-13-2-10-3-12-6-11-8-457-457-4 1-8 7-5 6-7 6-5 6-7 6-5 6-7 6-5 6-7 6-5 6-6 5-6 7-6 5-6 7-6 5-6 7-6 5-6 7h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-272 272h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-12 12h-2l-2 4h-2l-1 3-13 10-16 8-16 4-7 1h-13l-13-2-15-5-13-8-12-11-10-11-8-13-6-16-2-11v-18l3-14 5-13 7-12 11-13 450-450-1-4-455-455-10-14-5-11-4-13-1-6v-19l4-18 8-16 10-14 8-8 14-10 12-6 14-4z"
+                  fill="#fff"
+                />
+              </svg>
+            </q-btn>
+          </q-td>
+        </template>
+      </q-table>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useAdministradoresStore } from "../../stores/administradores.js";
 
 let useAdministradores = useAdministradoresStore();
@@ -146,12 +137,6 @@ let columns = ref([
     field: "municipio",
   },
   {
-    name: "password",
-    label: "Contraseña",
-    align: "center",
-    field: "password",
-  },
-  {
     name: "rol",
     label: "Rol",
     align: "center",
@@ -162,6 +147,12 @@ let columns = ref([
     label: "Estado",
     align: "center",
     field: "estado",
+  },
+  {
+    name: "acciones",
+    label: "Acciones",
+    align: "center",
+    field: "acciones",
   },
 ]);
 
@@ -189,54 +180,28 @@ let listarInactivos = async () => {
   console.log(r.administradores);
 };
 
-let cont_estados = ref(false);
-let cont_editar = ref(false);
-
-let estados = async () => {
+let activar = async (administrador) => {
   spinner.value = true;
-  r = await useAdministradores.getAdministradores();
-  administradores.value = r.administradores;
-  cont_estados.value = true;
+  r = await useAdministradores.putActivar(administrador._id);
+  listarTodos();
   spinner.value = false;
-  console.log(administradores.value);
 };
 
-let cambiarEstado = async (admin) => {
-  console.log(admin);
-  if (admin.estado == 1) {
-    r = await useAdministradores.putDesactivar(admin._id);
-    estados();
-    console.log(r);
+let desactivar = async (administrador) => {
+  if (administrador._id == "66b3a6d67e766caa0bd31da7") {
+    alert("No se puede desactivar este administrador");
+    return;
   } else {
-    r = await useAdministradores.putActivar(admin._id);
-    estados();
-    console.log(r);
+    spinner.value = true;
+    r = await useAdministradores.putDesactivar(administrador._id);
+    listarTodos();
+    spinner.value = false;
   }
 };
 
-let ocultarEstados = () => {
-  cont_estados.value = false;
+onMounted(() => {
   listarTodos();
-};
-
-let ocultarEditar = () => {
-  cont_editar.value = false;
-};
-
-let contEditar = async () => {
-  spinner.value = true;
-  r = await useAdministradores.getAdministradores();
-  cont_editar.value = true;
-  spinner.value = false;
-  administradores.value = r.administradores;
-
-  console.log(administradores.value);
-};
-
-let editar = async (id) => {
-  r = await useAdministradores.getAdministradoresId(id);
-  console.log(r);
-};
+});
 </script>
 <style scoped>
 * {
@@ -263,7 +228,6 @@ let editar = async (id) => {
   align-items: center;
 }
 
-/* From Uiverse.io by satyamchaudharydev */
 .spinner {
   --size: 30px;
   --first-block-clr: #e28426;
@@ -338,129 +302,6 @@ let editar = async (id) => {
   align-items: center;
 }
 
-.area {
-  margin-top: -110px;
-  width: 100%;
-  height: 100vh;
-  position: absolute;
-  z-index: -1;
-}
-
-.circles {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.circles li {
-  position: absolute;
-  display: block;
-  list-style: none;
-  width: 20px;
-  height: 20px;
-  animation: animate 20s linear infinite;
-  bottom: -150px;
-}
-
-.circles li img {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.circles li:nth-child(1) {
-  left: 25%;
-  width: 80px;
-  height: 80px;
-  animation-delay: 0s;
-}
-
-.circles li:nth-child(2) {
-  left: 10%;
-  width: 20px;
-  height: 20px;
-  animation-delay: 2s;
-  animation-duration: 12s;
-}
-
-.circles li:nth-child(3) {
-  left: 70%;
-  width: 20px;
-  height: 20px;
-  animation-delay: 4s;
-}
-
-.circles li:nth-child(4) {
-  left: 40%;
-  width: 60px;
-  height: 60px;
-  animation-delay: 0s;
-  animation-duration: 18s;
-}
-
-.circles li:nth-child(5) {
-  left: 65%;
-  width: 20px;
-  height: 20px;
-  animation-delay: 0s;
-}
-
-.circles li:nth-child(6) {
-  left: 75%;
-  width: 110px;
-  height: 110px;
-  animation-delay: 3s;
-}
-
-.circles li:nth-child(7) {
-  left: 35%;
-  width: 150px;
-  height: 150px;
-  animation-delay: 7s;
-}
-
-.circles li:nth-child(8) {
-  left: 50%;
-  width: 25px;
-  height: 25px;
-  animation-delay: 15s;
-  animation-duration: 45s;
-}
-
-.circles li:nth-child(9) {
-  left: 20%;
-  width: 15px;
-  height: 15px;
-  animation-delay: 2s;
-  animation-duration: 35s;
-}
-
-.circles li:nth-child(10) {
-  left: 85%;
-  width: 150px;
-  height: 150px;
-  animation-delay: 0s;
-  animation-duration: 11s;
-}
-
-@keyframes animate {
-  0% {
-    transform: translateY(-1000px) rotate(0deg);
-    opacity: 1;
-    border-radius: 0;
-  }
-
-  100% {
-    transform: translateY(0) rotate(720deg);
-    opacity: 0;
-    border-radius: 50%;
-  }
-}
-
 .btn {
   padding: 1.3em 3em;
   font-size: 12px;
@@ -488,44 +329,13 @@ let editar = async (id) => {
   transform: translateY(-1px);
 }
 
-.img_x {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-}
-
-.cont_estados,
-.cont_editar {
-  position: absolute;
-  z-index: 100;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.cont_nombre_vue {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  background-color: #f0c295;
-  width: 70%;
-  height: 70%;
-  border-radius: 10px;
-}
-
-.btn_estados,
-.btn_editar {
-  padding: 10px 8px;
-  margin: 10px;
-  font-size: 14px;
-  border: none;
-  border-radius: 8px;
-  background-color: #fcedbb;
-  color: #696969;
-}
-
-.btn_estados:hover,
-.btn_editar:hover {
-  background-color: #eed37a;
-  cursor: pointer;
+  margin-top: 20px;
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 </style>

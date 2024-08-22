@@ -42,7 +42,7 @@ export const useClimas =defineStore("climas",() => {
     let getActivos = async () => {
         try {
             let res = await axios.get('/api/climas/listar/activos',
-                null,{
+                {
                     headers: {
                         "x-token": token.value
                     }
@@ -59,7 +59,7 @@ export const useClimas =defineStore("climas",() => {
     let getInactivos = async () => {
         try {
             let res = await axios.get('/api/climas/listar/inactivos',
-                null,{
+                {
                     headers: {
                         "x-token": token.value
                     }
