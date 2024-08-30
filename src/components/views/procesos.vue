@@ -122,13 +122,13 @@ let columns = ref([
     name: "fechaInicio",
     label: "Fecha Inicio",
     align: "center",
-    field: "fechaInicio",
+    field: (row) => row.fechaInicio.split("T")[0],
   },
   {
     name: "fechaFin",
     label: "Fecha Fin",
     align: "center",
-    field: "fechaFin",
+    field: (row) => row.fechaFin.split("T")[0],
   },
   {
     name: "estado",

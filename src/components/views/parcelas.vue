@@ -146,7 +146,7 @@ let columns = ref([
     name: "fecha_Creacion",
     label: "Fecha de creación",
     align: "center",
-    field: "fecha_Creacion",
+    field: (row) => row.fecha_Creacion.split("T")[0],
   },
   {
     name: "estado",

@@ -110,13 +110,13 @@ let columns = ref([
     name: "fechaSiembra",
     label: "Fecha de siembra",
     align: "center",
-    field: "fechaSiembra",
+    field: (row) => row.fechaSiembra.split("T")[0],
   },
   {
     name: "fechaCosecha",
     label: "Fecha de cosecha",
     align: "center",
-    field: "fechaCosecha",
+    field: (row) => row.fechaCosecha.split("T")[0],
   },
   {
     name: "transplante",
@@ -124,7 +124,6 @@ let columns = ref([
     align: "center",
     field: "transplante",
   },
-
   {
     name: "cultivoAnterior",
     label: "Cultivo anterior",
