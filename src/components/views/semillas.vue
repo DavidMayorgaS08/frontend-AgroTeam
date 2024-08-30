@@ -110,13 +110,13 @@ let columns = ref([
     name: "fechaCompra",
     label: "Fecha de compra",
     align: "center",
-    field: "fechaCompra",
+    field: (row) => row.fechaCompra.split("T")[0],
   },
   {
     name: "fechaVencimiento",
     label: "Fecha de vencimiento",
     align: "center",
-    field: "fechaVencimiento",
+    field: (row) => row.fechaVencimiento.split("T")[0],
   },
   {
     name: "especieVariedad",

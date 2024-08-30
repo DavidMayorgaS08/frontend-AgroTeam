@@ -110,7 +110,7 @@ let columns = ref([
     name: "fecha",
     label: "Fecha",
     align: "center",
-    field: "fecha",
+    field: (row) => row.fecha.split("T")[0],
   },
   {
     name: "diasTransplante",
@@ -128,13 +128,13 @@ let columns = ref([
     name: "horaInicio",
     label: "Hora inicio",
     align: "center",
-    field: "horaInicio",
+    field: (row) => row.horaInicio.split("T")[1].split(":")[0] + ":" + row.horaInicio.split("T")[1].split(":")[1],
   },
   {
     name: "horaFin",
     label: "Hora fin",
     align: "center",
-    field: "horaFin",
+    field: (row) => row.horaFin.split("T")[1].split(":")[0] + ":" + row.horaFin.split("T")[1].split(":")[1],
   },
   {
     name: "dosis",

@@ -104,7 +104,7 @@ let columns = ref([
     name: "fecha",
     label: "Fecha",
     align: "center",
-    field: "fecha",
+    field: (row) => row.fecha.split("T")[0],
   },
   {
     name: "virificacionRealizada",
