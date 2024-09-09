@@ -18,6 +18,16 @@
     </div>
     <div class="q-pa-md">
       <q-table :rows="rows" :columns="columns" row-key="name">
+        <template v-slot:body-cell-productos="props">
+          <q-td :props="props">
+            <q-btn
+              @click="verProductos(props.row)"
+              color="secondary"
+              :id="props.row.id"
+              label="ver"
+            />
+          </q-td>
+        </template>
         <template v-slot:body-cell-estado="props">
           <q-td :props="props">
             <q-chip
@@ -80,17 +90,142 @@
         </template>
       </q-table>
     </div>
+    <div class="cont_productos" v-if="productos">
+      <div class="sub_cont_productos">
+        <svg
+          class="cerrarProductos"
+          @click="cerrarProductos()"
+          version="1.1"
+          viewBox="0 0 2048 2048"
+          width="25"
+          height="25"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            transform="translate(503,426)"
+            d="m0 0h18l15 3 12 5 13 8 13 11 449 449 4-2 453-453 14-10 12-6 14-4 7-1h18l15 3 12 5 13 8 13 11 8 10 8 13 5 13 3 15v15l-3 16-7 16-7 11-8 10h-2l-2 4-352 352h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-28 28h-2l-2 4-6 5-6 7-4 4h-2l-2 4-8 8h-2l-2 4-4 2v2h-2v2h-2l3 5 449 449 11 14 6 10 5 13 3 15v14l-3 16-5 13-8 14-9 11h-2l-1 3-13 10-16 8-16 4-7 1h-13l-13-2-10-3-12-6-11-8-457-457-4 1-8 7-5 6-7 6-5 6-7 6-5 6-7 6-5 6-7 6-5 6-6 5-6 7-6 5-6 7-6 5-6 7-6 5-6 7h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-272 272h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-12 12h-2l-2 4h-2l-1 3-13 10-16 8-16 4-7 1h-13l-13-2-15-5-13-8-12-11-10-11-8-13-6-16-2-11v-18l3-14 5-13 7-12 11-13 450-450-1-4-455-455-10-14-5-11-4-13-1-6v-19l4-18 8-16 10-14 8-8 14-10 12-6 14-4z"
+            fill="#fff"
+          />
+        </svg>
+        <div class="cont_titulo_producto">
+          <p class="text_producto">producto</p>
+        </div>
+        <div class="cont_ingrediente">
+          <p class="text_ingrediente">ingrediente activo</p>
+          <p class="ingrediente">{{ ingredienteActivo }}</p>
+        </div>
+        <div class="cont_dosis">
+          <p class="text_dosis">dosis</p>
+          <p class="dosis">{{ dosis }}</p>
+        </div>
+        <div class="cont_metodo">
+          <p class="text_metodo">metodo de aplicacion</p>
+          <p class="metodo">{{ metodoAplicacion }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="cont_form" v-if="formulario">
+      <div class="form">
+        <svg
+          class="cerrarForm"
+          @click="cerrarForm()"
+          version="1.1"
+          viewBox="0 0 2048 2048"
+          width="25"
+          height="25"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            transform="translate(503,426)"
+            d="m0 0h18l15 3 12 5 13 8 13 11 449 449 4-2 453-453 14-10 12-6 14-4 7-1h18l15 3 12 5 13 8 13 11 8 10 8 13 5 13 3 15v15l-3 16-7 16-7 11-8 10h-2l-2 4-352 352h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-28 28h-2l-2 4-6 5-6 7-4 4h-2l-2 4-8 8h-2l-2 4-4 2v2h-2v2h-2l3 5 449 449 11 14 6 10 5 13 3 15v14l-3 16-5 13-8 14-9 11h-2l-1 3-13 10-16 8-16 4-7 1h-13l-13-2-10-3-12-6-11-8-457-457-4 1-8 7-5 6-7 6-5 6-7 6-5 6-7 6-5 6-7 6-5 6-6 5-6 7-6 5-6 7-6 5-6 7-6 5-6 7h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-272 272h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-12 12h-2l-2 4h-2l-1 3-13 10-16 8-16 4-7 1h-13l-13-2-15-5-13-8-12-11-10-11-8-13-6-16-2-11v-18l3-14 5-13 7-12 11-13 450-450-1-4-455-455-10-14-5-11-4-13-1-6v-19l4-18 8-16 10-14 8-8 14-10 12-6 14-4z"
+            fill="#fff"
+          />
+        </svg>
+        <div class="titulo_form">
+          <p v-if="variable === 0" class="text_titulo_form">crear</p>
+          <p v-else class="text_titulo_form">editar</p>
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">fecha</p>
+          <input type="date" class="inputs" v-model="fecha">
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">parcela</p>
+          <select required v-model="parcelaOption">
+            <option value="" disabled selected hidden></option>
+            <option
+            v-for="(parcela, index) in parcelas"
+            :key="parcela._id"
+            :value="index + 1"
+            >{{ parcela.numero }} - {{ parcela.cultivoActual }}</option>
+          </select>
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">empleado</p>
+          <select required v-model="empleadoOption">
+            <option value="" disabled selected hidden></option>
+            <option
+            v-for="(empleado, index) in empleados"
+            :key="empleado._id"
+            :value="index + 1"
+            >{{ empleado.nombre }}</option>
+          </select>
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">ingrediente activo</p>
+          <input type="text" class="inputs" v-model="ingredienteActivo">
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">dosis</p>
+          <input type="text" class="inputs" v-model="dosis">
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">metodo de aplicacion</p>
+          <input type="text" class="inputs" v-model="metodoAplicacion">
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">operario</p>
+          <input type="text" class="inputs" v-model="operario">
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">responsable</p>
+          <input type="text" class="inputs" v-model="responsable">
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">observaciones</p>
+          <input type="text" class="inputs" v-model="observaciones">
+        </div>
+        <div class="cont_btn_form">
+          <button
+            v-if="variable === 0"
+            class="btn_form"
+            @click.prevent="enviarCrear()"
+          >
+            crear
+          </button>
+          <button v-else class="btn_form" @click.prevent="enviarEditar()">
+            editar
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script setup>
 import { ref, onMounted } from "vue";
-import { usePreparacionsuelosStore} from "../../stores/Preparacionsuelos.js";
+import { usePreparacionsuelosStore } from "../../stores/Preparacionsuelos.js";
+import { useParcelasStore } from "../../stores/parcelas.js";
+import { useEmpleadosStore } from "../../stores/empleados.js";
 
 let usePreparacionsuelos = usePreparacionsuelosStore();
+let useParcelas = useParcelasStore();
+let useEmpleados = useEmpleadosStore();
 
 let spinner = ref(false);
 
 let r = null;
+let p = ref([]);
+let e = ref([]);
 
 let rows = ref([]);
 let columns = ref([
@@ -100,19 +235,32 @@ let columns = ref([
     align: "center",
     field: (row) => row.fecha.split("T")[0],
   },
-  { 
+  {
     name: "id_parcela",
     label: "Parcela",
     align: "center",
-    field: "id_parcela",
+    field: (row) => {
+      let parcela = p.value.parcela;
+      parcela = parcela.find((p) => p._id == row.id_parcela);
+      return parcela.numero;
+    },
   },
   {
     name: "id_empleado",
     label: "Empleado",
     align: "center",
-    field: "id_empleado",
+    field: (row) => {
+      let empleado = e.value.empleado;
+      empleado = empleado.find((e) => e._id == row.id_empleado);
+      return empleado.nombre;
+    },
   },
-  // CREAR CARD PARA PRODUCTOS
+  {
+    name: "productos",
+    label: "Producto",
+    align: "center",
+    field: "productos",
+  },
   {
     name: "operario",
     label: "Operario",
@@ -142,12 +290,14 @@ let columns = ref([
     label: "Acciones",
     align: "center",
     field: "acciones",
-  }
+  },
 ]);
 
 let listarTodos = async () => {
   spinner.value = true;
   r = await usePreparacionsuelos.getPreparacion_suelos();
+  p.value = await useParcelas.getParcelas();
+  e.value = await useEmpleados.getEmpleados();
   rows.value = r.preparacionSuelos;
   spinner.value = false;
 };
@@ -180,12 +330,187 @@ let desactivar = async (row) => {
   spinner.value = false;
 };
 
+let ingredienteActivo = ref("");
+let dosis = ref("");
+let metodoAplicacion = ref("");
+
+let productos = ref(false);
+
+let verProductos = (row) => {
+  ingredienteActivo.value = row.productos[0].ingredienteActivo;
+  dosis.value = row.productos[0].dosis;
+  metodoAplicacion.value = row.productos[0].metodoAplicacion;
+  productos.value = true;
+};
+
+let cerrarProductos = () => {
+  productos.value = false;
+};
+
+let formulario = ref(false);
+
+let cerrarForm = () => {
+  formulario.value = false;
+  listarTodos();
+  vaciarCampos();
+};
+
+let fecha = ref("");
+let parcelaOption = ref("");
+let empleadoOption = ref("");
+let operario = ref("");
+let responsable = ref("");
+let observaciones = ref("");
+let estado = ref(1);
+
+let validaciones = () => {
+  if(fecha.value === "") {
+    alert("El campo fecha es obligatorio");
+    return false;
+  }
+  if(parcelaOption.value === "") {
+    alert("El campo parcela es obligatorio");
+    return false;
+  }
+  if(empleadoOption.value === "") {
+    alert("El campo empleado es obligatorio");
+    return false;
+  }
+  if(ingredienteActivo.value === "" || ingredienteActivo.value.trim() === "") {
+    alert("El campo ingrediente activo es obligatorio");
+    return false;
+  }
+  if(dosis.value === "" || String(dosis.value).trim() === "") {
+    alert("El campo dosis es obligatorio");
+    return false;
+  }
+  if(metodoAplicacion.value === "" || metodoAplicacion.value.trim() === "") {
+    alert("El campo metodo de aplicacion es obligatorio");
+    return false;
+  }
+  if(operario.value === "" || operario.value.trim() === "") {
+    alert("El campo operario es obligatorio");
+    return false;
+  }
+  if(responsable.value === "" || responsable.value.trim() === "") {
+    alert("El campo responsable es obligatorio");
+    return false;
+  }
+  if(observaciones.value === "" || observaciones.value.trim() === "") {
+    alert("El campo observaciones es obligatorio");
+    return false;
+  }
+}
+
+let vaciarCampos = () => {
+  fecha.value = "";
+  parcelaOption.value = "";
+  empleadoOption.value = "";
+  ingredienteActivo.value = "";
+  dosis.value = "";
+  metodoAplicacion.value = "";
+  operario.value = "";
+  responsable.value = "";
+  observaciones.value = "";
+};
+
+let parcelas = ref([]);
+let empleados = ref([]);
+
+let variable = ref(null);
+let id = ref(null);
+
+let crear = async () => {
+  spinner.value = true;
+  await useParcelas.getParcelas();
+  await useEmpleados.getEmpleados();
+  parcelas.value = useParcelas.parcelas.parcela;
+  empleados.value = useEmpleados.empleados.empleado;
+  vaciarCampos();
+  variable.value = 0;
+  formulario.value = true;
+  spinner.value = false;
+};
+
+let editar = async (data) => {
+  spinner.value = true;
+  await useParcelas.getParcelas();
+  await useEmpleados.getEmpleados();
+  parcelas.value = useParcelas.parcelas.parcela;
+  empleados.value = useEmpleados.empleados.empleado;
+  variable.value = 1;
+  id.value = data._id;
+  fecha.value = data.fecha.split("T")[0];
+  parcelaOption.value = parcelas.value.findIndex((p) => p._id == data.id_parcela) + 1;
+  empleadoOption.value = empleados.value.findIndex((e) => e._id == data.id_empleado) + 1;
+  ingredienteActivo.value = data.productos[0].ingredienteActivo;
+  dosis.value = data.productos[0].dosis;
+  metodoAplicacion.value = data.productos[0].metodoAplicacion;
+  operario.value = data.operario;
+  responsable.value = data.responsable;
+  observaciones.value = data.observaciones;
+  formulario.value = true;
+  spinner.value = false;
+};
+
+let enviarCrear = async () => {
+  if(validaciones() === false) {
+    return;
+  }
+  let data = {
+    fecha: fecha.value,
+    id_parcela: parcelas.value[parcelaOption.value - 1]._id,
+    id_empleado: empleados.value[empleadoOption.value - 1]._id,
+    productos: [
+      {
+        ingredienteActivo: ingredienteActivo.value,
+        dosis: dosis.value,
+        metodoAplicacion: metodoAplicacion.value,
+      },
+    ],
+    operario: operario.value,
+    responsable: responsable.value,
+    observaciones: observaciones.value,
+    estado: estado.value,
+  };
+  spinner.value = true;
+  await usePreparacionsuelos.postPereparacion_suelos(data);
+  vaciarCampos();
+  spinner.value = false;
+}
+
+let enviarEditar = async () => {
+  if(validaciones() === false) {
+    return;
+  }
+  let data = {
+    fecha: fecha.value,
+    id_parcela: parcelas.value[parcelaOption.value - 1]._id,
+    id_empleado: empleados.value[empleadoOption.value - 1]._id,
+    productos: [
+      {
+        ingredienteActivo: ingredienteActivo.value,
+        dosis: dosis.value,
+        metodoAplicacion: metodoAplicacion.value,
+      },
+    ],
+    operario: operario.value,
+    responsable: responsable.value,
+    observaciones: observaciones.value,
+    estado: estado.value,
+  };
+  spinner.value = true;
+  await usePreparacionsuelos.putPreparacion_suelos(id.value, data);
+  vaciarCampos();
+  spinner.value = false;
+};
+
 onMounted(() => {
   listarTodos();
 });
 </script>
 <style scoped>
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -318,5 +643,189 @@ onMounted(() => {
   font-size: 20px;
   text-transform: uppercase;
   font-weight: bold;
+}
+
+.cont_productos {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.474);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sub_cont_productos {
+  width: 28%;
+  height: 35%;
+  background: #e9b27c;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.cerrarProductos {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.cont_titulo_producto {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 25%;
+}
+
+.cont_ingrediente, .cont_dosis, .cont_metodo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 25%;
+}
+
+.text_producto {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.text_ingrediente, .text_dosis, .text_metodo {
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  width: 65%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding-left: 40px;
+}
+
+.ingrediente, .dosis, .metodo {
+  font-size: 18px;
+  width: 35%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding-left: 5px;
+}
+
+.cont_form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.474);
+  top: 0;
+  left: 0;
+}
+
+.form {
+  margin-top: 35px;
+  width: 28%;
+  height: 80%;
+  background: #e9b27c;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-right: 10px;
+}
+
+.cerrarForm {
+  position: absolute;
+  z-index: 1000;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.titulo_form {
+  margin-top: 20px;
+}
+
+.text_titulo_form {
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.cont_inputs {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Estilo para inputs y select */
+.inputs,
+select {
+  width: 75%;
+  padding: 10px;
+  border: none;
+  outline: none;
+  background: none;
+  border-bottom: 2px solid #f4f4f4;
+  transition: border-color 0.5s ease;
+}
+
+.inputs:focus,
+select:focus {
+  border-bottom-color: #000000;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: transparent;
+  background-image: url('data:image/svg+xml;utf8,<svg version="1.1" viewBox="0 0 2048 2048" width="80" height="80" xmlns="http://www.w3.org/2000/svg"><path transform="translate(131,440)" d="m0 0h26l15 2 20 6 12 5 17 9 13 10 14 12 774 774 3 1 779-779 11-9 15-11 22-11 25-7 17-2h23l15 2 21 6 12 5 15 8 11 8 11 9 6 5 9 11 9 12 12 23 9 27h1v55h-2l-7 24-11 23-7 10-9 11-11 12-878 878-10 8-11 8-12 7-16 7-21 6-24 3h-12l-20-2-27-8-23-12-14-11-13-11-880-880-9-11-9-12-10-18-5-13-5-18-2-2v-50l3-9 6-19 5-12 9-16 13-16 9-10 10-8 11-8 18-10 19-7 18-4z" fill="%23FFFFFF"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+}
+
+.text_inputs {
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: bold;
+  position: absolute;
+  top: 5%;
+  left: 14%;
+}
+
+.cont_btn_form {
+  margin: 16px 0;
+}
+
+.btn_form {
+  padding: 14px 25px;
+  border: none;
+  border-radius: 25px;
+  font-size: 13px;
+  cursor: pointer;
+  text-transform: uppercase;
+  box-shadow: 0px 8px 15px #0000001a;
+  transition: all 0.3s ease;
+  background-color: #f6e4ab;
+}
+
+.btn_form:hover {
+  background-color: #eed37a;
 }
 </style>
