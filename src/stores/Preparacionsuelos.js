@@ -78,7 +78,7 @@ export const usePreparacionsuelosStore = defineStore("preparacionSuelos", () => 
     // #5
     let postPereparacion_suelos = async (preparacion_suelo) => {
         try {
-            let res = await axios.post("/api/preparacion_suelos", preparacion_suelos,
+            let res = await axios.post("/api/preparacion_suelos", preparacion_suelo,
                 {
                     headers: {
                         "x-token": token.value

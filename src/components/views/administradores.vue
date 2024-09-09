@@ -209,8 +209,6 @@ let useAdministradores = useAdministradoresStore();
 
 let spinner = ref(false);
 
-let administradores = ref([]);
-
 let r = null;
 
 let rows = ref([]);
