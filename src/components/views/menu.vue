@@ -742,4 +742,70 @@ let cerrarSesion = () => {
 .btn_salir:hover {
   background-color: #e3e3e3;
 }
+
+@media(max-width: 1440px){
+.text_card {
+  font-size: 27px;
+}
+}
+
+@media(max-width: 1366px){
+  .cont {
+  grid-template-columns: repeat(4, 1fr);
+}
+}
+
+@media(max-width: 1000px){
+.text_card {
+  font-size: 24px;
+}
+}
+
+@media(max-width: 900px){
+  .cont {
+  grid-template-columns: repeat(3, 1fr);
+}
+.cont_menu_lateral {
+  grid-template-columns: repeat(2, 1fr);
+}
+.cont_perfil_desplegable {
+  width: 20%;
+}
+}
+
+@media(max-width: 700px){
+  .text_card {
+  font-size: 21px;
+}
+.cont_perfil_desplegable {
+  width: 35%;
+}
+}
+
+@media(max-width: 600px){
+  .cont {
+  grid-template-columns: repeat(2, 1fr);
+}
+.cont_perfil_desplegable {
+  width: 40%;
+}
+}
+
+@media(max-width: 450px){
+.cont_perfil_desplegable {
+  width: 45%;
+}
+}
+
+@media(max-width: 400px){
+  .cont {
+  grid-template-columns: repeat(1, 1fr);
+}
+.cont_menu_lateral {
+  grid-template-columns: repeat(1, 1fr);
+}
+.cont_perfil_desplegable {
+  width: 50%;
+}
+}
 </style>

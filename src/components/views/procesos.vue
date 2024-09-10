@@ -494,6 +494,8 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .btn {
