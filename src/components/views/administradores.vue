@@ -126,63 +126,67 @@
           <p v-if="variable === 0" class="text_titulo_form">crear</p>
           <p v-else class="text_titulo_form">editar</p>
         </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">Nombre</p>
-          <input
-            type="text"
-            class="inputs"
-            v-model="nombre"
-          />
+        <div class="part1">
+          <div class="cont_inputs">
+            <p class="text_inputs">Nombre</p>
+            <input
+              type="text"
+              class="inputs"
+              v-model="nombre"
+            />
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">Dirección</p>
+            <input
+              type="text"
+              class="inputs"
+              v-model="direccion"
+            />
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">Teléfono</p>
+            <input
+              type="text"
+              class="inputs"
+              v-model="telefono"
+            />
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">Correo</p>
+            <input
+              type="text"
+              class="inputs"
+              v-model="email"
+            />
+          </div>
         </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">Dirección</p>
-          <input
-            type="text"
-            class="inputs"
-            v-model="direccion"
-          />
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">Teléfono</p>
-          <input
-            type="text"
-            class="inputs"
-            v-model="telefono"
-          />
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">Correo</p>
-          <input
-            type="text"
-            class="inputs"
-            v-model="email"
-          />
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">Municipio</p>
-          <input
-            type="text"
-            class="inputs"
-            v-model="municipio"
-          />
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">Contraseña</p>
-          <input
-            type="text"
-            class="inputs"
-            v-model="password"
-          />
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">Rol</p>
-          <select required v-model="rol">
-            <option value="" disabled selected hidden></option>
-            <option value="1">Administrador</option>
-            <option value="2">Usuario 1</option>
-            <option value="3">Usuario 2</option>
-            <option value="4">Usuario 3</option>
-          </select>
+        <div class="part2">
+          <div class="cont_inputs">
+            <p class="text_inputs">Municipio</p>
+            <input
+              type="text"
+              class="inputs"
+              v-model="municipio"
+            />
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">Contraseña</p>
+            <input
+              type="text"
+              class="inputs"
+              v-model="password"
+            />
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">Rol</p>
+            <select required v-model="rol">
+              <option value="" disabled selected hidden></option>
+              <option value="1">Administrador</option>
+              <option value="2">Usuario 1</option>
+              <option value="3">Usuario 2</option>
+              <option value="4">Usuario 3</option>
+            </select>
+          </div>
         </div>
         <div class="cont_btn_form">
           <button
@@ -581,15 +585,34 @@ onMounted(() => {
 
 .form {
   margin-top: 35px;
-  width: 28%;
-  height: 80%;
+  width: 50%;
+  height: 70%;
   background: #ffffff;
   border-radius: 10px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
+}
+
+.part1 {
+  width: 50%;
+  height: 65%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-left: 10px;
+}
+
+.part2 {
+  width: 50%;
+  height: 55%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-right: 10px;
 }
 
 .cerrarForm {
@@ -602,6 +625,10 @@ onMounted(() => {
 
 .titulo_form {
   margin-top: 20px;
+  position: absolute;
+  top: 2%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .text_titulo_form {
@@ -622,8 +649,7 @@ onMounted(() => {
 
 /* Estilo para inputs y select */
 .inputs, select {
-  width: 75%;
-  padding: 10px;
+  width: 85%;
   border: none;
   outline: none;
   background: none;
@@ -646,24 +672,28 @@ select {
 }
 
 .text_inputs {
-  font-size: 12px;
+  font-size: 14px;
   text-transform: uppercase;
   font-weight: bold;
   position: absolute;
   top: 5%;
-  left: 14%;
+  left: 7%;
 }
 
 
 .cont_btn_form {
   margin: 20px 0;
+  position: absolute;
+  bottom: 2%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .btn_form {
   padding: 14px 25px;
   border: none;
   border-radius: 25px;
-  font-size: 13px;  
+  font-size: 14px;  
   cursor: pointer;
   text-transform: uppercase;
   transition: all 0.3s ease;

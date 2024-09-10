@@ -149,51 +149,71 @@
           <p v-if="variable === 0" class="text_titulo_form">crear</p>
           <p v-else class="text_titulo_form">editar</p>
         </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">fecha</p>
-          <input type="date" class="inputs" v-model="fecha" />
+        <div class="part1">
+          <div class="cont_inputs">
+            <p class="text_inputs">fecha</p>
+            <input type="date" class="inputs" v-model="fecha" />
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">parcela</p>
+            <select required v-model="parcelaOption">
+              <option value="" disabled selected hidden></option>
+              <option
+                v-for="(parcela, index) in parcelas"
+                :key="parcela._id"
+                :value="index + 1"
+              >
+                {{ parcela.numero }} - {{ parcela.cultivoActual }}
+              </option>
+            </select>
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">empleado</p>
+            <select required v-model="empleadoOption">
+              <option value="" disabled selected hidden></option>
+              <option
+                v-for="(empleado, index) in empleados"
+                :key="empleado._id"
+                :value="index + 1"
+              >
+                {{ empleado.nombre }}
+              </option>
+            </select>
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">muestra</p>
+            <input type="text" class="inputs" v-model="muestra" />
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">cultivo</p>
+            <input type="text" class="inputs" v-model="cultivo" />
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">laboratorio</p>
+            <input type="text" class="inputs" v-model="laboratorio" />
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">recomendacion</p>
+            <input type="text" class="inputs" v-model="recomendacion" />
+          </div>
         </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">parcela</p>
-          <select required v-model="parcelaOption">
-            <option value="" disabled selected hidden></option>
-            <option
-              v-for="(parcela, index) in parcelas"
-              :key="parcela._id"
-              :value="index + 1"
-            >
-              {{ parcela.numero }} - {{ parcela.cultivoActual }}
-            </option>
-          </select>
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">empleado</p>
-          <select required v-model="empleadoOption">
-            <option value="" disabled selected hidden></option>
-            <option
-              v-for="(empleado, index) in empleados"
-              :key="empleado._id"
-              :value="index + 1"
-            >
-              {{ empleado.nombre }}
-            </option>
-          </select>
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">muestra</p>
-          <input type="text" class="inputs" v-model="muestra" />
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">cultivo</p>
-          <input type="text" class="inputs" v-model="cultivo" />
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">laboratorio</p>
-          <input type="text" class="inputs" v-model="laboratorio" />
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">recomendacion</p>
-          <input type="text" class="inputs" v-model="recomendacion" />
+        <div class="part2">
+          <div class="cont_inputs">
+            <p class="text_inputs">fosforo</p>
+            <input type="text" class="inputs" v-model="fosforo" />
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">nitrogeno</p>
+            <input type="text" class="inputs" v-model="nitrogeno" />
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">ph</p>
+            <input type="text" class="inputs" v-model="ph" />
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">potasio</p>
+            <input type="text" class="inputs" v-model="potasio" />
+          </div>
         </div>
         <div class="cont_btn_form">
           <button
@@ -206,27 +226,6 @@
           <button v-else class="btn_form" @click.prevent="enviarEditar()">
             editar
           </button>
-        </div>
-      </div>
-      <div class="form2">
-        <div class="titulo_form">
-          <p class="text_titulo_form">resultado</p>
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">fosforo</p>
-          <input type="text" class="inputs" v-model="fosforo" />
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">nitrogeno</p>
-          <input type="text" class="inputs" v-model="nitrogeno" />
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">ph</p>
-          <input type="text" class="inputs" v-model="ph" />
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">potasio</p>
-          <input type="text" class="inputs" v-model="potasio" />
         </div>
       </div>
     </div>
@@ -482,12 +481,10 @@ let editar = async (row) => {
   variable.value = 1;
   id.value = row._id;
   fecha.value = row.fecha.split("T")[0];
-  parcelaOption.value = parcelas.value.findIndex(
-    (p) => p._id == row.id_parcela
-  ) + 1;
-  empleadoOption.value = empleados.value.findIndex(
-    (e) => e._id == row.id_empleado
-  ) + 1;
+  parcelaOption.value =
+    parcelas.value.findIndex((p) => p._id == row.id_parcela) + 1;
+  empleadoOption.value =
+    empleados.value.findIndex((e) => e._id == row.id_empleado) + 1;
   muestra.value = row.muestra;
   cultivo.value = row.cultivo;
   laboratorio.value = row.laboratorio;
@@ -589,7 +586,7 @@ onMounted(() => {
 .spinner {
   --size: 30px;
   --first-block-clr: #2e7d32;
-  --second-block-clr: #77DD77;
+  --second-block-clr: #77dd77;
   --clr: #111;
   width: 100px;
   height: 100px;
@@ -802,33 +799,36 @@ onMounted(() => {
 }
 
 .form {
-  margin-top: 35px;
-  width: 28%;
-  height: 80%;
+  margin-top: 55px;
+  width: 50%;
+  height: 85%;
   background: #ffffff;
   border-radius: 10px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
   margin-right: 10px;
 }
 
-.form2{
-  margin-top: 35px;
-  width: 28%;
-  height: 50%;
-  background: #e9b27c;
-  border-radius: 10px;
+.part1 {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  right: 4%;
-  top: 50%;
-  transform: translate(0, -50%);
+  width: 50%;
+  height: 76%;
+  padding-left: 10px;
+}
+
+.part2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 50%;
+  padding-right: 10px;
 }
 
 .cerrarForm {
@@ -841,6 +841,10 @@ onMounted(() => {
 
 .titulo_form {
   margin-top: 20px;
+  position: absolute;
+  top: 2%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .text_titulo_form {
@@ -862,8 +866,7 @@ onMounted(() => {
 /* Estilo para inputs y select */
 .inputs,
 select {
-  width: 75%;
-  padding: 10px;
+  width: 85%;
   border: none;
   outline: none;
   background: none;
@@ -887,23 +890,27 @@ select {
 }
 
 .text_inputs {
-  font-size: 12px;
+  font-size: 14px;
   text-transform: uppercase;
   font-weight: bold;
   position: absolute;
   top: 5%;
-  left: 14%;
+  left: 7%;
 }
 
 .cont_btn_form {
   margin: 16px 0;
+  position: absolute;
+  bottom: 1%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .btn_form {
   padding: 14px 25px;
   border: none;
   border-radius: 25px;
-  font-size: 13px;
+  font-size: 14px;
   cursor: pointer;
   text-transform: uppercase;
   transition: all 0.3s ease;
