@@ -484,7 +484,7 @@ onMounted(() => {
 .form {
   margin-top: 35px;
   width: 28%;
-  height: 80%;
+  height: 70%;
   background: #ffffff;
   border-radius: 10px;
   display: flex;
@@ -524,7 +524,6 @@ onMounted(() => {
 
 .inputs {
   width: 75%;
-  padding: 10px;
   border: none;
   outline: none;
   background: none;
@@ -536,12 +535,12 @@ onMounted(() => {
 }
 
 .text_inputs {
-  font-size: 12px;
+  font-size: 14px;
   text-transform: uppercase;
   font-weight: bold;
   position: absolute;
   top: 5%;
-  left: 14%;
+  left: 12%;
 }
 
 
@@ -553,7 +552,7 @@ onMounted(() => {
   padding: 14px 25px;
   border: none;
   border-radius: 25px;
-  font-size: 13px;  
+  font-size: 14px;  
   cursor: pointer;
   text-transform: uppercase;
   transition: all 0.3s ease;

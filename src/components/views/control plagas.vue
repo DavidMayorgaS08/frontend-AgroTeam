@@ -101,66 +101,70 @@
           <p v-if="variable === 0" class="text_titulo_form">crear</p>
           <p v-else class="text_titulo_form">editar</p>
         </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">Cultivo</p>
-          <select required v-model="cultivoOption">
-            <option value="" disabled selected hidden></option>
-            <option
-            v-for="(cultivo, index) in cultivos"
-            :key="cultivo._id"
-            :value="index + 1"
-            > {{ cultivo.nombre }}</option>
-          </select>
+        <div class="part1">
+          <div class="cont_inputs">
+            <p class="text_inputs">Cultivo</p>
+            <select required v-model="cultivoOption">
+              <option value="" disabled selected hidden></option>
+              <option
+              v-for="(cultivo, index) in cultivos"
+              :key="cultivo._id"
+              :value="index + 1"
+              > {{ cultivo.nombre }}</option>
+            </select>
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">Empleado</p>
+            <select required v-model="empleadoOption">
+              <option value="" disabled selected hidden></option>
+              <option
+              v-for="(empleado, index) in empleados"
+              :key="empleado._id"
+              :value="index + 1"
+              > {{ empleado.nombre }}</option>
+            </select>
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">Fecha</p>
+            <input type="date" class="inputs" v-model="fecha">
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">Tipo de cultivo</p>
+            <input type="text" class="inputs" v-model="tipoCultivo">
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">Nombre</p>
+            <input type="text" class="inputs" v-model="nombre">
+          </div>
         </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">Empleado</p>
-          <select required v-model="empleadoOption">
-            <option value="" disabled selected hidden></option>
-            <option
-            v-for="(empleado, index) in empleados"
-            :key="empleado._id"
-            :value="index + 1"
-            > {{ empleado.nombre }}</option>
-          </select>
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">Fecha</p>
-          <input type="date" class="inputs" v-model="fecha">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">Tipo de cultivo</p>
-          <input type="text" class="inputs" v-model="tipoCultivo">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">Nombre</p>
-          <input type="text" class="inputs" v-model="nombre">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">Tipo</p>
-          <input type="text" class="inputs" v-model="tipo">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">Ingrediente activo</p>
-          <input type="text" class="inputs" v-model="ingredienteActivo">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">Dosis</p>
-          <input type="text" class="inputs" v-model="dosis">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">Empleado operador</p>
-          <select required v-model="empleadoOperadorOption">
-            <option value="" disabled selected hidden></option>
-            <option
-            v-for="(empleado, index) in empleados"
-            :key="empleado._id"
-            :value="index + 1"
-            > {{ empleado.nombre }}</option>
-          </select>
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">Observaciones</p>
-          <input type="text" class="inputs" v-model="observaciones">
+        <div class="part2">
+          <div class="cont_inputs">
+            <p class="text_inputs">Tipo</p>
+            <input type="text" class="inputs" v-model="tipo">
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">Ingrediente activo</p>
+            <input type="text" class="inputs" v-model="ingredienteActivo">
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">Dosis</p>
+            <input type="text" class="inputs" v-model="dosis">
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">Empleado operador</p>
+            <select required v-model="empleadoOperadorOption">
+              <option value="" disabled selected hidden></option>
+              <option
+              v-for="(empleado, index) in empleados"
+              :key="empleado._id"
+              :value="index + 1"
+              > {{ empleado.nombre }}</option>
+            </select>
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">Observaciones</p>
+            <input type="text" class="inputs" v-model="observaciones">
+          </div>
         </div>
         <div class="cont_btn_form">
           <button
@@ -870,16 +874,37 @@ onMounted(() => {
 
 .form {
   margin-top: 35px;
-  width: 28%;
-  height: 80%;
+  width: 50%;
+  height: 70%;
   background: #ffffff;
   border-radius: 10px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
   margin-right: 10px;
+}
+
+.part1{
+  width: 50%;
+  height: 65%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-left: 5%;
+  padding-right: 15px;
+}
+
+.part2{
+  width: 50%;
+  height: 65%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-right: 5%;
+  padding-left: 15px;
 }
 
 .cerrarForm {
@@ -892,6 +917,10 @@ onMounted(() => {
 
 .titulo_form {
   margin-top: 20px;
+  position: absolute;
+  top: 2%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .text_titulo_form {
@@ -913,8 +942,7 @@ onMounted(() => {
 /* Estilo para inputs y select */
 .inputs,
 select {
-  width: 75%;
-  padding: 10px;
+  width: 100%;
   border: none;
   outline: none;
   background: none;
@@ -938,28 +966,31 @@ select {
 }
 
 .text_inputs {
-  font-size: 12px;
+  font-size: 14px;
   text-transform: uppercase;
   font-weight: bold;
   position: absolute;
   top: 5%;
-  left: 14%;
+  left: 0%;
 }
 
 .cont_btn_form {
-  margin: 16px 0;
+  position: absolute;
+  bottom: 2%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .btn_form {
   padding: 14px 25px;
   border: none;
   border-radius: 25px;
-  font-size: 13px;
+  font-size: 14px;
   cursor: pointer;
   text-transform: uppercase;
   transition: all 0.3s ease;
   background-color: #2e7d32;
-  color: #fff;
+  color: #ffffff;
 }
 
 .btn_form:hover {

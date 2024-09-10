@@ -101,60 +101,64 @@
           <p v-if="variable === 0" class="text_titulo_form">crear</p>
           <p v-else class="text_titulo_form">editar</p>
         </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">Proceso</p>
-          <select required v-model="procesoOption">
-            <option value="" disabled selected hidden></option>
-            <option
-            v-for="(proceso, index) in procesos"
-            :key="proceso._id"
-            :value="index + 1"
-            >{{ proceso.tipo }}</option>
-          </select>
+        <div class="part1">
+          <div class="cont_inputs">
+            <p class="text_inputs">Proceso</p>
+            <select required v-model="procesoOption">
+              <option value="" disabled selected hidden></option>
+              <option
+              v-for="(proceso, index) in procesos"
+              :key="proceso._id"
+              :value="index + 1"
+              >{{ proceso.tipo }}</option>
+            </select>
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">fecha</p>
+            <input type="date" class="inputs" v-model="fecha">
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">producto comercial</p>
+            <input type="text" class="inputs" v-model="productoComercial">
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">ingrediente activo</p>
+            <input type="text" class="inputs" v-model="ingredenteActivo">
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">dosis utilizada</p>
+            <input type="text" class="inputs" v-model="dosisUtilizada">
+          </div>
         </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">fecha</p>
-          <input type="date" class="inputs" v-model="fecha">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">producto comercial</p>
-          <input type="text" class="inputs" v-model="productoComercial">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">ingrediente activo</p>
-          <input type="text" class="inputs" v-model="ingredenteActivo">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">dosis utilizada</p>
-          <input type="text" class="inputs" v-model="dosisUtilizada">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">metodo aplicacion</p>
-          <input type="text" class="inputs" v-model="metodoAplicacion">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">empleado operario</p>
-          <select required v-model="empleadooperadorOption">
-            <option 
-            v-for="(empleado, index) in empleados"
-            :key="empleado._id"
-            :value="index + 1"
-            >{{ empleado.nombre }}</option>
-          </select>
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">empleado responsable</p>
-          <select required v-model="empleadoResponsableOption">
-            <option 
-            v-for="(empleado, index) in empleados"
-            :key="empleado._id"
-            :value="index + 1"
-            >{{ empleado.nombre }}</option>
-          </select>
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">observaciones</p>
-          <input type="text" class="inputs" v-model="observaciones">
+        <div class="part2">
+          <div class="cont_inputs">
+            <p class="text_inputs">metodo aplicacion</p>
+            <input type="text" class="inputs" v-model="metodoAplicacion">
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">empleado operario</p>
+            <select required v-model="empleadooperadorOption">
+              <option 
+              v-for="(empleado, index) in empleados"
+              :key="empleado._id"
+              :value="index + 1"
+              >{{ empleado.nombre }}</option>
+            </select>
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">empleado responsable</p>
+            <select required v-model="empleadoResponsableOption">
+              <option 
+              v-for="(empleado, index) in empleados"
+              :key="empleado._id"
+              :value="index + 1"
+              >{{ empleado.nombre }}</option>
+            </select>
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">observaciones</p>
+            <input type="text" class="inputs" v-model="observaciones">
+          </div>
         </div>
         <div class="cont_btn_form">
           <button
@@ -614,16 +618,37 @@ onMounted(() => {
 
 .form {
   margin-top: 35px;
-  width: 28%;
-  height: 80%;
+  width: 50%;
+  height: 70%;
   background: #ffffff;
   border-radius: 10px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
   margin-right: 10px;
+}
+
+.part1{
+  width: 50%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-left: 5%;
+  padding-right: 15px;
+}
+
+.part2{
+  width: 50%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-right: 5%;
+  padding-left: 15px;
 }
 
 .cerrarForm {
@@ -636,6 +661,10 @@ onMounted(() => {
 
 .titulo_form {
   margin-top: 20px;
+  position: absolute;
+  top: 2%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .text_titulo_form {
@@ -657,8 +686,7 @@ onMounted(() => {
 /* Estilo para inputs y select */
 .inputs,
 select {
-  width: 75%;
-  padding: 10px;
+  width: 100%;
   border: none;
   outline: none;
   background: none;
@@ -682,28 +710,31 @@ select {
 }
 
 .text_inputs {
-  font-size: 12px;
+  font-size: 14px;
   text-transform: uppercase;
   font-weight: bold;
   position: absolute;
   top: 5%;
-  left: 14%;
+  left: 0%;
 }
 
 .cont_btn_form {
-  margin: 16px 0;
+  position: absolute;
+  bottom: 2%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .btn_form {
   padding: 14px 25px;
   border: none;
   border-radius: 25px;
-  font-size: 13px;
+  font-size: 14px;
   cursor: pointer;
   text-transform: uppercase;
   transition: all 0.3s ease;
   background-color: #2e7d32;
-  color: #fff;
+  color: #ffffff;
 }
 
 .btn_form:hover {
