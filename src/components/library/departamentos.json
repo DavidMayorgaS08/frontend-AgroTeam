@@ -1,0 +1,132 @@
+{
+    "departamentos": [
+        {
+            "nombre": "Amazonas",
+            "capital": "Leticia"
+        },
+        {
+            "nombre": "Antioquia",
+            "capital": "Medellín"
+        },
+        {
+            "nombre": "Arauca",
+            "capital": "Arauca"
+        },
+        {
+            "nombre": "Atlántico",
+            "capital": "Barranquilla"
+        },
+        {
+            "nombre": "Bolívar",
+            "capital": "Cartagena"
+        },
+        {
+            "nombre": "Boyacá",
+            "capital": "Tunja"
+        },
+        {
+            "nombre": "Caldas",
+            "capital": "Manizales"
+        },
+        {
+            "nombre": "Caquetá",
+            "capital": "Florencia"
+        },
+        {
+            "nombre": "Casanare",
+            "capital": "Yopal"
+        },
+        {
+            "nombre": "Cauca",
+            "capital": "Popayán"
+        },
+        {
+            "nombre": "Cesar",
+            "capital": "Valledupar"
+        },
+        {
+            "nombre": "Chocó",
+            "capital": "Quibdó"
+        },
+        {
+            "nombre": "Córdoba",
+            "capital": "Montería"
+        },
+        {
+            "nombre": "Cundinamarca",
+            "capital": "Bogotá"
+        },
+        {
+            "nombre": "Guainía",
+            "capital": "Inírida"
+        },
+        {
+            "nombre": "Guaviare",
+            "capital": "San José del Guaviare"
+        },
+        {
+            "nombre": "Huila",
+            "capital": "Neiva"
+        },
+        {
+            "nombre": "La Guajira",
+            "capital": "Riohacha"
+        },
+        {
+            "nombre": "Magdalena",
+            "capital": "Santa Marta"
+        },
+        {
+            "nombre": "Meta",
+            "capital": "Villavicencio"
+        },
+        {
+            "nombre": "Nariño",
+            "capital": "Pasto"
+        },
+        {
+            "nombre": "Norte de Santander",
+            "capital": "Cúcuta"
+        },
+        {
+            "nombre": "Putumayo",
+            "capital": "Mocoa"
+        },
+        {
+            "nombre": "Quindío",
+            "capital": "Armenia"
+        },
+        {
+            "nombre": "Risaralda",
+            "capital": "Pereira"
+        },
+        {
+            "nombre": "San Andrés y Providencia",
+            "capital": "San Andrés"
+        },
+        {
+            "nombre": "Santander",
+            "capital": "Bucaramanga"
+        },
+        {
+            "nombre": "Sucre",
+            "capital": "Sincelejo"
+        },
+        {
+            "nombre": "Tolima",
+            "capital": "Ibagué"
+        },
+        {
+            "nombre": "Valle del Cauca",
+            "capital": "Cali"
+        },
+        {
+            "nombre": "Vaupés",
+            "capital": "Mitú"
+        },
+        {
+            "nombre": "Vichada",
+            "capital": "Puerto Carreño"
+        }
+    ]
+}

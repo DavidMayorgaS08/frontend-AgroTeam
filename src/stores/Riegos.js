@@ -3,48 +3,48 @@ import axios from "axios";
 import { ref } from "vue";
 import { useLoginStore } from '../stores/login.js'
 
-export const useAdministradoresStore = defineStore("administradores", () => {
+export const useRiegosStore = defineStore("riegos", () => {
     let token = ref(useLoginStore().token);
-    let administradores = ref(null)
+    let riegos = ref(null)
     // #1
-    let getAdministradores = async () => {
+    let getRiegos = async () => {
         try {
-            let res = await axios.get("/api/administradores",
+            let res = await axios.get("/api/riegos",
                 {
                     headers: {
                         "x-token": token.value
                     }
-                })
-            administradores.value = res.data
+                }
+            )
+            riegos.value = res.data
             console.log(res);
             return res.data
         } catch (error) {
             console.log(error);
-            console.log(token.value);
-            
             return error
         }
     }
 
-    let getAdministradoresId = async (id) => {
+    let getRiegosId = async (id) => {
         try {
-            let res = await axios.get(`/api/administradores/${id}`, {
-                headers: {
-                    "x-token": token.value
+            let res = await axios.get(`/api/riegos/${id}`,
+                {
+                    headers: {
+                        "x-token": token.value
+                    }
                 }
-            })
+            )
             console.log(res);
             return res.data
         } catch (error) {
             console.log(error);
             return error
-
         }
     }
 
     let getActivos = async () => {
         try {
-            let res = await axios.get('/api/administradores/listar/activos',
+            let res = await axios.get('/api/riegos/listar/activos',
                 {
                     headers: {
                         "x-token": token.value
@@ -61,7 +61,7 @@ export const useAdministradoresStore = defineStore("administradores", () => {
 
     let getInactivos = async () => {
         try {
-            let res = await axios.get('/api/administradores/listar/inactivos',
+            let res = await axios.get('/api/riegos/listar/inactivos',
                 {
                     headers: {
                         "x-token": token.value
@@ -76,9 +76,9 @@ export const useAdministradoresStore = defineStore("administradores", () => {
         }
     }
 
-    let postAdministradores = async (administrador) => {
+    let postRiegos = async (riegos) => {
         try {
-            let res = await axios.post("/api/administradores", administrador,
+            let res = await axios.post("/api/riegos", riegos,
                 {
                     headers: {
                         "x-token": token.value
@@ -93,63 +93,58 @@ export const useAdministradoresStore = defineStore("administradores", () => {
         }
     }
 
-    let putAdministradores = async (id, administrador) => {
+    let putRiegos = async (id, riegos) => {
         try {
-            let res = await axios.put(`/api/administradores/${id}`, administrador,
-                {
-                    headers: {
-                        "x-token": token.value
-                    }
-                }
-            )
-            console.log(res);
-            return res.data
-        } catch (error) {
-            console.log(error);
-            return error
-        }
-    }
-    // #7
-    let putActivar = async (id) => {
-        try {
-            let res = await axios.put(`/api/administradores/activar/${id}`,
-                null,
-                {
-                    headers: {
-                        "x-token": token.value
-                    }
-                }
-            )
-            console.log(res);
-            return res.data
-
-        } catch (error) {
-            console.log(error);
-            return error
-
-        }
-    }
-    // #8
-    let putDesactivar = async (id) => {
-        try {
-            let res = await axios.put(`/api/administradores/desactivar/${id}`,
-                null, {
+            let res = await axios.post(`/api/riegos/${id}`, riegos, {
                 headers: {
                     "x-token": token.value
                 }
-            }
-            )
-            console.log(res);
-            return res.data
-
+            })
         } catch (error) {
             console.log(error);
             return error
+        }
+    }
 
+    let putActivar = async (id) => {
+        try {
+            let res = await axios.put(`/api/riegos/activar/${id}`, null, {
+                headers:{
+                    "x-token": token.value
+                }
+            })
+            console.log(res);
+            return res.data            
+        } catch (error){
+            console.log(error);
+            return error
+        }
+    }
+
+    let putDesactivar = async (id) => {
+        try {
+            let res = await axios.put(`/api/riegos/desactivar/${id}`, null, {
+                headers:{
+                    "x-token": token.value
+                }
+            })
+            console.log(res);
+            return res.data            
+        } catch (error){
+            console.log(error);
+            return error
         }
     }
 
     return {
-        getAdministradores, getAdministradoresId, getActivos, getInactivos, postAdministradores, putAdministradores, putActivar, putDesactivar, administradores
+        getRiegos,
+        getRiegosId,
+        getActivos,
+        getInactivos,
+        postRiegos,
+        putRiegos,
+        putActivar,
+        putDesactivar,
+        riegos
     }
 })

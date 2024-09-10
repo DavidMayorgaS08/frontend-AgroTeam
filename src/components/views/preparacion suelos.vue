@@ -1,24 +1,5 @@
 <template>
   <div class="app">
-    <!-- Alerta de error -->
-    <div
-      v-if="showErrorAlert"
-      class="alert alert-error"
-      :class="alertClass"
-      role="alert"
-    >
-      <span class="alert-message">{{ errorMessage }}</span>
-    </div>
-
-    <!-- Alerta de éxito -->
-    <div
-      v-if="showSuccessAlert"
-      class="alert alert-success"
-      :class="alertClass"
-      role="alert"
-    >
-      <span class="alert-message">Enviado con éxito.</span>
-    </div>
     <div class="cont_spinner" v-if="spinner">
       <div class="spinner"></div>
     </div>
@@ -33,68 +14,25 @@
       <button class="btn" @click.prevent="crear()">crear</button>
     </div>
     <div class="cont_nombre_vue">
-      <p class="nombre_vue">administradores</p>
+      <p class="nombre_vue">Preparacion suelos</p>
     </div>
     <div class="q-pa-md">
       <q-table :rows="rows" :columns="columns" row-key="name">
+        <template v-slot:body-cell-productos="props">
+          <q-td :props="props">
+            <q-btn
+              @click="verProductos(props.row)"
+              color="secondary"
+              :id="props.row.id"
+              label="ver"
+            />
+          </q-td>
+        </template>
         <template v-slot:body-cell-estado="props">
           <q-td :props="props">
             <q-chip
               :label="props.row.estado == 0 ? 'Inactivo' : 'Activo'"
               :color="props.row.estado == 0 ? 'negative' : 'positive'"
-              text-color="white"
-            />
-          </q-td>
-        </template>
-        <template v-slot:body-cell-rol="props">
-          <q-td :props="props">
-            <q-chip
-              :label="
-                props.row.rol === 1
-                  ? 'Administrador'
-                  : props.row.rol === 2
-                  ? 'Usuario 1'
-                  : props.row.rol === 3
-                  ? 'Usuario 2'
-                  : 'Usuario 3'
-              "
-              :color="
-                props.row.rol === 1
-                  ? 'primary'
-                  : props.row.rol === 2
-                  ? 'primary'
-                  : props.row.rol === 3
-                  ? 'primary'
-                  : 'primary'
-              "
-              text-color="white"
-            />
-          </q-td>
-        </template>
-            />
-          </q-td>
-        </template>
-        <template v-slot:body-cell-rol="props">
-          <q-td :props="props">
-            <q-chip
-              :label="
-                props.row.rol === 1
-                  ? 'Administrador'
-                  : props.row.rol === 2
-                  ? 'Usuario 1'
-                  : props.row.rol === 3
-                  ? 'Usuario 2'
-                  : 'Usuario 3'
-              "
-              :color="
-                props.row.rol === 1
-                  ? 'primary'
-                  : props.row.rol === 2
-                  ? 'primary'
-                  : props.row.rol === 3
-                  ? 'primary'
-                  : 'primary'
-              "
               text-color="white"
             />
           </q-td>
@@ -152,6 +90,40 @@
         </template>
       </q-table>
     </div>
+    <div class="cont_productos" v-if="productos">
+      <div class="sub_cont_productos">
+        <svg
+          class="cerrarProductos"
+          @click="cerrarProductos()"
+          version="1.1"
+          viewBox="0 0 2048 2048"
+          width="25"
+          height="25"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            transform="translate(503,426)"
+            d="m0 0h18l15 3 12 5 13 8 13 11 449 449 4-2 453-453 14-10 12-6 14-4 7-1h18l15 3 12 5 13 8 13 11 8 10 8 13 5 13 3 15v15l-3 16-7 16-7 11-8 10h-2l-2 4-352 352h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-28 28h-2l-2 4-6 5-6 7-4 4h-2l-2 4-8 8h-2l-2 4-4 2v2h-2v2h-2l3 5 449 449 11 14 6 10 5 13 3 15v14l-3 16-5 13-8 14-9 11h-2l-1 3-13 10-16 8-16 4-7 1h-13l-13-2-10-3-12-6-11-8-457-457-4 1-8 7-5 6-7 6-5 6-7 6-5 6-7 6-5 6-7 6-5 6-6 5-6 7-6 5-6 7-6 5-6 7-6 5-6 7h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-272 272h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-12 12h-2l-2 4h-2l-1 3-13 10-16 8-16 4-7 1h-13l-13-2-15-5-13-8-12-11-10-11-8-13-6-16-2-11v-18l3-14 5-13 7-12 11-13 450-450-1-4-455-455-10-14-5-11-4-13-1-6v-19l4-18 8-16 10-14 8-8 14-10 12-6 14-4z"
+            fill="#fff"
+          />
+        </svg>
+        <div class="cont_titulo_producto">
+          <p class="text_producto">producto</p>
+        </div>
+        <div class="cont_ingrediente">
+          <p class="text_ingrediente">ingrediente activo</p>
+          <p class="ingrediente">{{ ingredienteActivo }}</p>
+        </div>
+        <div class="cont_dosis">
+          <p class="text_dosis">dosis</p>
+          <p class="dosis">{{ dosis }}</p>
+        </div>
+        <div class="cont_metodo">
+          <p class="text_metodo">metodo de aplicacion</p>
+          <p class="metodo">{{ metodoAplicacion }}</p>
+        </div>
+      </div>
+    </div>
     <div class="cont_form" v-if="formulario">
       <div class="form">
         <svg
@@ -174,83 +146,54 @@
           <p v-else class="text_titulo_form">editar</p>
         </div>
         <div class="cont_inputs">
-          <p class="text_inputs">Nombre</p>
-          <input type="text" class="inputs" v-model="nombre" />
+          <p class="text_inputs">fecha</p>
+          <input type="date" class="inputs" v-model="fecha">
         </div>
         <div class="cont_inputs">
-          <p class="text_inputs">Dirección</p>
-          <input type="text" class="inputs" v-model="direccion" />
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">Teléfono</p>
-          <input type="text" class="inputs" v-model="telefono" />
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">Correo</p>
-          <input type="text" class="inputs" v-model="email" />
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">Municipio</p>
-          <input type="text" class="inputs" v-model="municipio" />
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">Contraseña</p>
-          <input type="text" class="inputs" v-model="password" />
-          <input
-            type="text"
-            class="inputs"
-            v-model="nombre"
-          />
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">Dirección</p>
-          <input
-            type="text"
-            class="inputs"
-            v-model="direccion"
-          />
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">Teléfono</p>
-          <input
-            type="text"
-            class="inputs"
-            v-model="telefono"
-          />
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">Correo</p>
-          <input
-            type="text"
-            class="inputs"
-            v-model="email"
-          />
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">Municipio</p>
-          <input
-            type="text"
-            class="inputs"
-            v-model="municipio"
-          />
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">Contraseña</p>
-          <input
-            type="text"
-            class="inputs"
-            v-model="password"
-          />
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">Rol</p>
-          <select required v-model="rol">
+          <p class="text_inputs">parcela</p>
+          <select required v-model="parcelaOption">
             <option value="" disabled selected hidden></option>
-            <option value="1">Administrador</option>
-            <option value="2">Usuario 1</option>
-            <option value="3">Usuario 2</option>
-            <option value="4">Usuario 3</option>
+            <option
+            v-for="(parcela, index) in parcelas"
+            :key="parcela._id"
+            :value="index + 1"
+            >{{ parcela.numero }} - {{ parcela.cultivoActual }}</option>
           </select>
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">empleado</p>
+          <select required v-model="empleadoOption">
+            <option value="" disabled selected hidden></option>
+            <option
+            v-for="(empleado, index) in empleados"
+            :key="empleado._id"
+            :value="index + 1"
+            >{{ empleado.nombre }}</option>
+          </select>
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">ingrediente activo</p>
+          <input type="text" class="inputs" v-model="ingredienteActivo">
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">dosis</p>
+          <input type="text" class="inputs" v-model="dosis">
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">metodo de aplicacion</p>
+          <input type="text" class="inputs" v-model="metodoAplicacion">
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">operario</p>
+          <input type="text" class="inputs" v-model="operario">
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">responsable</p>
+          <input type="text" class="inputs" v-model="responsable">
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">observaciones</p>
+          <input type="text" class="inputs" v-model="observaciones">
         </div>
         <div class="cont_btn_form">
           <button
@@ -268,59 +211,73 @@
     </div>
   </div>
 </template>
-
 <script setup>
 import { ref, onMounted } from "vue";
-import { useAdministradoresStore } from "../../stores/administradores.js";
+import { usePreparacionsuelosStore } from "../../stores/Preparacionsuelos.js";
+import { useParcelasStore } from "../../stores/parcelas.js";
+import { useEmpleadosStore } from "../../stores/empleados.js";
 
-let useAdministradores = useAdministradoresStore();
-
-const showErrorAlert = ref(false);
-const showSuccessAlert = ref(false);
-const alertClass = ref("");
-const errorMessage = ref("");
+let usePreparacionsuelos = usePreparacionsuelosStore();
+let useParcelas = useParcelasStore();
+let useEmpleados = useEmpleadosStore();
 
 let spinner = ref(false);
 
 let r = null;
+let p = ref([]);
+let e = ref([]);
 
 let rows = ref([]);
 let columns = ref([
   {
-    name: "nombre",
-    label: "Nombre",
+    name: "fecha",
+    label: "Fecha",
     align: "center",
-    field: "nombre",
+    field: (row) => row.fecha.split("T")[0],
   },
   {
-    name: "direccion",
-    label: "Dirección",
+    name: "id_parcela",
+    label: "Parcela",
     align: "center",
-    field: "direccion",
+    field: (row) => {
+      let parcela = p.value.parcela;
+      parcela = parcela.find((p) => p._id == row.id_parcela);
+      return parcela.numero;
+    },
   },
   {
-    name: "telefono",
-    label: "Teléfono",
+    name: "id_empleado",
+    label: "Empleado",
     align: "center",
-    field: "telefono",
+    field: (row) => {
+      let empleado = e.value.empleado;
+      empleado = empleado.find((e) => e._id == row.id_empleado);
+      return empleado.nombre;
+    },
   },
   {
-    name: "email",
-    label: "Email",
+    name: "productos",
+    label: "Producto",
     align: "center",
-    field: "email",
+    field: "productos",
   },
   {
-    name: "municipio",
-    label: "Municipio",
+    name: "operario",
+    label: "Operario",
     align: "center",
-    field: "municipio",
+    field: "operario",
   },
   {
-    name: "rol",
-    label: "Rol",
+    name: "responsable",
+    label: "Responsable",
     align: "center",
-    field: "rol",
+    field: "responsable",
+  },
+  {
+    name: "observaciones",
+    label: "Observaciones",
+    align: "center",
+    field: "observaciones",
   },
   {
     name: "estado",
@@ -336,58 +293,58 @@ let columns = ref([
   },
 ]);
 
-const hideAlert = () => {
-  setTimeout(() => {
-    alertClass.value = "hide";
-    setTimeout(() => {
-      showErrorAlert.value = false;
-      showSuccessAlert.value = false;
-      alertClass.value = "";
-    }, 500);
-  }, 3000);
-};
-
 let listarTodos = async () => {
   spinner.value = true;
-  r = await useAdministradores.getAdministradores();
-  rows.value = r.administradores;
+  r = await usePreparacionsuelos.getPreparacion_suelos();
+  p.value = await useParcelas.getParcelas();
+  e.value = await useEmpleados.getEmpleados();
+  rows.value = r.preparacionSuelos;
   spinner.value = false;
-  console.log(r.administradores);
 };
 
 let listarActivos = async () => {
   spinner.value = true;
-  r = await useAdministradores.getActivos();
-  rows.value = r.administradores;
+  r = await usePreparacionsuelos.getActivos();
+  rows.value = r.preparacionSuelos;
   spinner.value = false;
-  console.log(r.administradores);
 };
 
 let listarInactivos = async () => {
   spinner.value = true;
-  r = await useAdministradores.getInactivos();
-  rows.value = r.administradores;
+  r = await usePreparacionsuelos.getInactivos();
+  rows.value = r.preparacionSuelos;
   spinner.value = false;
-  console.log(r.administradores);
 };
 
-let activar = async (administrador) => {
+let activar = async (row) => {
   spinner.value = true;
-  r = await useAdministradores.putActivar(administrador._id);
+  r = await usePreparacionsuelos.putActivar(row._id);
   listarTodos();
   spinner.value = false;
 };
 
-let desactivar = async (administrador) => {
-  if (administrador._id == "66b3a6d67e766caa0bd31da7") {
-    alert("No se puede desactivar este administrador");
-    return;
-  } else {
-    spinner.value = true;
-    r = await useAdministradores.putDesactivar(administrador._id);
-    listarTodos();
-    spinner.value = false;
-  }
+let desactivar = async (row) => {
+  spinner.value = true;
+  r = await usePreparacionsuelos.putDesactivar(row._id);
+  listarTodos();
+  spinner.value = false;
+};
+
+let ingredienteActivo = ref("");
+let dosis = ref("");
+let metodoAplicacion = ref("");
+
+let productos = ref(false);
+
+let verProductos = (row) => {
+  ingredienteActivo.value = row.productos[0].ingredienteActivo;
+  dosis.value = row.productos[0].dosis;
+  metodoAplicacion.value = row.productos[0].metodoAplicacion;
+  productos.value = true;
+};
+
+let cerrarProductos = () => {
+  productos.value = false;
 };
 
 let formulario = ref(false);
@@ -398,169 +355,154 @@ let cerrarForm = () => {
   vaciarCampos();
 };
 
-let nombre = ref("");
-let direccion = ref("");
-let telefono = ref("");
-let email = ref("");
-let municipio = ref("");
-let password = ref("");
-let rol = ref("");
+let fecha = ref("");
+let parcelaOption = ref("");
+let empleadoOption = ref("");
+let operario = ref("");
+let responsable = ref("");
+let observaciones = ref("");
 let estado = ref(1);
 
 let validaciones = () => {
-  if (nombre.value === "" || nombre.value.trim() === "") {
-    errorMessage.value = "El nombre es obligatorio";
-    alertClass.value = "show";
-    showErrorAlert.value = true;
-    hideAlert();
+  if(fecha.value === "") {
+    alert("El campo fecha es obligatorio");
     return false;
   }
-  if (direccion.value === "" || direccion.value.trim() === "") {
-    errorMessage.value = "La dirección es obligatoria";
-    alertClass.value = "show";
-    showErrorAlert.value = true;
-    hideAlert();
+  if(parcelaOption.value === "") {
+    alert("El campo parcela es obligatorio");
     return false;
   }
-  if (telefono.value === "" || telefono.value.trim() === "") {
-    errorMessage.value = "El teléfono es obligatorio";
-    alertClass.value = "show";
-    showErrorAlert.value = true;
-    hideAlert();
+  if(empleadoOption.value === "") {
+    alert("El campo empleado es obligatorio");
     return false;
   }
-  if (email.value === "" || email.value.trim() === "") {
-    errorMessage.value = "El email es obligatorio";
-    alertClass.value = "show";
-    showErrorAlert.value = true;
-    hideAlert();
+  if(ingredienteActivo.value === "" || ingredienteActivo.value.trim() === "") {
+    alert("El campo ingrediente activo es obligatorio");
     return false;
   }
-  if (municipio.value === "" || municipio.value.trim() === "") {
-    errorMessage.value = "El municipio es obligatorio";
-    alertClass.value = "show";
-    showErrorAlert.value = true;
-    hideAlert();
+  if(dosis.value === "" || String(dosis.value).trim() === "") {
+    alert("El campo dosis es obligatorio");
     return false;
   }
-  if (password.value === "" || password.value.trim() === "") {
-    errorMessage.value = "La contraseña es obligatoria";
-    alertClass.value = "show";
-    showErrorAlert.value = true;
-    hideAlert();
+  if(metodoAplicacion.value === "" || metodoAplicacion.value.trim() === "") {
+    alert("El campo metodo de aplicacion es obligatorio");
     return false;
   }
-  if (rol.value === "" || String(rol.value).trim() === "") {
-    errorMessage.value = "El rol es obligatorio";
-    alertClass.value = "show";
-    showErrorAlert.value = true;
-    hideAlert();
-    alert("El nombre es obligatorio");
+  if(operario.value === "" || operario.value.trim() === "") {
+    alert("El campo operario es obligatorio");
     return false;
   }
-  if (direccion.value === "" || direccion.value.trim() === "") {
-    alert("La dirección es obligatoria");
+  if(responsable.value === "" || responsable.value.trim() === "") {
+    alert("El campo responsable es obligatorio");
     return false;
   }
-  if (telefono.value === "" || telefono.value.trim() === "") {
-    alert("El teléfono es obligatorio");
+  if(observaciones.value === "" || observaciones.value.trim() === "") {
+    alert("El campo observaciones es obligatorio");
     return false;
   }
-  if (email.value === "" || email.value.trim() === "") {
-    alert("El email es obligatorio");
-    return false;
-  }
-  if (municipio.value === "" || municipio.value.trim() === "") {
-    alert("El municipio es obligatorio");
-    return false;
-  }
-  if (password.value === "" || password.value.trim() === "") {
-    alert("La contraseña es obligatoria");
-    return false;
-  }
-  if (rol.value === "" || String(rol.value).trim() === "") {
-    alert("El rol es obligatorio");
-    return false;
-  }
-};
+}
 
 let vaciarCampos = () => {
-  nombre.value = "";
-  direccion.value = "";
-  telefono.value = "";
-  email.value = "";
-  municipio.value = "";
-  password.value = "";
-  rol.value = "";
+  fecha.value = "";
+  parcelaOption.value = "";
+  empleadoOption.value = "";
+  ingredienteActivo.value = "";
+  dosis.value = "";
+  metodoAplicacion.value = "";
+  operario.value = "";
+  responsable.value = "";
+  observaciones.value = "";
 };
+
+let parcelas = ref([]);
+let empleados = ref([]);
 
 let variable = ref(null);
 let id = ref(null);
 
-let crear = () => {
+let crear = async () => {
+  spinner.value = true;
+  await useParcelas.getParcelas();
+  await useEmpleados.getEmpleados();
+  parcelas.value = useParcelas.parcelas.parcela;
+  empleados.value = useEmpleados.empleados.empleado;
+  vaciarCampos();
   variable.value = 0;
   formulario.value = true;
+  spinner.value = false;
 };
 
-let editar = (data) => {
+let editar = async (data) => {
+  spinner.value = true;
+  await useParcelas.getParcelas();
+  await useEmpleados.getEmpleados();
+  parcelas.value = useParcelas.parcelas.parcela;
+  empleados.value = useEmpleados.empleados.empleado;
   variable.value = 1;
   id.value = data._id;
-  nombre.value = data.nombre;
-  direccion.value = data.direccion;
-  telefono.value = data.telefono;
-  email.value = data.email;
-  municipio.value = data.municipio;
-  password.value = data.password;
-  rol.value = data.rol;
+  fecha.value = data.fecha.split("T")[0];
+  parcelaOption.value = parcelas.value.findIndex((p) => p._id == data.id_parcela) + 1;
+  empleadoOption.value = empleados.value.findIndex((e) => e._id == data.id_empleado) + 1;
+  ingredienteActivo.value = data.productos[0].ingredienteActivo;
+  dosis.value = data.productos[0].dosis;
+  metodoAplicacion.value = data.productos[0].metodoAplicacion;
+  operario.value = data.operario;
+  responsable.value = data.responsable;
+  observaciones.value = data.observaciones;
   formulario.value = true;
+  spinner.value = false;
 };
 
 let enviarCrear = async () => {
-  if (validaciones() === false) {
+  if(validaciones() === false) {
     return;
   }
   let data = {
-    nombre: nombre.value,
-    direccion: direccion.value,
-    telefono: telefono.value,
-    email: email.value,
-    municipio: municipio.value,
-    password: password.value,
-    rol: rol.value,
+    fecha: fecha.value,
+    id_parcela: parcelas.value[parcelaOption.value - 1]._id,
+    id_empleado: empleados.value[empleadoOption.value - 1]._id,
+    productos: [
+      {
+        ingredienteActivo: ingredienteActivo.value,
+        dosis: dosis.value,
+        metodoAplicacion: metodoAplicacion.value,
+      },
+    ],
+    operario: operario.value,
+    responsable: responsable.value,
+    observaciones: observaciones.value,
     estado: estado.value,
   };
   spinner.value = true;
-  await useAdministradores.postAdministradores(data);
+  await usePreparacionsuelos.postPereparacion_suelos(data);
   vaciarCampos();
   spinner.value = false;
-  showErrorAlert.value = false;
-  showSuccessAlert.value = true;
-  alertClass.value = "show";
-  hideAlert();
-};
+}
 
 let enviarEditar = async () => {
-  if (validaciones() === false) {
+  if(validaciones() === false) {
     return;
   }
   let data = {
-    nombre: nombre.value,
-    direccion: direccion.value,
-    telefono: telefono.value,
-    email: email.value,
-    municipio: municipio.value,
-    password: password.value,
-    rol: rol.value,
+    fecha: fecha.value,
+    id_parcela: parcelas.value[parcelaOption.value - 1]._id,
+    id_empleado: empleados.value[empleadoOption.value - 1]._id,
+    productos: [
+      {
+        ingredienteActivo: ingredienteActivo.value,
+        dosis: dosis.value,
+        metodoAplicacion: metodoAplicacion.value,
+      },
+    ],
+    operario: operario.value,
+    responsable: responsable.value,
+    observaciones: observaciones.value,
     estado: estado.value,
   };
   spinner.value = true;
-  await useAdministradores.putAdministradores(id.value, data);
+  await usePreparacionsuelos.putPreparacion_suelos(id.value, data);
   vaciarCampos();
   spinner.value = false;
-  showErrorAlert.value = false;
-  showSuccessAlert.value = true;
-  alertClass.value = "show";
-  hideAlert();
 };
 
 onMounted(() => {
@@ -581,7 +523,7 @@ onMounted(() => {
 
 .cont_spinner {
   position: absolute;
-  z-index: 10000;
+  z-index: 1000;
   top: 0;
   left: 0;
   width: 100%;
@@ -703,7 +645,78 @@ onMounted(() => {
   font-weight: bold;
 }
 
-/* NUEVO */
+.cont_productos {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.474);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sub_cont_productos {
+  width: 28%;
+  height: 35%;
+  background: #e9b27c;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.cerrarProductos {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.cont_titulo_producto {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 25%;
+}
+
+.cont_ingrediente, .cont_dosis, .cont_metodo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 25%;
+}
+
+.text_producto {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.text_ingrediente, .text_dosis, .text_metodo {
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  width: 65%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding-left: 40px;
+}
+
+.ingrediente, .dosis, .metodo {
+  font-size: 18px;
+  width: 35%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding-left: 5px;
+}
 
 .cont_form {
   display: flex;
@@ -728,6 +741,7 @@ onMounted(() => {
   justify-content: center;
   align-items: center;
   position: relative;
+  margin-right: 10px;
 }
 
 .cerrarForm {
@@ -759,7 +773,8 @@ onMounted(() => {
 }
 
 /* Estilo para inputs y select */
-.inputs, select {
+.inputs,
+select {
   width: 75%;
   padding: 10px;
   border: none;
@@ -769,8 +784,8 @@ onMounted(() => {
   transition: border-color 0.5s ease;
 }
 
-
-.inputs:focus, select:focus {
+.inputs:focus,
+select:focus {
   border-bottom-color: #000000;
 }
 
@@ -795,14 +810,14 @@ select {
 }
 
 .cont_btn_form {
-  margin: 20px 0;
+  margin: 16px 0;
 }
 
 .btn_form {
   padding: 14px 25px;
   border: none;
   border-radius: 25px;
-  font-size: 13px;  
+  font-size: 13px;
   cursor: pointer;
   text-transform: uppercase;
   box-shadow: 0px 8px 15px #0000001a;
@@ -812,52 +827,5 @@ select {
 
 .btn_form:hover {
   background-color: #eed37a;
-}
-
-.alert {
-  padding: 15px;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  position: fixed;
-  z-index: 10001;
-  left: 50%;
-  width: 30%;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  font-family: "Times New Roman", serif;
-  font-size: 20px;
-  opacity: 0;
-  transform: translateX(-50%) translateY(-100px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.alert.show {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-  animation: slideIn 0.5s forwards;
-}
-
-.alert.hide {
-  opacity: 0;
-  transform: translateX(-50%) translateY(-100px);
-  animation: slideOut 0.5s forwards;
-}
-
-.a {
-  color: white;
-}
-
-.alert-error {
-  background-color: #c7303c;
-  color: white;
-}
-.alert-success {
-  background-color: #10b133;
-  color: white;
-}
-
-.alert-message {
-  flex: 1;
 }
 </style>
