@@ -497,7 +497,7 @@ let cerrarSesion = () => {
 }
 
 .menu {
-  background-color: #e9b27c;
+  background-color: #2e7d32;
   height: 70px;
   width: 100%;
   display: flex;
@@ -594,8 +594,7 @@ let cerrarSesion = () => {
   grid-template-columns: repeat(5, 1fr);
   gap: 30px;
   padding: 20px 5%;
-  margin-top: 90px;
-  margin-bottom: 60px;
+  margin-top: 70px;
 }
 
 .cards {
@@ -612,13 +611,13 @@ let cerrarSesion = () => {
 
 .cards:hover {
   cursor: pointer;
-  border: 1px solid #ff9900e5;
+  border: 1px solid #2e7d32;
   transform: scale(1.1);
 }
 
 .text_card {
   font-size: 30px;
-  color: #c58423e5;
+  color: #2e7d32;
   position: absolute;
   width: 100%;
   text-align: center;
@@ -627,7 +626,7 @@ let cerrarSesion = () => {
 
 .cont_menu_lateral {
   width: 100%;
-  background-color: #e9b27c;
+  background-color: #2e7d32;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
 }
@@ -652,8 +651,8 @@ let cerrarSesion = () => {
 }
 
 .btn {
-  background-color: #f6e4ab;
-  color: #696969;
+  background-color: #ffffff;
+  color: #2e7d32;
   border: none;
   padding: 10px;
   font-size: 20px;
@@ -664,8 +663,7 @@ let cerrarSesion = () => {
 }
 
 .btn:hover {
-  background-color: #eed37a;
-  color: white;
+  background-color: #e3e3e3;
 }
 
 .cont_perfil {
@@ -686,7 +684,7 @@ let cerrarSesion = () => {
   position: fixed;
   top: 78px;
   right: 1%;
-  background-color: #e9b27c;
+  background-color: #2e7d32;
   clip-path: circle(0% at 100% 0);
 }
 
@@ -730,12 +728,18 @@ let cerrarSesion = () => {
 }
 
 .btn_salir {
-  background-color: #2b90c8;
-  color: white;
+  background-color: #ffffff;
+  color: #2e7d32;
+  font-weight: bold;
   border: none;
   padding: 10px;
   font-size: 18px;
   cursor: pointer;
   border-radius: 12px;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn_salir:hover {
+  background-color: #e3e3e3;
 }
 </style>
