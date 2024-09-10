@@ -543,7 +543,6 @@ onMounted(() => {
 .inputs,
 select {
   width: 75%;
-  padding: 10px;
   border: none;
   outline: none;
   background: none;
@@ -567,12 +566,12 @@ select {
 }
 
 .text_inputs {
-  font-size: 12px;
+  font-size: 14px;
   text-transform: uppercase;
   font-weight: bold;
   position: absolute;
   top: 5%;
-  left: 14%;
+  left: 12%;
 }
 
 .cont_btn_form {
@@ -583,7 +582,7 @@ select {
   padding: 14px 25px;
   border: none;
   border-radius: 25px;
-  font-size: 13px;
+  font-size: 14px;
   cursor: pointer;
   text-transform: uppercase;
   transition: all 0.3s ease;
