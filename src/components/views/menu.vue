@@ -162,9 +162,6 @@
         <button class="btn_salir" @click="cerrarSesion()">Cerrar Sesion</button>
       </div>
     </div>
-    <div class="footer">
-      <p class="text_footer">©2024 AgroTeam</p>
-    </div>
   </div>
 </template>
 <script setup>
@@ -501,7 +498,7 @@ let cerrarSesion = () => {
 
 .menu {
   background-color: #e9b27c;
-  height: 90px;
+  height: 70px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -637,7 +634,7 @@ let cerrarSesion = () => {
 
 .cont_menu2 {
   position: fixed;
-  top: 90px;
+  top: 70px;
   clip-path: inset(0 0 100% 0);
   left: 0;
   transition: all 0.3s ease-in-out;
@@ -687,7 +684,7 @@ let cerrarSesion = () => {
   padding: 8px 0;
   border-radius: 10px;
   position: fixed;
-  top: 98px;
+  top: 78px;
   right: 1%;
   background-color: #e9b27c;
   clip-path: circle(0% at 100% 0);
@@ -740,21 +737,5 @@ let cerrarSesion = () => {
   font-size: 18px;
   cursor: pointer;
   border-radius: 12px;
-}
-
-.footer {
-  background-color: #e9b27c;
-  height: 55px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  bottom: 0;
-}
-
-.text_footer {
-  font-size: 20px;
-  color: white;
 }
 </style>
