@@ -1,24 +1,5 @@
 <template>
   <div class="app">
-     <!-- Alerta de error -->
-    <div
-      v-if="showErrorAlert"
-      class="alert alert-error"
-      :class="alertClass"
-      role="alert"
-    >
-      <span class="alert-message">{{ errorMessage }}</span>
-    </div>
-
-    <!-- Alerta de éxito -->
-    <div
-      v-if="showSuccessAlert"
-      class="alert alert-success"
-      :class="alertClass"
-      role="alert"
-    >
-      <span class="alert-message">Enviado con éxito.</span>
-    </div>
     <div class="cont_spinner" v-if="spinner">
       <div class="spinner"></div>
     </div>
@@ -113,7 +94,7 @@
           <path
             transform="translate(503,426)"
             d="m0 0h18l15 3 12 5 13 8 13 11 449 449 4-2 453-453 14-10 12-6 14-4 7-1h18l15 3 12 5 13 8 13 11 8 10 8 13 5 13 3 15v15l-3 16-7 16-7 11-8 10h-2l-2 4-352 352h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-28 28h-2l-2 4-6 5-6 7-4 4h-2l-2 4-8 8h-2l-2 4-4 2v2h-2v2h-2l3 5 449 449 11 14 6 10 5 13 3 15v14l-3 16-5 13-8 14-9 11h-2l-1 3-13 10-16 8-16 4-7 1h-13l-13-2-10-3-12-6-11-8-457-457-4 1-8 7-5 6-7 6-5 6-7 6-5 6-7 6-5 6-7 6-5 6-6 5-6 7-6 5-6 7-6 5-6 7-6 5-6 7h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-272 272h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-12 12h-2l-2 4h-2l-1 3-13 10-16 8-16 4-7 1h-13l-13-2-15-5-13-8-12-11-10-11-8-13-6-16-2-11v-18l3-14 5-13 7-12 11-13 450-450-1-4-455-455-10-14-5-11-4-13-1-6v-19l4-18 8-16 10-14 8-8 14-10 12-6 14-4z"
-            fill="#fff"
+            fill="#000"
           />
         </svg>
         <div class="titulo_form">
@@ -273,24 +254,15 @@ let estado = ref(1);
 
 let validaciones = () => {
   if (nombre.value === "" || nombre.value.trim() === "") {
-    errorMessage.value = "El nombre es obligatorio";
-    alertClass.value = "show";
-    showErrorAlert.value = true;
-    hideAlert();
+    alert = ("El nombre es obligatorio");
     return false;
   }
   if (tipo.value === "" || tipo.value.trim() === "") {
-    errorMessage.value = "El tipo es obligatorio";
-    alertClass.value = "show";
-    showErrorAlert.value = true;
-    hideAlert();
+    alert = ("El tipo es obligatorio");
     return false;
   }
   if (parcelaOption.value === "") {
-   errorMessage.value = "La parcela es obligatoria";
-    alertClass.value = "show";
-    showErrorAlert.value = true;
-    hideAlert();
+   alert = ("La parcela es obligatoria");
     return false;
   }
 };
@@ -404,8 +376,8 @@ onMounted(() => {
 
 .spinner {
   --size: 30px;
-  --first-block-clr: #e28426;
-  --second-block-clr: #eed37a;
+  --first-block-clr: #2e7d32;
+  --second-block-clr: #77DD77;
   --clr: #111;
   width: 100px;
   height: 100px;
@@ -493,8 +465,8 @@ onMounted(() => {
 }
 
 .btn:hover {
-  background-color: #e9b27c;
-  box-shadow: 0px 15px 20px #eed37a;
+  background-color: #2e7d32;
+  box-shadow: 0px 15px 20px #61ca66;
   color: #fff;
   transform: translateY(-7px);
 }
@@ -529,7 +501,7 @@ onMounted(() => {
   margin-top: 35px;
   width: 28%;
   height: 50%;
-  background: #e9b27c;
+  background: #ffffff;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -575,13 +547,12 @@ select {
   border: none;
   outline: none;
   background: none;
-  border-bottom: 2px solid #f4f4f4;
-  transition: border-color 0.5s ease;
+  border-bottom: 1px solid #000000;
 }
 
 .inputs:focus,
 select:focus {
-  border-bottom-color: #000000;
+  border-bottom: 2px solid #2e7d32;
 }
 
 select {
@@ -615,58 +586,12 @@ select {
   font-size: 13px;
   cursor: pointer;
   text-transform: uppercase;
-  box-shadow: 0px 8px 15px #0000001a;
   transition: all 0.3s ease;
-  background-color: #f6e4ab;
+  background-color: #2e7d32;
+  color: #fff;
 }
 
 .btn_form:hover {
-  background-color: #eed37a;
-}
-.alert {
-  padding: 15px;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  position: fixed;
-  z-index: 10001;
-  left: 50%;
-  width: 30%;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  font-family: "Times New Roman", serif;
-  font-size: 20px;
-  opacity: 0;
-  transform: translateX(-50%) translateY(-100px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.alert.show {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-  animation: slideIn 0.5s forwards;
-}
-
-.alert.hide {
-  opacity: 0;
-  transform: translateX(-50%) translateY(-100px);
-  animation: slideOut 0.5s forwards;
-}
-
-.a {
-  color: white;
-}
-
-.alert-error {
-  background-color: #c7303c;
-  color: white;
-}
-.alert-success {
-  background-color: #10b133;
-  color: white;
-}
-
-.alert-message {
-  flex: 1;
+  background-color: #589f5c;
 }
 </style>

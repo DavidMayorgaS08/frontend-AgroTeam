@@ -536,12 +536,12 @@ onMounted(() => {
 
 .spinner {
   --size: 30px;
-  --first-block-clr: #e28426;
-  --second-block-clr: #eed37a;
+  --first-block-clr: #2e7d32;
+  --second-block-clr: #77DD77;
   --clr: #111;
   width: 100px;
   height: 100px;
-  position: fixed;
+  position: relative;
 }
 
 .spinner::after,

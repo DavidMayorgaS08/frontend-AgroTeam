@@ -78,10 +78,11 @@ async function iniciar() {
   padding: 40px;
   margin: 20px auto;
   transform: translate(-50%, -55%);
-  background: #e9b27c;
+  background: #ffffff;
   box-sizing: border-box;
   border-radius: 10px;
-  text-align: center; /* Centra el contenido */
+  text-align: center;
+  box-shadow: 0 0px 25px rgba(0, 0, 0, 0.5);
 }
 
 .login-box p:first-child {
@@ -105,7 +106,7 @@ async function iniciar() {
   color: #000000;
   margin-bottom: 30px;
   border: none;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid #000000;
   outline: none;
   background: transparent;
 }
@@ -129,11 +130,15 @@ async function iniciar() {
   font-size: 12px;
 }
 
+.login-box .user-box input:focus {
+  border-bottom: 3px solid #2e7d32;
+}
+
 .boton-elegante {
   padding: 10px 30px;
-  border: 2px solid #f6e4ab;
-  background-color: #f6e4ab;
-  color: #000000;
+  border: 2px solid #2e7d32;
+  background-color: #2e7d32;
+  color: #ffffff;
   font-size: 1.2rem;
   cursor: pointer;
   border-radius: 30px;
@@ -162,8 +167,8 @@ async function iniciar() {
 }
 
 .boton-elegante:hover {
-  border-color: #eed37a;
-  background: #eed37a;
+  border-color: #589f5c;
+  background: #589f5c;
 }
 
 .login-box a.a2 {
@@ -205,8 +210,8 @@ async function iniciar() {
 /* From Uiverse.io by satyamchaudharydev */
 .spinner {
   --size: 30px;
-  --first-block-clr: #e28426;
-  --second-block-clr: #eed37a;
+  --first-block-clr: #2e7d32;
+  --second-block-clr: #77DD77;
   --clr: #111;
   width: 100px;
   height: 100px;
