@@ -1,5 +1,24 @@
 <template>
   <div class="app">
+    <!-- Alerta de error -->
+    <div
+      v-if="showErrorAlert"
+      class="alert alert-error"
+      :class="alertClass"
+      role="alert"
+    >
+      <span class="alert-message">{{ errorMessage }}</span>
+    </div>
+
+    <!-- Alerta de éxito -->
+    <div
+      v-if="showSuccessAlert"
+      class="alert alert-success"
+      :class="alertClass"
+      role="alert"
+    >
+      <span class="alert-message">Enviado con éxito.</span>
+    </div>
     <div class="cont_spinner" v-if="spinner">
       <div class="spinner"></div>
     </div>
@@ -24,6 +43,34 @@
               :label="props.row.estado == 0 ? 'Inactivo' : 'Activo'"
               :color="props.row.estado == 0 ? 'negative' : 'positive'"
               text-color="white"
+            />
+          </q-td>
+        </template>
+        <template v-slot:body-cell-rol="props">
+          <q-td :props="props">
+            <q-chip
+              :label="
+                props.row.rol === 1
+                  ? 'Administrador'
+                  : props.row.rol === 2
+                  ? 'Usuario 1'
+                  : props.row.rol === 3
+                  ? 'Usuario 2'
+                  : 'Usuario 3'
+              "
+              :color="
+                props.row.rol === 1
+                  ? 'primary'
+                  : props.row.rol === 2
+                  ? 'primary'
+                  : props.row.rol === 3
+                  ? 'primary'
+                  : 'primary'
+              "
+              text-color="white"
+            />
+          </q-td>
+        </template>
             />
           </q-td>
         </template>
@@ -128,6 +175,27 @@
         </div>
         <div class="cont_inputs">
           <p class="text_inputs">Nombre</p>
+          <input type="text" class="inputs" v-model="nombre" />
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">Dirección</p>
+          <input type="text" class="inputs" v-model="direccion" />
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">Teléfono</p>
+          <input type="text" class="inputs" v-model="telefono" />
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">Correo</p>
+          <input type="text" class="inputs" v-model="email" />
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">Municipio</p>
+          <input type="text" class="inputs" v-model="municipio" />
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">Contraseña</p>
+          <input type="text" class="inputs" v-model="password" />
           <input
             type="text"
             class="inputs"
@@ -207,6 +275,11 @@ import { useAdministradoresStore } from "../../stores/administradores.js";
 
 let useAdministradores = useAdministradoresStore();
 
+const showErrorAlert = ref(false);
+const showSuccessAlert = ref(false);
+const alertClass = ref("");
+const errorMessage = ref("");
+
 let spinner = ref(false);
 
 let r = null;
@@ -263,6 +336,17 @@ let columns = ref([
   },
 ]);
 
+const hideAlert = () => {
+  setTimeout(() => {
+    alertClass.value = "hide";
+    setTimeout(() => {
+      showErrorAlert.value = false;
+      showSuccessAlert.value = false;
+      alertClass.value = "";
+    }, 500);
+  }, 3000);
+};
+
 let listarTodos = async () => {
   spinner.value = true;
   r = await useAdministradores.getAdministradores();
@@ -311,7 +395,7 @@ let formulario = ref(false);
 let cerrarForm = () => {
   formulario.value = false;
   listarTodos();
-  vaciarCampos(); 
+  vaciarCampos();
 };
 
 let nombre = ref("");
@@ -325,6 +409,52 @@ let estado = ref(1);
 
 let validaciones = () => {
   if (nombre.value === "" || nombre.value.trim() === "") {
+    errorMessage.value = "El nombre es obligatorio";
+    alertClass.value = "show";
+    showErrorAlert.value = true;
+    hideAlert();
+    return false;
+  }
+  if (direccion.value === "" || direccion.value.trim() === "") {
+    errorMessage.value = "La dirección es obligatoria";
+    alertClass.value = "show";
+    showErrorAlert.value = true;
+    hideAlert();
+    return false;
+  }
+  if (telefono.value === "" || telefono.value.trim() === "") {
+    errorMessage.value = "El teléfono es obligatorio";
+    alertClass.value = "show";
+    showErrorAlert.value = true;
+    hideAlert();
+    return false;
+  }
+  if (email.value === "" || email.value.trim() === "") {
+    errorMessage.value = "El email es obligatorio";
+    alertClass.value = "show";
+    showErrorAlert.value = true;
+    hideAlert();
+    return false;
+  }
+  if (municipio.value === "" || municipio.value.trim() === "") {
+    errorMessage.value = "El municipio es obligatorio";
+    alertClass.value = "show";
+    showErrorAlert.value = true;
+    hideAlert();
+    return false;
+  }
+  if (password.value === "" || password.value.trim() === "") {
+    errorMessage.value = "La contraseña es obligatoria";
+    alertClass.value = "show";
+    showErrorAlert.value = true;
+    hideAlert();
+    return false;
+  }
+  if (rol.value === "" || String(rol.value).trim() === "") {
+    errorMessage.value = "El rol es obligatorio";
+    alertClass.value = "show";
+    showErrorAlert.value = true;
+    hideAlert();
     alert("El nombre es obligatorio");
     return false;
   }
@@ -403,6 +533,10 @@ let enviarCrear = async () => {
   await useAdministradores.postAdministradores(data);
   vaciarCampos();
   spinner.value = false;
+  showErrorAlert.value = false;
+  showSuccessAlert.value = true;
+  alertClass.value = "show";
+  hideAlert();
 };
 
 let enviarEditar = async () => {
@@ -423,6 +557,10 @@ let enviarEditar = async () => {
   await useAdministradores.putAdministradores(id.value, data);
   vaciarCampos();
   spinner.value = false;
+  showErrorAlert.value = false;
+  showSuccessAlert.value = true;
+  alertClass.value = "show";
+  hideAlert();
 };
 
 onMounted(() => {
@@ -631,6 +769,7 @@ onMounted(() => {
   transition: border-color 0.5s ease;
 }
 
+
 .inputs:focus, select:focus {
   border-bottom-color: #000000;
 }
@@ -655,7 +794,6 @@ select {
   left: 14%;
 }
 
-
 .cont_btn_form {
   margin: 20px 0;
 }
@@ -674,5 +812,52 @@ select {
 
 .btn_form:hover {
   background-color: #eed37a;
+}
+
+.alert {
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  position: fixed;
+  z-index: 10001;
+  left: 50%;
+  width: 30%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-family: "Times New Roman", serif;
+  font-size: 20px;
+  opacity: 0;
+  transform: translateX(-50%) translateY(-100px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.alert.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  animation: slideIn 0.5s forwards;
+}
+
+.alert.hide {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-100px);
+  animation: slideOut 0.5s forwards;
+}
+
+.a {
+  color: white;
+}
+
+.alert-error {
+  background-color: #c7303c;
+  color: white;
+}
+.alert-success {
+  background-color: #10b133;
+  color: white;
+}
+
+.alert-message {
+  flex: 1;
 }
 </style>

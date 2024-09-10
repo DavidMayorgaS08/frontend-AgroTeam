@@ -1,5 +1,24 @@
 <template>
   <div class="app">
+     <!-- Alerta de error -->
+    <div
+      v-if="showErrorAlert"
+      class="alert alert-error"
+      :class="alertClass"
+      role="alert"
+    >
+      <span class="alert-message">{{ errorMessage }}</span>
+    </div>
+
+    <!-- Alerta de éxito -->
+    <div
+      v-if="showSuccessAlert"
+      class="alert alert-success"
+      :class="alertClass"
+      role="alert"
+    >
+      <span class="alert-message">Enviado con éxito.</span>
+    </div>
     <div class="cont_spinner" v-if="spinner">
       <div class="spinner"></div>
     </div>
@@ -146,6 +165,10 @@ import { useParcelasStore } from "../../stores/parcelas";
 let useCultivo = useCultivosStore();
 let useParcela = useParcelasStore();
 
+const showErrorAlert = ref(false);
+const showSuccessAlert = ref(false);
+const alertClass = ref("");
+const errorMessage = ref("");
 let spinner = ref(false);
 
 let r = null;
@@ -189,6 +212,16 @@ let columns = ref([
   },
 ]);
 
+const hideAlert = () => {
+  setTimeout(() => {
+    alertClass.value = "hide";
+    setTimeout(() => {
+      showErrorAlert.value = false;
+      showSuccessAlert.value = false;
+      alertClass.value = "";
+    }, 500);
+  }, 3000);
+};
 let listarTodos = async () => {
   spinner.value = true;
   r = await useCultivo.getCultivos();
@@ -240,15 +273,24 @@ let estado = ref(1);
 
 let validaciones = () => {
   if (nombre.value === "" || nombre.value.trim() === "") {
-    alert("El nombre es obligatorio");
+    errorMessage.value = "El nombre es obligatorio";
+    alertClass.value = "show";
+    showErrorAlert.value = true;
+    hideAlert();
     return false;
   }
   if (tipo.value === "" || tipo.value.trim() === "") {
-    alert("El tipo es obligatorio");
+    errorMessage.value = "El tipo es obligatorio";
+    alertClass.value = "show";
+    showErrorAlert.value = true;
+    hideAlert();
     return false;
   }
   if (parcelaOption.value === "") {
-    alert("La parcela es obligatoria");
+   errorMessage.value = "La parcela es obligatoria";
+    alertClass.value = "show";
+    showErrorAlert.value = true;
+    hideAlert();
     return false;
   }
 };
@@ -305,6 +347,10 @@ let enviarCrear = async () => {
   await useCultivo.postCultivos(data);
   vaciarCampos();
   spinner.value = false;
+  showErrorAlert.value = false;
+  showSuccessAlert.value = true;
+  alertClass.value = "show";
+  hideAlert();
 };
 
 let enviarEditar = async () => {
@@ -321,6 +367,10 @@ let enviarEditar = async () => {
   await useCultivo.putCultivos(id.value, data);
   vaciarCampos();
   spinner.value = false;
+  showErrorAlert.value = false;
+  showSuccessAlert.value = true;
+  alertClass.value = "show";
+  hideAlert();
 };
 
 onMounted(() => {
@@ -572,5 +622,51 @@ select {
 
 .btn_form:hover {
   background-color: #eed37a;
+}
+.alert {
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  position: fixed;
+  z-index: 10001;
+  left: 50%;
+  width: 30%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-family: "Times New Roman", serif;
+  font-size: 20px;
+  opacity: 0;
+  transform: translateX(-50%) translateY(-100px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.alert.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  animation: slideIn 0.5s forwards;
+}
+
+.alert.hide {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-100px);
+  animation: slideOut 0.5s forwards;
+}
+
+.a {
+  color: white;
+}
+
+.alert-error {
+  background-color: #c7303c;
+  color: white;
+}
+.alert-success {
+  background-color: #10b133;
+  color: white;
+}
+
+.alert-message {
+  flex: 1;
 }
 </style>
