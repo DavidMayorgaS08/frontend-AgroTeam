@@ -10,7 +10,7 @@
         </label>
       </div>
       <div class="cont_perfil" @click="perfil()">
-        <input id="checkbox2" type="checkbox" v-model="isChecked2">
+        <input id="checkbox2" type="checkbox" v-model="isChecked2" />
         <svg
           for="checkbox2"
           version="1.1"
@@ -124,7 +124,9 @@
       </div>
       <div>
         <button class="btn" @click="cultivo()">Cultivos</button>
-        <button class="btn" @click="elaboracionSustrato()">Elaboración Sustratos</button>
+        <button class="btn" @click="elaboracionSustrato()">
+          Elaboración Sustratos
+        </button>
         <button class="btn" @click="empleado()">Empleados</button>
         <button class="btn" @click="factura()">Facturas</button>
         <button class="btn" @click="fertilizacion()">Fertilizaciones</button>
@@ -137,10 +139,14 @@
         <button class="btn" @click="mantenimiento()">Mantenimientos</button>
       </div>
       <div>
-        <button class="btn" @click="maquinariaHerramienta()">Maquinaria y Herramientas</button>
+        <button class="btn" @click="maquinariaHerramienta()">
+          Maquinaria y Herramientas
+        </button>
         <button class="btn" @click="nomina()">Nominas</button>
         <button class="btn" @click="parcela()">Parcelas</button>
-        <button class="btn" @click="preparacionSuelo()">Preparación Suelos</button>
+        <button class="btn" @click="preparacionSuelo()">
+          Preparación Suelos
+        </button>
         <button class="btn" @click="proceso()">Procesos</button>
       </div>
       <div>
@@ -151,7 +157,10 @@
         <button class="btn" @click="siembra()">Siembras</button>
       </div>
     </div>
-    <div class="cont_perfil_desplegable" :class="{ cont_perfil2: true, 'perfil2-open': perfilOpen }">
+    <div
+      class="cont_perfil_desplegable"
+      :class="{ cont_perfil2: true, 'perfil2-open': perfilOpen }"
+    >
       <div class="cont_nombre">
         <p class="text_nombre">Jesus</p>
       </div>
@@ -191,7 +200,7 @@ let adiministradores = () => {
 };
 
 let administrador = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/administradores");
 };
@@ -203,7 +212,7 @@ let analisisSuelos = () => {
 };
 
 let analisisSuelo = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/analisisSuelos");
 };
@@ -215,7 +224,7 @@ let climas = () => {
 };
 
 let clima = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/climas");
 };
@@ -227,7 +236,7 @@ let compradores = () => {
 };
 
 let comprador = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/compradores");
 };
@@ -239,7 +248,7 @@ let controlPlagas = () => {
 };
 
 let controlPlaga = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/controlPlagas");
 };
@@ -251,7 +260,7 @@ let cultivos = () => {
 };
 
 let cultivo = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/cultivos");
 };
@@ -263,7 +272,7 @@ let elaboracionSustratos = () => {
 };
 
 let elaboracionSustrato = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/elaboracionSustratos");
 };
@@ -275,7 +284,7 @@ let empleados = () => {
 };
 
 let empleado = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/empleados");
 };
@@ -287,7 +296,7 @@ let facturas = () => {
 };
 
 let factura = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/facturas");
 };
@@ -299,7 +308,7 @@ let fertilizaciones = () => {
 };
 
 let fertilizacion = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/fertilizaciones");
 };
@@ -311,7 +320,7 @@ let fincas = () => {
 };
 
 let finca = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/fincas");
 };
@@ -323,7 +332,7 @@ let gastos = () => {
 };
 
 let gasto = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/gastos");
 };
@@ -335,7 +344,7 @@ let insumos = () => {
 };
 
 let insumo = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/insumos");
 };
@@ -347,7 +356,7 @@ let inventarios = () => {
 };
 
 let inventario = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/inventarios");
 };
@@ -359,7 +368,7 @@ let mantenimientos = () => {
 };
 
 let mantenimiento = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/mantenimientos");
 };
@@ -371,7 +380,7 @@ let maquinariasHerramientas = () => {
 };
 
 let maquinariaHerramienta = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/maquinariaHerramientas");
 };
@@ -383,7 +392,7 @@ let nominas = () => {
 };
 
 let nomina = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/nominas");
 };
@@ -395,7 +404,7 @@ let parcelas = () => {
 };
 
 let parcela = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/parcelas");
 };
@@ -407,7 +416,7 @@ let preparacionSuelos = () => {
 };
 
 let preparacionSuelo = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/preparcionSuelos");
 };
@@ -419,7 +428,7 @@ let procesos = () => {
 };
 
 let proceso = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/procesos");
 };
@@ -431,7 +440,7 @@ let producciones = () => {
 };
 
 let produccion = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/producciones");
 };
@@ -443,7 +452,7 @@ let proveedores = () => {
 };
 
 let proveedor = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/proveedores");
 };
@@ -455,7 +464,7 @@ let riegos = () => {
 };
 
 let riego = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/riegos");
 };
@@ -467,7 +476,7 @@ let semillas = () => {
 };
 
 let semilla = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/semillas");
 };
@@ -479,7 +488,7 @@ let siembras = () => {
 };
 
 let siembra = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/siembras");
 };
@@ -629,6 +638,8 @@ let cerrarSesion = () => {
   background-color: #2e7d32;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  overflow-y: auto;
+  max-height: 100vh;
 }
 
 .cont_menu2 {
@@ -701,14 +712,15 @@ let cerrarSesion = () => {
   clip-path: circle(141.2% at 100% 0);
 }
 
-.cont_nombre, .cont_rol {
+.cont_nombre,
+.cont_rol {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 45px;
 }
 
-.cont_salir{
+.cont_salir {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -743,69 +755,75 @@ let cerrarSesion = () => {
   background-color: #e3e3e3;
 }
 
-@media(max-width: 1440px){
-.text_card {
-  font-size: 27px;
-}
-}
-
-@media(max-width: 1366px){
-  .cont {
-  grid-template-columns: repeat(4, 1fr);
-}
-}
-
-@media(max-width: 1000px){
-.text_card {
-  font-size: 24px;
-}
-}
-
-@media(max-width: 900px){
-  .cont {
-  grid-template-columns: repeat(3, 1fr);
-}
-.cont_menu_lateral {
-  grid-template-columns: repeat(2, 1fr);
-}
-.cont_perfil_desplegable {
-  width: 20%;
-}
-}
-
-@media(max-width: 700px){
+@media (max-width: 1440px) {
   .text_card {
-  font-size: 21px;
-}
-.cont_perfil_desplegable {
-  width: 35%;
-}
+    font-size: 27px;
+  }
 }
 
-@media(max-width: 600px){
+@media (max-width: 1366px) {
   .cont {
-  grid-template-columns: repeat(2, 1fr);
-}
-.cont_perfil_desplegable {
-  width: 40%;
-}
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
-@media(max-width: 450px){
-.cont_perfil_desplegable {
-  width: 45%;
-}
+@media (max-width: 1000px) {
+  .text_card {
+    font-size: 24px;
+  }
 }
 
-@media(max-width: 400px){
+@media (max-width: 900px) {
   .cont {
-  grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .cont_menu_lateral {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cont_perfil_desplegable {
+    width: 20%;
+  }
 }
-.cont_menu_lateral {
-  grid-template-columns: repeat(1, 1fr);
+
+@media (max-width: 920px) {
+  .cont_perfil_desplegable {
+    width: 22%;
+  }
 }
-.cont_perfil_desplegable {
-  width: 50%;
+
+@media (max-width: 700px) {
+  .text_card {
+    font-size: 21px;
+  }
+  .cont_perfil_desplegable {
+    width: 35%;
+  }
 }
+
+@media (max-width: 600px) {
+  .cont {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cont_perfil_desplegable {
+    width: 40%;
+  }
+}
+
+@media (max-width: 450px) {
+  .cont_perfil_desplegable {
+    width: 45%;
+  }
+}
+
+@media (max-width: 400px) {
+  .cont {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .cont_menu_lateral {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .cont_perfil_desplegable {
+    width: 50%;
+  }
 }
 </style>
