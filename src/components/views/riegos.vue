@@ -80,92 +80,17 @@
         </template>
       </q-table>
     </div>
-    <div class="cont_form">
-      <div class="form">
-        <svg
-          class="cerrarForm"
-          @click="cerrarForm()"
-          version="1.1"
-          viewBox="0 0 2048 2048"
-          width="25"
-          height="25"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            transform="translate(503,426)"
-            d="m0 0h18l15 3 12 5 13 8 13 11 449 449 4-2 453-453 14-10 12-6 14-4 7-1h18l15 3 12 5 13 8 13 11 8 10 8 13 5 13 3 15v15l-3 16-7 16-7 11-8 10h-2l-2 4-352 352h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-28 28h-2l-2 4-6 5-6 7-4 4h-2l-2 4-8 8h-2l-2 4-4 2v2h-2v2h-2l3 5 449 449 11 14 6 10 5 13 3 15v14l-3 16-5 13-8 14-9 11h-2l-1 3-13 10-16 8-16 4-7 1h-13l-13-2-10-3-12-6-11-8-457-457-4 1-8 7-5 6-7 6-5 6-7 6-5 6-7 6-5 6-7 6-5 6-6 5-6 7-6 5-6 7-6 5-6 7-6 5-6 7h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-272 272h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-12 12h-2l-2 4h-2l-1 3-13 10-16 8-16 4-7 1h-13l-13-2-15-5-13-8-12-11-10-11-8-13-6-16-2-11v-18l3-14 5-13 7-12 11-13 450-450-1-4-455-455-10-14-5-11-4-13-1-6v-19l4-18 8-16 10-14 8-8 14-10 12-6 14-4z"
-            fill="#fff"
-          />
-        </svg>
-        <div class="titulo_form">
-          <p v-if="variable === 0" class="text_titulo_form">crear</p>
-          <p v-else class="text_titulo_form">editar</p>
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">cultivo</p>
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">empleado</p>
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">fecha</p>
-          <input type="date" class="inputs" v-model="fecha">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">días transplante</p>
-          <input type="number" class="inputs" v-model="diasTransplante">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">estado fenológico</p>
-          <input type="text" class="inputs" v-model="estadoFenologico">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">hora inicio</p>
-          <input type="time" class="inputs" v-model="horaInicio">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">hora fin</p>
-          <input type="time" class="inputs" v-model="horaFin">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">dosis</p>
-          <input type="number" class="inputs" v-model="dosis">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">cantidad agua</p>
-          <input type="number" class="inputs" v-model="cantidadAgua">
-        </div>
-        <div class="cont_btn_form">
-          <button
-            v-if="variable === 0"
-            class="btn_form"
-            @click.prevent="enviarCrear()"
-          >
-            crear
-          </button>
-          <button v-else class="btn_form" @click.prevent="enviarEditar()">
-            editar
-          </button>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 <script setup>
 import { onMounted, ref } from "vue";
 import { useRiegosStore} from "../../stores/Riegos.js";
-import { useCultivosStore } from "../../stores/cultivos.js";
-import { useEmpleadosStore } from "../../stores/empleados.js";
 
 let useRiegos = useRiegosStore();
-let useCultivos = useCultivosStore();
-let useEmpleados = useEmpleadosStore();
 
 let spinner = ref(false);
 
 let r = null;
-let c = ref([]);
-let e = ref([]);
 
 let rows = ref([]);
 let columns = ref([
@@ -173,21 +98,13 @@ let columns = ref([
     name: "id_cultivo",
     label: "Cultivo",
     align: "center",
-    field: (row) => {
-      let cultivo = c.value.cultivo
-      cultivo = cultivo.find((c) => c._id == row.id_cultivo);
-      return cultivo.nombre;
-    },
+    field: "id_cultivo",
   },
   {
     name: "id_empleado",
     label: "Empleado",
     align: "center",
-    field: (row) => {
-      let empleado = e.value.empleado
-      empleado = empleado.find((e) => e._id == row.id_empleado);
-      return empleado.nombre;
-    },
+    field: "id_empleado",
   },
   {
     name: "fecha",
@@ -248,8 +165,6 @@ let columns = ref([
 let listarTodos = async () => {
   spinner.value = true;
   r = await useRiegos.getRiegos();
-  c.value = await useCultivos.getCultivos();
-  e.value = await useEmpleados.getEmpleados();
   rows.value = r.riego;
   spinner.value = false;
 };
@@ -383,6 +298,8 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .btn {
@@ -420,5 +337,25 @@ onMounted(() => {
   font-size: 20px;
   text-transform: uppercase;
   font-weight: bold;
+}
+
+@media(max-width: 1440px){
+
+}
+
+@media(max-width: 1366px){
+
+}
+
+@media(max-width: 720px){
+
+}
+
+@media(max-width: 375px){
+
+}
+
+@media(max-width: 360px){
+
 }
 </style>
