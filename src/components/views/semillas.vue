@@ -80,17 +80,114 @@
         </template>
       </q-table>
     </div>
+    <div class="cont_form" v-if="formulario">
+      <div class="form">
+        <svg
+          class="cerrarForm"
+          @click="cerrarForm()"
+          version="1.1"
+          viewBox="0 0 2048 2048"
+          width="25"
+          height="25"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            transform="translate(503,426)"
+            d="m0 0h18l15 3 12 5 13 8 13 11 449 449 4-2 453-453 14-10 12-6 14-4 7-1h18l15 3 12 5 13 8 13 11 8 10 8 13 5 13 3 15v15l-3 16-7 16-7 11-8 10h-2l-2 4-352 352h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-28 28h-2l-2 4-6 5-6 7-4 4h-2l-2 4-8 8h-2l-2 4-4 2v2h-2v2h-2l3 5 449 449 11 14 6 10 5 13 3 15v14l-3 16-5 13-8 14-9 11h-2l-1 3-13 10-16 8-16 4-7 1h-13l-13-2-10-3-12-6-11-8-457-457-4 1-8 7-5 6-7 6-5 6-7 6-5 6-7 6-5 6-7 6-5 6-6 5-6 7-6 5-6 7-6 5-6 7-6 5-6 7h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-272 272h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-12 12h-2l-2 4h-2l-1 3-13 10-16 8-16 4-7 1h-13l-13-2-15-5-13-8-12-11-10-11-8-13-6-16-2-11v-18l3-14 5-13 7-12 11-13 450-450-1-4-455-455-10-14-5-11-4-13-1-6v-19l4-18 8-16 10-14 8-8 14-10 12-6 14-4z"
+            fill="#fff"
+          />
+        </svg>
+        <div class="titulo_form">
+          <p v-if="variable === 0" class="text_titulo_form">crear</p>
+          <p v-else class="text_titulo_form">editar</p>
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">proveedor</p>
+          <select required v-model="proveedorOption">
+            <option value="" disabled selected hidden></option>
+            <option
+            v-for="(proveedor, index) in proveedores"
+            :key="proveedor._id"
+            :value="index + 1"
+            >{{ proveedor.nombre }}</option>
+          </select>
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">número de factura</p>
+          <input type="text" class="inputs" v-model="numFactura">
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">fecha de compra</p>
+          <input type="date" class="inputs" v-model="fechaCompra">
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">fecha de vencimiento</p>
+          <input type="date" class="inputs" v-model="fechaVencimiento">
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">especie y variedad</p>
+          <input type="text" class="inputs" v-model="especieVariedad">
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">proveedor de semillas</p>
+          <input type="text" class="inputs" v-model="proveedorSemillas">
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">nro de lote</p>
+          <input type="text" class="inputs" v-model="NroLote">
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">origen</p>
+          <input type="text" class="inputs" v-model="origen">
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">poder germinativo</p>
+          <input type="text" class="inputs" v-model="poderGerminativo">
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">observaciones</p>
+          <input type="text" class="inputs" v-model="observaciones">
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">unidad total</p>
+          <input type="text" class="inputs" v-model="unidadTotal">
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">total</p>
+          <input type="text" class="inputs" v-model="total">
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">transplante</p>
+          <input type="text" class="inputs" v-model="transplante">
+        </div>
+        <div class="cont_btn_form">
+          <button
+            v-if="variable === 0"
+            class="btn_form"
+            @click.prevent="enviarCrear()"
+          >
+            crear
+          </button>
+          <button v-else class="btn_form" @click.prevent="enviarEditar()">
+            editar
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script setup>
 import { onMounted, ref } from "vue";
 import { useSemillasStore} from "../../stores/Semillas.js";
+import { useProveedoresStore } from "../../stores/Proveedores.js";
 
 let useSemillas = useSemillasStore();
+let useProveedores = useProveedoresStore();
 
 let spinner = ref(false);
 
 let r = null;
+let p = ref([]);
 
 let rows = ref([]);
 let columns = ref([
@@ -98,7 +195,11 @@ let columns = ref([
     name: "id_proveedor",
     label: "Proveedor",
     align: "center",
-    field: "id_proveedor",
+    field: (row) => {
+      let proveedor = p.value.proveedor;
+      proveedor = proveedor.find((p) => p._id == row.id_proveedor);
+      return proveedor.nombre;
+    },
   },
   {
     name: "numFactura",
@@ -110,13 +211,13 @@ let columns = ref([
     name: "fechaCompra",
     label: "Fecha de compra",
     align: "center",
-    field: "fechaCompra",
+    field: (row) => row.fechaCompra.split("T")[0],
   },
   {
     name: "fechaVencimiento",
     label: "Fecha de vencimiento",
     align: "center",
-    field: "fechaVencimiento",
+    field: (row) => row.fechaVencimiento.split("T")[0],
   },
   {
     name: "especieVariedad",
@@ -189,6 +290,7 @@ let columns = ref([
 let listarTodos = async () => {
   spinner.value = true;
   r = await useSemillas.getSemillas();
+  p.value = await useProveedores.getProveedores();
   rows.value = r.semillas;
   spinner.value = false;
 };
@@ -221,6 +323,189 @@ let desactivar = async (row) => {
   spinner.value = false;
 };
 
+let formulario = ref(false);
+
+let cerrarForm = () => {
+  formulario.value = false;
+  listarTodos();
+  vaciarCampos();
+};
+
+let proveedorOption = ref("");
+let numFactura = ref("");
+let fechaCompra = ref("");
+let fechaVencimiento = ref("");
+let especieVariedad = ref("");
+let proveedorSemillas = ref("");
+let NroLote = ref("");
+let origen = ref("");
+let poderGerminativo = ref("");
+let observaciones = ref("");
+let unidadTotal = ref("");
+let total = ref("");
+let transplante = ref("");
+let estado = ref(1);
+
+let validaciones = () => {
+  if(proveedorOption.value === ""){
+    alert("El proveedor es obligatorio");
+    return false;
+  }
+  if(numFactura.value === "" || String(numFactura.value).trim() === ""){
+    alert("El número de factura es obligatorio");
+    return false;
+  }
+  if(fechaCompra.value === ""){
+    alert("La fecha de compra es obligatoria");
+    return false;
+  }
+  if(fechaVencimiento.value === ""){
+    alert("La fecha de vencimiento es obligatoria");
+    return false;
+  }
+  if(especieVariedad.value === "" || especieVariedad.value.trim() === ""){
+    alert("La especie y variedad es obligatoria");
+    return false;
+  }
+  if(proveedorSemillas.value === "" || proveedorSemillas.value.trim() === ""){
+    alert("El proveedor de semillas es obligatorio");
+    return false;
+  }
+  if(NroLote.value === "" || String(NroLote.value).trim() === ""){
+    alert("El número de lote es obligatorio");
+    return false;
+  }
+  if(origen.value === "" || origen.value.trim() === ""){
+    alert("El origen es obligatorio");
+    return false;
+  }
+  if(poderGerminativo.value === "" || poderGerminativo.value.trim() === ""){
+    alert("El poder germinativo es obligatorio");
+    return false;
+  }
+  if(observaciones.value === "" || observaciones.value.trim() === ""){
+    alert("Las observaciones son obligatorias");
+    return false;
+  }
+  if(unidadTotal.value === "" || unidadTotal.value.trim() === ""){
+    alert("La unidad total es obligatoria");
+    return false;
+  }
+  if(total.value === "" || String(total.value).trim() === ""){
+    alert("El total es obligatorio");
+    return false;
+  }
+  if(transplante.value === "" || transplante.value.trim() === ""){
+    alert("El transplante es obligatorio");
+    return false;
+  }
+}
+
+let vaciarCampos = () => {
+  proveedorOption.value = "";
+  numFactura.value = "";
+  fechaCompra.value = "";
+  fechaVencimiento.value = "";
+  especieVariedad.value = "";
+  proveedorSemillas.value = "";
+  NroLote.value = "";
+  origen.value = "";
+  poderGerminativo.value = "";
+  observaciones.value = "";
+  unidadTotal.value = "";
+  total.value = "";
+  transplante.value = "";
+};
+
+let proveedores = ref([]);
+
+let variable = ref(null);
+let id = ref(null);
+
+let crear = async () => {
+  spinner.value = true;
+  await useProveedores.getProveedores();
+  proveedores.value = useProveedores.proveedores.proveedor;
+  variable.value = 0;
+  formulario.value = true;
+  spinner.value = false;
+}
+
+let editar = async (data) => {
+  spinner.value = true;
+  await useProveedores.getProveedores();
+  proveedores.value = useProveedores.proveedores.proveedor;
+  variable.value = 1;
+  id.value = data._id;
+  proveedorOption.value = proveedores.value.findIndex((p) => p._id == data.id_proveedor) + 1;
+  numFactura.value = data.numFactura;
+  fechaCompra.value = data.fechaCompra.split("T")[0];
+  fechaVencimiento.value = data.fechaVencimiento.split("T")[0];
+  especieVariedad.value = data.especieVariedad;
+  proveedorSemillas.value = data.proveedorSemillas;
+  NroLote.value = data.NroLote;
+  origen.value = data.origen;
+  poderGerminativo.value = data.poderGerminativo;
+  observaciones.value = data.observaciones;
+  unidadTotal.value = data.unidadTotal;
+  total.value = data.total;
+  transplante.value = data.transplante;
+  formulario.value = true;
+  spinner.value = false;
+}
+
+let enviarCrear = async () => {
+  if(validaciones === false){
+    return;
+  }
+  let data = {
+    id_proveedor: proveedores.value[proveedorOption.value - 1]._id,
+    numFactura: numFactura.value,
+    fechaCompra: fechaCompra.value,
+    fechaVencimiento: fechaVencimiento.value,
+    especieVariedad: especieVariedad.value,
+    proveedorSemillas: proveedorSemillas.value,
+    NroLote: NroLote.value,
+    origen: origen.value,
+    poderGerminativo: poderGerminativo.value,
+    observaciones: observaciones.value,
+    unidadTotal: unidadTotal.value,
+    total: total.value,
+    transplante: transplante.value,
+    estado: estado.value,
+  };
+  spinner.value = true;
+  await useSemillas.postSemillas(data);
+  vaciarCampos();
+  spinner.value = false;
+}
+
+let enviarEditar = async () => {
+  if(validaciones === false){
+    return;
+  }
+  let data = {
+    id_proveedor: proveedores.value[proveedorOption.value - 1]._id,
+    numFactura: numFactura.value,
+    fechaCompra: fechaCompra.value,
+    fechaVencimiento: fechaVencimiento.value,
+    especieVariedad: especieVariedad.value,
+    proveedorSemillas: proveedorSemillas.value,
+    NroLote: NroLote.value,
+    origen: origen.value,
+    poderGerminativo: poderGerminativo.value,
+    observaciones: observaciones.value,
+    unidadTotal: unidadTotal.value,
+    total: total.value,
+    transplante: transplante.value,
+    estado: estado.value,
+  };
+  spinner.value = true;
+  await useSemillas.putSemillas(id.value, data);
+  vaciarCampos();
+  spinner.value = false;
+}
+
 onMounted(() => {
   listarTodos();
 });
@@ -252,12 +537,12 @@ onMounted(() => {
 
 .spinner {
   --size: 30px;
-  --first-block-clr: #e28426;
-  --second-block-clr: #eed37a;
+  --first-block-clr: #2e7d32;
+  --second-block-clr: #77DD77;
   --clr: #111;
   width: 100px;
   height: 100px;
-  position: fixed;
+  position: relative;
 }
 
 .spinner::after,
@@ -322,6 +607,8 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .btn {
@@ -359,5 +646,116 @@ onMounted(() => {
   font-size: 20px;
   text-transform: uppercase;
   font-weight: bold;
+}
+
+.cont_form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.474);
+  top: 0;
+  left: 0;
+}
+
+.form {
+  margin-top: 70px;
+  width: 28%;
+  height: 90%;
+  background: #e9b27c;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-right: 10px;
+}
+
+.cerrarForm {
+  position: absolute;
+  z-index: 1000;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.titulo_form {
+  margin-top: 20px;
+}
+
+.text_titulo_form {
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.cont_inputs {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Estilo para inputs y select */
+.inputs,
+select {
+  width: 75%;
+  padding: 10px;
+  border: none;
+  outline: none;
+  background: none;
+  border-bottom: 2px solid #f4f4f4;
+  transition: border-color 0.5s ease;
+}
+
+.inputs:focus,
+select:focus {
+  border-bottom-color: #000000;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: transparent;
+  background-image: url('data:image/svg+xml;utf8,<svg version="1.1" viewBox="0 0 2048 2048" width="80" height="80" xmlns="http://www.w3.org/2000/svg"><path transform="translate(131,440)" d="m0 0h26l15 2 20 6 12 5 17 9 13 10 14 12 774 774 3 1 779-779 11-9 15-11 22-11 25-7 17-2h23l15 2 21 6 12 5 15 8 11 8 11 9 6 5 9 11 9 12 12 23 9 27h1v55h-2l-7 24-11 23-7 10-9 11-11 12-878 878-10 8-11 8-12 7-16 7-21 6-24 3h-12l-20-2-27-8-23-12-14-11-13-11-880-880-9-11-9-12-10-18-5-13-5-18-2-2v-50l3-9 6-19 5-12 9-16 13-16 9-10 10-8 11-8 18-10 19-7 18-4z" fill="%23FFFFFF"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+}
+
+.text_inputs {
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: bold;
+  position: absolute;
+  top: 5%;
+  left: 14%;
+}
+
+.cont_btn_form {
+  margin: 16px 0;
+}
+
+.btn_form {
+  padding: 14px 25px;
+  border: none;
+  border-radius: 25px;
+  font-size: 13px;
+  cursor: pointer;
+  text-transform: uppercase;
+  box-shadow: 0px 8px 15px #0000001a;
+  transition: all 0.3s ease;
+  background-color: #f6e4ab;
+}
+
+.btn_form:hover {
+  background-color: #eed37a;
 }
 </style>

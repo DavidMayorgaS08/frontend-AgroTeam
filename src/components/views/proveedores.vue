@@ -80,6 +80,57 @@
         </template>
       </q-table>
     </div>
+    <div class="cont_form" v-if="formulario">
+      <div class="form">
+        <svg
+          class="cerrarForm"
+          @click="cerrarForm()"
+          version="1.1"
+          viewBox="0 0 2048 2048"
+          width="25"
+          height="25"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            transform="translate(503,426)"
+            d="m0 0h18l15 3 12 5 13 8 13 11 449 449 4-2 453-453 14-10 12-6 14-4 7-1h18l15 3 12 5 13 8 13 11 8 10 8 13 5 13 3 15v15l-3 16-7 16-7 11-8 10h-2l-2 4-352 352h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-28 28h-2l-2 4-6 5-6 7-4 4h-2l-2 4-8 8h-2l-2 4-4 2v2h-2v2h-2l3 5 449 449 11 14 6 10 5 13 3 15v14l-3 16-5 13-8 14-9 11h-2l-1 3-13 10-16 8-16 4-7 1h-13l-13-2-10-3-12-6-11-8-457-457-4 1-8 7-5 6-7 6-5 6-7 6-5 6-7 6-5 6-7 6-5 6-6 5-6 7-6 5-6 7-6 5-6 7-6 5-6 7h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-272 272h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-12 12h-2l-2 4h-2l-1 3-13 10-16 8-16 4-7 1h-13l-13-2-15-5-13-8-12-11-10-11-8-13-6-16-2-11v-18l3-14 5-13 7-12 11-13 450-450-1-4-455-455-10-14-5-11-4-13-1-6v-19l4-18 8-16 10-14 8-8 14-10 12-6 14-4z"
+            fill="#fff"
+          />
+        </svg>
+        <div class="titulo_form">
+          <p v-if="variable === 0" class="text_titulo_form">crear</p>
+          <p v-else class="text_titulo_form">editar</p>
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">nombre</p>
+          <input type="text" class="inputs" v-model="nombre">
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">dirección</p>
+          <input type="text" class="inputs" v-model="direccion">
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">teléfono</p>
+          <input type="text" class="inputs" v-model="telefono">
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">email</p>
+          <input type="text" class="inputs" v-model="email">
+        </div>
+        <div class="cont_btn_form">
+          <button
+            v-if="variable === 0"
+            class="btn_form"
+            @click.prevent="enviarCrear()"
+          >
+            crear
+          </button>
+          <button v-else class="btn_form" @click.prevent="enviarEditar()">
+            editar
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script setup>
@@ -167,6 +218,98 @@ let desactivar = async (row) => {
   spinner.value = false;
 };
 
+let formulario = ref(false);
+
+let cerrarForm = () => {
+  formulario.value = false;
+  listarTodos();
+  vaciarCampos();
+};
+
+let nombre = ref("");
+let direccion = ref("");
+let telefono = ref("");
+let email = ref("");
+let estado = ref(1);
+
+let validaciones = () => {
+  if(nombre.value === "" || nombre.value.trim() === ""){
+    alert("El campo nombre es obligatorio");
+    return false;
+  }
+  if(direccion.value === "" || direccion.value.trim() === ""){
+    alert("El campo dirección es obligatorio");
+    return false;
+  }
+  if(telefono.value === "" || String(telefono.value).trim() === ""){
+    alert("El campo teléfono es obligatorio");
+    return false;
+  }
+  if(email.value === "" || email.value.trim() === ""){
+    alert("El campo email es obligatorio");
+    return false;
+  }
+}
+
+let vaciarCampos = () => {
+  nombre.value = "";
+  direccion.value = "";
+  telefono.value = "";
+  email.value = "";
+};
+
+let variable = ref(null);
+let id = ref(null);
+
+let crear = () => {
+  variable.value = 0;
+  formulario.value = true;
+};
+
+let editar = (data) => {
+  variable.value = 1;
+  id.value = data._id;
+  nombre.value = data.nombre;
+  direccion.value = data.direccion;
+  telefono.value = data.telefono;
+  email.value = data.email;
+  formulario.value = true;
+};
+
+let enviarCrear = async () => {
+  if(validaciones() === false){
+    return;
+  }
+  let data = {
+    nombre: nombre.value,
+    direccion: direccion.value,
+    telefono: telefono.value,
+    email: email.value,
+    estado: estado.value
+  };
+  spinner.value = true;
+  await useProveedores.postProveedores(data);
+  vaciarCampos();
+  spinner.value = false;
+}
+
+let enviarEditar = async () => {
+  if(validaciones() === false){
+    return;
+  }
+  let data = {
+    nombre: nombre.value,
+    direccion: direccion.value,
+    telefono: telefono.value,
+    email: email.value,
+    estado: estado.value
+  };
+  spinner.value = true;
+  await useProveedores.putProveedor(id.value, data);
+  vaciarCampos();
+  spinner.value = false;
+}
+
 onMounted(() => {
   listarTodos();
 });
@@ -198,12 +341,12 @@ onMounted(() => {
 
 .spinner {
   --size: 30px;
-  --first-block-clr: #e28426;
-  --second-block-clr: #eed37a;
+  --first-block-clr: #2e7d32;
+  --second-block-clr: #77DD77;
   --clr: #111;
   width: 100px;
   height: 100px;
-  position: fixed;
+  position: relative;
 }
 
 .spinner::after,
@@ -268,6 +411,8 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .btn {
@@ -305,5 +450,103 @@ onMounted(() => {
   font-size: 20px;
   text-transform: uppercase;
   font-weight: bold;
+}
+
+.cont_form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.474);
+  top: 0;
+  left: 0;
+}
+
+.form {
+  margin-top: 35px;
+  width: 28%;
+  height: 60%;
+  background: #e9b27c;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.cerrarForm {
+  position: absolute;
+  z-index: 1000;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.titulo_form {
+  margin-top: 20px;
+}
+
+.text_titulo_form {
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.cont_inputs {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Estilo para inputs y select */
+.inputs{
+  width: 75%;
+  padding: 10px;
+  border: none;
+  outline: none;
+  background: none;
+  border-bottom: 2px solid #f4f4f4;
+  transition: border-color 0.5s ease;
+}
+
+.inputs:focus {
+  border-bottom-color: #000000;
+}
+
+.text_inputs {
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: bold;
+  position: absolute;
+  top: 5%;
+  left: 14%;
+}
+
+
+.cont_btn_form {
+  margin: 20px 0;
+}
+
+.btn_form {
+  padding: 14px 25px;
+  border: none;
+  border-radius: 25px;
+  font-size: 13px;  
+  cursor: pointer;
+  text-transform: uppercase;
+  box-shadow: 0px 8px 15px #0000001a;
+  transition: all 0.3s ease;
+  background-color: #f6e4ab;
+}
+
+.btn_form:hover {
+  background-color: #eed37a;
 }
 </style>
