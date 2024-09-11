@@ -10,7 +10,7 @@
         </label>
       </div>
       <div class="cont_perfil" @click="perfil()">
-        <input id="checkbox2" type="checkbox" v-model="isChecked2">
+        <input id="checkbox2" type="checkbox" v-model="isChecked2" />
         <svg
           for="checkbox2"
           version="1.1"
@@ -124,7 +124,9 @@
       </div>
       <div>
         <button class="btn" @click="cultivo()">Cultivos</button>
-        <button class="btn" @click="elaboracionSustrato()">Elaboración Sustratos</button>
+        <button class="btn" @click="elaboracionSustrato()">
+          Elaboración Sustratos
+        </button>
         <button class="btn" @click="empleado()">Empleados</button>
         <button class="btn" @click="factura()">Facturas</button>
         <button class="btn" @click="fertilizacion()">Fertilizaciones</button>
@@ -137,10 +139,14 @@
         <button class="btn" @click="mantenimiento()">Mantenimientos</button>
       </div>
       <div>
-        <button class="btn" @click="maquinariaHerramienta()">Maquinaria y Herramientas</button>
+        <button class="btn" @click="maquinariaHerramienta()">
+          Maquinaria y Herramientas
+        </button>
         <button class="btn" @click="nomina()">Nominas</button>
         <button class="btn" @click="parcela()">Parcelas</button>
-        <button class="btn" @click="preparacionSuelo()">Preparación Suelos</button>
+        <button class="btn" @click="preparacionSuelo()">
+          Preparación Suelos
+        </button>
         <button class="btn" @click="proceso()">Procesos</button>
       </div>
       <div>
@@ -151,7 +157,10 @@
         <button class="btn" @click="siembra()">Siembras</button>
       </div>
     </div>
-    <div class="cont_perfil_desplegable" :class="{ cont_perfil2: true, 'perfil2-open': perfilOpen }">
+    <div
+      class="cont_perfil_desplegable"
+      :class="{ cont_perfil2: true, 'perfil2-open': perfilOpen }"
+    >
       <div class="cont_nombre">
         <p class="text_nombre">Jesus</p>
       </div>
@@ -629,6 +638,8 @@ let cerrarSesion = () => {
   background-color: #2e7d32;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  max-height: 100vh;
+  overflow-y: auto;
 }
 
 .cont_menu2 {
@@ -701,14 +712,15 @@ let cerrarSesion = () => {
   clip-path: circle(141.2% at 100% 0);
 }
 
-.cont_nombre, .cont_rol {
+.cont_nombre,
+.cont_rol {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 45px;
 }
 
-.cont_salir{
+.cont_salir {
   display: flex;
   justify-content: center;
   align-items: center;

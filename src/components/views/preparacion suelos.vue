@@ -3,7 +3,7 @@
     <div class="cont_spinner" v-if="spinner">
       <div class="spinner"></div>
     </div>
-    <div class="cont_btns">
+    <div class="cont_btns"> 
       <button class="btn" @click.prevent="listarTodos()">listar todos</button>
       <button class="btn" @click.prevent="listarActivos()">
         listar activos
