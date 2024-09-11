@@ -95,14 +95,16 @@ export const useRiegosStore = defineStore("riegos", () => {
 
     let putRiegos = async (id, riegos) => {
         try {
-            let res = await axios.post(`/api/riegos/${id}`, riegos, {
+            let res = await axios.put(`/api/riegos/${id}`, riegos, {
                 headers: {
                     "x-token": token.value
                 }
             })
+            console.log(res);
+            return res.data;
         } catch (error) {
             console.log(error);
-            return error
+            return error;
         }
     }
 
