@@ -638,8 +638,8 @@ let cerrarSesion = () => {
   background-color: #2e7d32;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  overflow-y: auto;
   max-height: 100vh;
+  overflow-y: auto;
 }
 
 .cont_menu2 {

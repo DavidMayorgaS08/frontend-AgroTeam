@@ -11,10 +11,19 @@
           <input
             required=""
             name="password"
-            type="password"
+            :type="inputPassword"
             v-model="password"
           />
           <label>Contraseña</label>
+        </div>
+        <div class="cont_verContra">
+          <input
+            @click="ver()"
+            type="checkbox"
+            id="verContra"
+            v-model="check"
+          />
+          <label for="verContra">Mostrar Contraseña</label>
         </div>
         <button class="boton-elegante" @click.prevent="iniciar()">
           Ingresar
@@ -85,6 +94,17 @@ function cerrar() {
 let email = ref("juanperez@example.com");
 let password = ref("password123");
 
+let check = ref(false);
+let inputPassword = ref("password");
+
+let ver = () => {
+  if (check.value == true) {
+    inputPassword.value = "password";
+  } else {
+    inputPassword.value = "text";
+  }
+};
+
 async function iniciar() {
   spinner.value = true;
   try {
@@ -109,10 +129,10 @@ async function iniciar() {
 </script>
 
 <style scoped>
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .login-box {
@@ -256,7 +276,7 @@ async function iniciar() {
 .spinner {
   --size: 30px;
   --first-block-clr: #2e7d32;
-  --second-block-clr: #77DD77;
+  --second-block-clr: #77dd77;
   --clr: #111;
   width: 100px;
   height: 100px;
@@ -281,6 +301,22 @@ async function iniciar() {
   top: calc(50% - var(--size));
   left: calc(50% - var(--size));
   animation: down 2.4s cubic-bezier(0, 0, 0.24, 1.21) infinite;
+}
+
+.cont_verContra {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.cont_verContra input {
+  margin-right: 10px;
+}
+
+.cont_verContra input[type="checkbox"] {
+  width: 15px; /* Adjust the width as needed */
+  height: 15px; /* Adjust the height as needed */
 }
 
 .error {
