@@ -1089,6 +1089,8 @@ select {
               v-model="telefono"
             />
           </div>
+        </div>
+        <div class="part2">
           <div class="cont_inputs">
             <p class="text_inputs">Correo</p>
             <input
@@ -1097,22 +1099,12 @@ select {
               v-model="email"
             />
           </div>
-        </div>
-        <div class="part2">
           <div class="cont_inputs">
             <p class="text_inputs">Municipio</p>
             <input
               type="text"
               class="inputs"
               v-model="municipio"
-            />
-          </div>
-          <div class="cont_inputs">
-            <p class="text_inputs">Contraseña</p>
-            <input
-              type="text"
-              class="inputs"
-              v-model="password"
             />
           </div>
           <div class="cont_inputs">
@@ -1767,7 +1759,7 @@ onMounted(() => {
 
 .part1 {
   width: 50%;
-  height: 65%;
+  height: 55%;
   display: flex;
   flex-direction: column;
   align-items: center;
