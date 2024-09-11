@@ -175,7 +175,7 @@
           ></path>
         </svg>
       </div>
-      <div class="success__title">Modificación Exitoso</div>
+      <div class="success__title">{{ text }}</div>
       <div class="success__close" @click="cerrar()">
         <svg
           xmlns="http://www.w3.org/2000/svg"

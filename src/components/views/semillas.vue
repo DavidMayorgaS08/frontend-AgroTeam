@@ -174,6 +174,68 @@
         </div>
       </div>
     </div>
+    <div :class="registroExitoso ? 'success1' : 'success'">
+      <div class="success__icon">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          viewBox="0 0 24 24"
+          height="24"
+          fill="none"
+        >
+          <path
+            fill-rule="evenodd"
+            fill="#393a37"
+            d="m12 1c-6.075 0-11 4.925-11 11s4.925 11 11 11 11-4.925 11-11-4.925-11-11-11zm4.768 9.14c.0878-.1004.1546-.21726.1966-.34383.0419-.12657.0581-.26026.0477-.39319-.0105-.13293-.0475-.26242-.1087-.38085-.0613-.11844-.1456-.22342-.2481-.30879-.1024-.08536-.2209-.14938-.3484-.18828s-.2616-.0519-.3942-.03823c-.1327.01366-.2612.05372-.3782.1178-.1169.06409-.2198.15091-.3027.25537l-4.3 5.159-2.225-2.226c-.1886-.1822-.4412-.283-.7034-.2807s-.51301.1075-.69842.2929-.29058.4362-.29285.6984c-.00228.2622.09851.5148.28067.7034l3 3c.0983.0982.2159.1748.3454.2251.1295.0502.2681.0729.4069.0665.1387-.0063.2747-.0414.3991-.1032.1244-.0617.2347-.1487.3236-.2554z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+      </div>
+      <div class="success__title">{{ text }}</div>
+      <div class="success__close" @click="cerrar()">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          viewBox="0 0 20 20"
+          height="20"
+        >
+          <path
+            fill="#393a37"
+            d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z"
+          ></path>
+        </svg>
+      </div>
+    </div>
+    <div :class="registroFallido ? 'error1' : 'error'">
+      <div class="error__icon">
+        <svg
+          fill="none"
+          height="24"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="m13 13h-2v-6h2zm0 4h-2v-2h2zm-1-15c-1.3132 0-2.61358.25866-3.82683.7612-1.21326.50255-2.31565 1.23915-3.24424 2.16773-1.87536 1.87537-2.92893 4.41891-2.92893 7.07107 0 2.6522 1.05357 5.1957 2.92893 7.0711.92859.9286 2.03098 1.6651 3.24424 2.1677 1.21325.5025 2.51363.7612 3.82683.7612 2.6522 0 5.1957-1.0536 7.0711-2.9289 1.8753-1.8754 2.9289-4.4189 2.9289-7.0711 0-1.3132-.2587-2.61358-.7612-3.82683-.5026-1.21326-1.2391-2.31565-2.1677-3.24424-.9286-.92858-2.031-1.66518-3.2443-2.16773-1.2132-.50254-2.5136-.7612-3.8268-.7612z"
+            fill="#393a37"
+          ></path>
+        </svg>
+      </div>
+      <div class="error__title">{{ text }}</div>
+      <div class="error__close" @click="cerrar()">
+        <svg
+          height="20"
+          viewBox="0 0 20 20"
+          width="20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z"
+            fill="#393a37"
+          ></path>
+        </svg>
+      </div>
+    </div>
   </div>
 </template>
 <script setup>
@@ -185,7 +247,21 @@ let useSemillas = useSemillasStore();
 let useProveedores = useProveedoresStore();
 
 let spinner = ref(false);
+let registroFallido = ref(false);
+let registroExitoso = ref(false);
+let text = ref("");
 
+const ocultar = () => {
+  setTimeout(() => {
+    registroExitoso.value = false;
+    registroFallido.value = false;
+  }, 3000);
+};
+
+const cerrar = () => {
+  registroExitoso.value = false;
+  registroFallido.value = false;
+};
 let r = null;
 let p = ref([]);
 
@@ -232,10 +308,10 @@ let columns = ref([
     field: "proveedorSemillas",
   },
   {
-     name: "NroLote",
-      label: "Nro de lote",
-      align: "center",
-      field: "NroLote",
+    name: "NroLote",
+    label: "Nro de lote",
+    align: "center",
+    field: "NroLote",
   },
   {
     name: "origen",
@@ -284,7 +360,7 @@ let columns = ref([
     label: "Acciones",
     align: "center",
     field: "acciones",
-  }
+  },
 ]);
 
 let listarTodos = async () => {
@@ -348,58 +424,85 @@ let estado = ref(1);
 
 let validaciones = () => {
   if(proveedorOption.value === ""){
-    alert("El proveedor es obligatorio");
+    text.value = "El proveedor es obligatorio";
+    registroFallido.value = true;
+    ocultar();
     return false;
   }
-  if(numFactura.value === "" || String(numFactura.value).trim() === ""){
-    alert("El número de factura es obligatorio");
+  if (numFactura.value === "" || String(numFactura.value).trim() === "") {
+    text.value = "El número de factura es obligatorio";
+    registroFallido.value = true;
+    ocultar();
     return false;
   }
-  if(fechaCompra.value === ""){
-    alert("La fecha de compra es obligatoria");
+  if (fechaCompra.value === "") {
+    text.value = "La fecha de compra es obligatoria";
+    registroFallido.value = true;
+    ocultar();
     return false;
   }
-  if(fechaVencimiento.value === ""){
-    alert("La fecha de vencimiento es obligatoria");
+  if (fechaVencimiento.value === "") {
+    text.value = "La fecha de vencimiento es obligatoria";
+    registroFallido.value = true;
+    ocultar();
     return false;
   }
-  if(especieVariedad.value === "" || especieVariedad.value.trim() === ""){
-    alert("La especie y variedad es obligatoria");
+  if (especieVariedad.value === "" || especieVariedad.value.trim() === "") {
+    text.value = "La especia de variedad es obligatoria";
+    registroFallido.value = true;
+    ocultar();
     return false;
   }
-  if(proveedorSemillas.value === "" || proveedorSemillas.value.trim() === ""){
-    alert("El proveedor de semillas es obligatorio");
+  if (proveedorSemillas.value === "" || proveedorSemillas.value.trim() === "") {
+    text.value = "El proveedor de las semillas es obligatorio";
+    registroFallido.value = true;
+    ocultar();
     return false;
   }
-  if(NroLote.value === "" || String(NroLote.value).trim() === ""){
-    alert("El número de lote es obligatorio");
+  if (NroLote.value === "" || String(NroLote.value).trim() === "") {
+    text.value = "El número del lote es obligatorio";
+    registroFallido.value = true;
+    ocultar();
     return false;
   }
-  if(origen.value === "" || origen.value.trim() === ""){
-    alert("El origen es obligatorio");
+  if (origen.value === "" || origen.value.trim() === "") {
+    text.value = "El origen es obligatorio";
+    registroFallido.value = true;
+    ocultar();
     return false;
   }
-  if(poderGerminativo.value === "" || poderGerminativo.value.trim() === ""){
-    alert("El poder germinativo es obligatorio");
+  if (poderGerminativo.value === "" || poderGerminativo.value.trim() === "") {
+    text.value = "El poder germinativo es obligatorio";
+    registroFallido.value = true;
+    ocultar();
     return false;
   }
-  if(observaciones.value === "" || observaciones.value.trim() === ""){
-    alert("Las observaciones son obligatorias");
+  if (observaciones.value === "" || observaciones.value.trim() === "") {
+    text.value = "Las observaciones son obligatorias";
+    registroFallido.value = true;
+    ocultar();
     return false;
   }
-  if(unidadTotal.value === "" || unidadTotal.value.trim() === ""){
-    alert("La unidad total es obligatoria");
+  if (unidadTotal.value === "" || unidadTotal.value.trim() === "") {
+    text.value = "La unidad total es obligatoria";
+    registroFallido.value = true;
+    ocultar();
     return false;
   }
-  if(total.value === "" || String(total.value).trim() === ""){
-    alert("El total es obligatorio");
+  if (total.value === "" || String(total.value).trim() === "") {
+    text.value = "El total es obligatorio";
+    registroFallido.value = true;
+    ocultar();
     return false;
   }
-  if(transplante.value === "" || transplante.value.trim() === ""){
-    alert("El transplante es obligatorio");
+  if (transplante.value === "" || transplante.value.trim() === "") {
+    text.value = "El trasplante es obligatorio";
+    registroFallido.value = true;
+    ocultar();
     return false;
   }
-}
+};
+
 
 let vaciarCampos = () => {
   proveedorOption.value = "";
@@ -429,7 +532,7 @@ let crear = async () => {
   variable.value = 0;
   formulario.value = true;
   spinner.value = false;
-}
+};
 
 let editar = async (data) => {
   spinner.value = true;
@@ -452,10 +555,10 @@ let editar = async (data) => {
   transplante.value = data.transplante;
   formulario.value = true;
   spinner.value = false;
-}
+};
 
 let enviarCrear = async () => {
-  if(validaciones === false){
+  if (validaciones() === false) {
     return;
   }
   let data = {
@@ -476,12 +579,15 @@ let enviarCrear = async () => {
   };
   spinner.value = true;
   await useSemillas.postSemillas(data);
-  vaciarCampos();
+  cerrarForm();
   spinner.value = false;
-}
+  text.value = "Registro exitoso";
+  registroExitoso.value = true;
+  ocultar();
+};
 
 let enviarEditar = async () => {
-  if(validaciones === false){
+  if (validaciones === false) {
     return;
   }
   let data = {
@@ -502,16 +608,19 @@ let enviarEditar = async () => {
   };
   spinner.value = true;
   await useSemillas.putSemillas(id.value, data);
-  vaciarCampos();
+  cerrarForm();
   spinner.value = false;
-}
+  text.value = "Modificación exitosa";
+  registroExitoso.value = true;
+  ocultar();
+};
 
 onMounted(() => {
   listarTodos();
 });
 </script>
 <style scoped>
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -602,7 +711,138 @@ onMounted(() => {
     transform: translateY(-100%);
   }
 }
+.success {
+  position: absolute;
+  z-index: 10000;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  width: 320px;
+  padding: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  background: #84d65a;
+  border-radius: 8px;
+  box-shadow: 0px 0px 5px -3px #111;
+  transition: all 0.5s;
+}
 
+.success1 {
+  position: absolute;
+  top: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  width: 320px;
+  padding: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  background: #84d65a;
+  border-radius: 8px;
+  box-shadow: 0px 0px 5px -3px #111;
+  transition: all 0.5s;
+}
+
+.success__icon {
+  width: 20px;
+  height: 20px;
+  transform: translateY(-2px);
+  margin-right: 8px;
+}
+
+.success__icon path {
+  fill: #393a37;
+}
+
+.success__title {
+  font-weight: 500;
+  font-size: 14px;
+  color: #393a37;
+}
+
+.success__close {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.success__close path {
+  fill: #393a37;
+}
+
+.error {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  width: 320px;
+  padding: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  background: #fce8db;
+  border-radius: 8px;
+  box-shadow: 0px 0px 5px -3px #111;
+  transition: all 0.5s;
+}
+
+.error1 {
+  position: absolute;
+  top: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  width: 320px;
+  padding: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  background: #fce8db;
+  border-radius: 8px;
+  box-shadow: 0px 0px 5px -3px #111;
+  transition: all 0.5s;
+}
+
+.error__icon {
+  width: 20px;
+  height: 20px;
+  transform: translateY(-2px);
+  margin-right: 8px;
+}
+
+.error__icon path {
+  fill: #ef665b;
+}
+
+.error__title {
+  font-weight: 500;
+  font-size: 14px;
+  color: #71192f;
+}
+
+.error__close {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.error__close path {
+  fill: #71192f;
+}
 .cont_btns {
   display: flex;
   justify-content: center;
