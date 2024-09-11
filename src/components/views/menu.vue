@@ -759,6 +759,9 @@ let cerrarSesion = () => {
 .text_card {
   font-size: 24px;
 }
+.cont_perfil_desplegable {
+  width: 21%;
+}
 }
 
 @media(max-width: 900px){
@@ -769,7 +772,7 @@ let cerrarSesion = () => {
   grid-template-columns: repeat(2, 1fr);
 }
 .cont_perfil_desplegable {
-  width: 20%;
+  width: 25%;
 }
 }
 
@@ -806,6 +809,12 @@ let cerrarSesion = () => {
 }
 .cont_perfil_desplegable {
   width: 50%;
+}
+}
+
+@media(max-width: 350px){
+.cont_perfil_desplegable {
+  width: 60%;
 }
 }
 </style>
