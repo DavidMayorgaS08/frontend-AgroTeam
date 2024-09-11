@@ -98,67 +98,69 @@
           />
         </svg>
         <div class="titulo_form">
-          <p v-if="variable === 0" class="text_titulo_form">crear</p>
-          <p v-else class="text_titulo_form">editar</p>
+          <p v-if="variable === 0" class="text_titulo_form">crear semilla</p>
+          <p v-else class="text_titulo_form">editar semilla</p>
         </div>
         <div class="cont_inputs">
           <p class="text_inputs">proveedor</p>
           <select required v-model="proveedorOption">
             <option value="" disabled selected hidden></option>
             <option
-            v-for="(proveedor, index) in proveedores"
-            :key="proveedor._id"
-            :value="index + 1"
-            >{{ proveedor.nombre }}</option>
+              v-for="(proveedor, index) in proveedores"
+              :key="proveedor._id"
+              :value="index + 1"
+            >
+              {{ proveedor.nombre }}
+            </option>
           </select>
         </div>
         <div class="cont_inputs">
           <p class="text_inputs">número de factura</p>
-          <input type="text" class="inputs" v-model="numFactura">
+          <input type="text" class="inputs" v-model="numFactura" />
         </div>
         <div class="cont_inputs">
           <p class="text_inputs">fecha de compra</p>
-          <input type="date" class="inputs" v-model="fechaCompra">
+          <input type="date" class="inputs" v-model="fechaCompra" />
         </div>
         <div class="cont_inputs">
           <p class="text_inputs">fecha de vencimiento</p>
-          <input type="date" class="inputs" v-model="fechaVencimiento">
+          <input type="date" class="inputs" v-model="fechaVencimiento" />
         </div>
         <div class="cont_inputs">
           <p class="text_inputs">especie y variedad</p>
-          <input type="text" class="inputs" v-model="especieVariedad">
+          <input type="text" class="inputs" v-model="especieVariedad" />
         </div>
         <div class="cont_inputs">
           <p class="text_inputs">proveedor de semillas</p>
-          <input type="text" class="inputs" v-model="proveedorSemillas">
+          <input type="text" class="inputs" v-model="proveedorSemillas" />
         </div>
         <div class="cont_inputs">
           <p class="text_inputs">nro de lote</p>
-          <input type="text" class="inputs" v-model="NroLote">
+          <input type="text" class="inputs" v-model="NroLote" />
         </div>
         <div class="cont_inputs">
           <p class="text_inputs">origen</p>
-          <input type="text" class="inputs" v-model="origen">
+          <input type="text" class="inputs" v-model="origen" />
         </div>
         <div class="cont_inputs">
           <p class="text_inputs">poder germinativo</p>
-          <input type="text" class="inputs" v-model="poderGerminativo">
+          <input type="text" class="inputs" v-model="poderGerminativo" />
         </div>
         <div class="cont_inputs">
           <p class="text_inputs">observaciones</p>
-          <input type="text" class="inputs" v-model="observaciones">
+          <input type="text" class="inputs" v-model="observaciones" />
         </div>
         <div class="cont_inputs">
           <p class="text_inputs">unidad total</p>
-          <input type="text" class="inputs" v-model="unidadTotal">
+          <input type="text" class="inputs" v-model="unidadTotal" />
         </div>
         <div class="cont_inputs">
           <p class="text_inputs">total</p>
-          <input type="text" class="inputs" v-model="total">
+          <input type="text" class="inputs" v-model="total" />
         </div>
         <div class="cont_inputs">
           <p class="text_inputs">transplante</p>
-          <input type="text" class="inputs" v-model="transplante">
+          <input type="text" class="inputs" v-model="transplante" />
         </div>
         <div class="cont_btn_form">
           <button
@@ -240,7 +242,7 @@
 </template>
 <script setup>
 import { onMounted, ref } from "vue";
-import { useSemillasStore} from "../../stores/Semillas.js";
+import { useSemillasStore } from "../../stores/Semillas.js";
 import { useProveedoresStore } from "../../stores/Proveedores.js";
 
 let useSemillas = useSemillasStore();
@@ -503,7 +505,6 @@ let validaciones = () => {
   }
 };
 
-
 let vaciarCampos = () => {
   proveedorOption.value = "";
   numFactura.value = "";
@@ -540,7 +541,8 @@ let editar = async (data) => {
   proveedores.value = useProveedores.proveedores.proveedor;
   variable.value = 1;
   id.value = data._id;
-  proveedorOption.value = proveedores.value.findIndex((p) => p._id == data.id_proveedor) + 1;
+  proveedorOption.value =
+    proveedores.value.findIndex((p) => p._id == data.id_proveedor) + 1;
   numFactura.value = data.numFactura;
   fechaCompra.value = data.fechaCompra.split("T")[0];
   fechaVencimiento.value = data.fechaVencimiento.split("T")[0];
@@ -647,7 +649,7 @@ onMounted(() => {
 .spinner {
   --size: 30px;
   --first-block-clr: #2e7d32;
-  --second-block-clr: #77DD77;
+  --second-block-clr: #77dd77;
   --clr: #111;
   width: 100px;
   height: 100px;

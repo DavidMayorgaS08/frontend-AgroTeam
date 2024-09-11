@@ -98,8 +98,8 @@
           />
         </svg>
         <div class="titulo_form">
-          <p v-if="variable === 0" class="text_titulo_form">crear</p>
-          <p v-else class="text_titulo_form">editar</p>
+          <p v-if="variable === 0" class="text_titulo_form">crear nómina</p>
+          <p v-else class="text_titulo_form">editar nómina</p>
         </div>
         <div class="cont_inputs">
           <p class="text_inputs">fecha</p>
