@@ -98,8 +98,8 @@
           />
         </svg>
         <div class="titulo_form">
-          <p v-if="variable === 0" class="text_titulo_form">crear</p>
-          <p v-else class="text_titulo_form">editar</p>
+          <p v-if="variable === 0" class="text_titulo_form">crear proveedor</p>
+          <p v-else class="text_titulo_form">editar proveedor</p>
         </div>
         <div class="cont_inputs">
           <p class="text_inputs">nombre</p>
@@ -308,6 +308,11 @@ let telefono = ref("");
 let email = ref("");
 let estado = ref(1);
 
+function validarFormatoEmail(email) {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
+}
+
 let validaciones = () => {
   if(nombre.value === "" || nombre.value.trim() === ""){
    text.value = "El nombre es obligatorio";
@@ -327,8 +332,25 @@ let validaciones = () => {
     ocultar();
     return false;
   }
+    if (
+    telefono.value === "" ||
+    isNaN(telefono.value) ||
+    telefono.value < 0 ||
+    telefono.value.length < 10
+  ) {
+    text.value = "El teléfono es debe tener al menos 10 caracteres";
+    registroFallido.value = true;
+    ocultar();
+    return false;
+  }
   if(email.value === "" || email.value.trim() === ""){
    text.value = "El email es obligatorio";
+    registroFallido.value = true;
+    ocultar();
+    return false;
+  }
+    if (email.value === "" || !validarFormatoEmail(email.value)) {
+    text.value = "El correo es inválido";
     registroFallido.value = true;
     ocultar();
     return false;
