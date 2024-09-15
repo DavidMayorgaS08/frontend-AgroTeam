@@ -91,8 +91,8 @@ function cerrar() {
   registroFallido.value = false;
 }
 
-let email = ref("juanperez@example.com");
-let password = ref("password123");
+let email = ref("");
+let password = ref("");
 
 let check = ref(false);
 let inputPassword = ref("password");
