@@ -10,7 +10,7 @@
         </label>
       </div>
       <div class="cont_perfil" @click="perfil()">
-        <input id="checkbox2" type="checkbox" v-model="isChecked2" />
+        <input id="checkbox2" type="checkbox" v-model="isChecked2">
         <svg
           for="checkbox2"
           version="1.1"
@@ -34,79 +34,79 @@
       <p class="text_agro">AgroTeam</p>
     </div>
     <div class="cont" v-if="Menu">
-      <div class="cards" @click="adiministradores()">
+      <div class="cards1" @click="adiministradores()">
         <p class="text_card">Administradores</p>
       </div>
-      <div class="cards" @click="analisisSuelos()">
+      <div class="cards2" @click="analisisSuelos()">
         <p class="text_card">Analisis de Suelos</p>
       </div>
-      <div class="cards" @click="climas()">
+      <div class="cards3" @click="climas()">
         <p class="text_card">Climas</p>
       </div>
-      <div class="cards" @click="compradores()">
+      <div class="cards4" @click="compradores()">
         <p class="text_card">Compradores</p>
       </div>
-      <div class="cards" @click="controlPlagas()">
+      <div class="cards5" @click="controlPlagas()">
         <p class="text_card">Control Plagas</p>
       </div>
-      <div class="cards" @click="cultivos()">
+      <div class="cards6" @click="cultivos()">
         <p class="text_card">Cultivos</p>
       </div>
-      <div class="cards" @click="elaboracionSustratos()">
+      <div class="cards7" @click="elaboracionSustratos()">
         <p class="text_card">Elaboración Sustratos</p>
       </div>
-      <div class="cards" @click="empleados()">
+      <div class="cards8" @click="empleados()">
         <p class="text_card">Empleados</p>
       </div>
-      <div class="cards" @click="facturas()">
+      <div class="cards9" @click="facturas()">
         <p class="text_card">Facturas</p>
       </div>
-      <div class="cards" @click="fertilizaciones()">
+      <div class="cards10" @click="fertilizaciones()">
         <p class="text_card">Fertilizaciones</p>
       </div>
-      <div class="cards" @click="fincas()">
+      <div class="cards11" @click="fincas()">
         <p class="text_card">Fincas</p>
       </div>
-      <div class="cards" @click="gastos()">
+      <div class="cards12" @click="gastos()">
         <p class="text_card">Gastos</p>
       </div>
-      <div class="cards" @click="insumos()">
+      <div class="cards13" @click="insumos()">
         <p class="text_card">Insumos</p>
       </div>
-      <div class="cards" @click="inventarios()">
+      <div class="cards14" @click="inventarios()">
         <p class="text_card">Inventarios</p>
       </div>
-      <div class="cards" @click="mantenimientos()">
+      <div class="cards15" @click="mantenimientos()">
         <p class="text_card">Mantenimientos</p>
       </div>
-      <div class="cards" @click="maquinariasHerramientas()">
+      <div class="cards16" @click="maquinariasHerramientas()">
         <p class="text_card">Maquinaria y herramientas</p>
       </div>
-      <div class="cards" @click="nominas()">
+      <div class="cards17" @click="nominas()">
         <p class="text_card">Nominas</p>
       </div>
-      <div class="cards" @click="parcelas()">
+      <div class="cards18" @click="parcelas()">
         <p class="text_card">Parcelas</p>
       </div>
-      <div class="cards" @click="preparacionSuelos()">
+      <div class="cards19" @click="preparacionSuelos()">
         <p class="text_card">Preparación Suelos</p>
       </div>
-      <div class="cards" @click="procesos()">
+      <div class="cards20" @click="procesos()">
         <p class="text_card">Procesos</p>
       </div>
-      <div class="cards" @click="producciones()">
+      <div class="cards21" @click="producciones()">
         <p class="text_card">Producciones</p>
       </div>
-      <div class="cards" @click="proveedores()">
+      <div class="cards22" @click="proveedores()">
         <p class="text_card">Proveedores</p>
       </div>
-      <div class="cards" @click="riegos()">
+      <div class="cards23" @click="riegos()">
         <p class="text_card">Riegos</p>
       </div>
-      <div class="cards" @click="semillas()">
+      <div class="cards24" @click="semillas()">
         <p class="text_card">Semillas</p>
       </div>
-      <div class="cards" @click="siembras()">
+      <div class="cards25" @click="siembras()">
         <p class="text_card">Siembras</p>
       </div>
     </div>
@@ -124,9 +124,7 @@
       </div>
       <div>
         <button class="btn" @click="cultivo()">Cultivos</button>
-        <button class="btn" @click="elaboracionSustrato()">
-          Elaboración Sustratos
-        </button>
+        <button class="btn" @click="elaboracionSustrato()">Elaboración Sustratos</button>
         <button class="btn" @click="empleado()">Empleados</button>
         <button class="btn" @click="factura()">Facturas</button>
         <button class="btn" @click="fertilizacion()">Fertilizaciones</button>
@@ -139,14 +137,10 @@
         <button class="btn" @click="mantenimiento()">Mantenimientos</button>
       </div>
       <div>
-        <button class="btn" @click="maquinariaHerramienta()">
-          Maquinaria y Herramientas
-        </button>
+        <button class="btn" @click="maquinariaHerramienta()">Maquinaria y Herramientas</button>
         <button class="btn" @click="nomina()">Nominas</button>
         <button class="btn" @click="parcela()">Parcelas</button>
-        <button class="btn" @click="preparacionSuelo()">
-          Preparación Suelos
-        </button>
+        <button class="btn" @click="preparacionSuelo()">Preparación Suelos</button>
         <button class="btn" @click="proceso()">Procesos</button>
       </div>
       <div>
@@ -157,10 +151,7 @@
         <button class="btn" @click="siembra()">Siembras</button>
       </div>
     </div>
-    <div
-      class="cont_perfil_desplegable"
-      :class="{ cont_perfil2: true, 'perfil2-open': perfilOpen }"
-    >
+    <div class="cont_perfil_desplegable" :class="{ cont_perfil2: true, 'perfil2-open': perfilOpen }">
       <div class="cont_nombre">
         <p class="text_nombre">Jesus</p>
       </div>
@@ -497,6 +488,7 @@ let cerrarSesion = () => {
   localStorage.removeItem("login");
   router.push("/");
 };
+
 </script>
   <style scoped>
 * {
@@ -505,6 +497,430 @@ let cerrarSesion = () => {
   box-sizing: border-box;
 }
 
+.cards1 {
+    background-color: #ffffff;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    background-image: url("src/img/admin.jpeg");
+    background-position: center;
+    background-size: cover;
+  }
+  .cards2 {
+    background-color: #ffffff;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    background-image: url("src/img/anasuelos.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+  
+  .cards3 {
+    background-color: #ffffff;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    background-image: url("src/img/climas.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+  
+  .cards4 {
+    background-color: #ffffff;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    background-image: url("src/img/compradores.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+
+  .cards5 {
+    background-color: #ffffff;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    background-image: url("src/img/plagas.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+
+  .cards6 {
+    background-color: #ffffff;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    background-image: url("src/img/cultivos.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+
+  .cards7 {
+    background-color: #ffffff;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    background-image: url("src/img/sustratos.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+
+  .cards8 {
+    background-color: #ffffff;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    background-image: url("src/img/empleados.webp");
+    background-position: center;
+    background-size: cover;
+  }
+
+  .cards9 {
+    background-color: #ffffff;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    background-image: url("src/img/fact.jpeg");
+    background-position: center;
+    background-size: cover;
+  }
+
+  .cards10 {
+    background-color: #ffffff;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    background-image: url("src/img/fertilizantes.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+
+  .cards11 {
+    background-color: #ffffff;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    background-image: url("src/img/finca.webp");
+    background-position: center;
+    background-size: cover;
+  }
+
+  .cards12 {
+    background-color: #ffffff;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    background-image: url("src/img/gastos.avif");
+    background-position: center;
+    background-size: cover;
+  }
+
+  .cards13 {
+    background-color: #ffffff;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    background-image: url("src/img/insumos.webp");
+    background-position: center;
+    background-size: cover;
+  }
+
+  .cards14 {
+    background-color: #ffffff;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    background-image: url("src/img/inventario.webp");
+    background-position: center;
+    background-size: cover;
+  }
+
+  .cards15 {
+    background-color: #ffffff;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    background-image: url("src/img/mantenimientos.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+
+  .cards16 {
+    background-color: #ffffff;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    background-image: url("src/img/maquinaria.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+
+  .cards17 {
+    background-color: #ffffff;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    background-image: url("src/img/nomina.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+
+  .cards18 {
+    background-color: #ffffff;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    background-image: url("src/img/parcelas.avif");
+    background-position: center;
+    background-size: cover;
+  }
+
+  .cards19 {
+    background-color: #ffffff;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    background-image: url("src/img/suelos.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+
+  .cards20 {
+    background-color: #ffffff;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    background-image: url("src/img/procesos.JPG");
+    background-position: center;
+    background-size: cover;
+  }
+
+  .cards21 {
+    background-color: #ffffff;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    background-image: url("src/img/produccion.jpeg");
+    background-position: center;
+    background-size: cover;
+  }
+
+  .cards22 {
+    background-color: #ffffff;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    background-image: url("src/img/proveedores.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+
+  .cards23 {
+    background-color: #ffffff;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    background-image: url("src/img/riego.avif");
+    background-position: center;
+    background-size: cover;
+  }
+
+  .cards24 {
+    background-color: #ffffff;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    background-image: url("src/img/semillas.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+
+  .cards25 {
+    background-color: #ffffff;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    background-image: url("src/img/siembra.webp");
+    background-position: center;
+    background-size: cover;
+  }
+
+.cards:hover {
+  cursor: pointer;
+  border: 1px solid #2e7d32;
+  transform: scale(1.1);
+}
+
+.text_card {
+  font-size: 24px;
+  color: #2e7d32;
+  font-weight: bold;
+  position: absolute;
+  width: 95%;
+  text-align: center;
+  white-space: normal;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.cards1:hover .text_card,
+.cards2:hover .text_card,
+.cards3:hover .text_card,
+.cards4:hover .text_card,
+.cards5:hover .text_card,
+.cards6:hover .text_card,
+.cards7:hover .text_card,
+.cards8:hover .text_card,
+.cards9:hover .text_card,
+.cards10:hover .text_card,
+.cards11:hover .text_card,
+.cards12:hover .text_card,
+.cards13:hover .text_card,
+.cards14:hover .text_card,
+.cards15:hover .text_card,
+.cards16:hover .text_card,
+.cards17:hover .text_card,
+.cards18:hover .text_card,
+.cards19:hover .text_card,
+.cards20:hover .text_card,
+.cards21:hover .text_card,
+.cards22:hover .text_card,
+.cards23:hover .text_card,
+.cards24:hover .text_card,
+.cards25:hover .text_card {
+  background-color: #2e7d32;
+  color: #ffffff;
+  transform: scale(1.05);
+}
 .menu {
   background-color: #2e7d32;
   height: 70px;
@@ -527,6 +943,7 @@ let cerrarSesion = () => {
 .text_agro {
   font-size: 30px;
   color: white;
+  font-weight: bold;
 }
 
 #checkbox {
@@ -606,40 +1023,12 @@ let cerrarSesion = () => {
   margin-top: 70px;
 }
 
-.cards {
-  background-color: #f2f2f2;
-  width: 100%;
-  height: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  position: relative;
-  transition: all 0.2s ease-in-out;
-}
-
-.cards:hover {
-  cursor: pointer;
-  border: 1px solid #2e7d32;
-  transform: scale(1.1);
-}
-
-.text_card {
-  font-size: 30px;
-  color: #2e7d32;
-  position: absolute;
-  width: 100%;
-  text-align: center;
-  white-space: normal;
-}
 
 .cont_menu_lateral {
   width: 100%;
   background-color: #2e7d32;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  max-height: 100vh;
-  overflow-y: auto;
 }
 
 .cont_menu2 {
@@ -671,6 +1060,7 @@ let cerrarSesion = () => {
   margin: 10px 0;
   width: 90%;
   border-radius: 12px;
+  font-weight: bold;
 }
 
 .btn:hover {
@@ -712,15 +1102,14 @@ let cerrarSesion = () => {
   clip-path: circle(141.2% at 100% 0);
 }
 
-.cont_nombre,
-.cont_rol {
+.cont_nombre, .cont_rol {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 45px;
 }
 
-.cont_salir {
+.cont_salir{
   display: flex;
   justify-content: center;
   align-items: center;

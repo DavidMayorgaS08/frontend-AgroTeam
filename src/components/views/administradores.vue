@@ -352,7 +352,7 @@ let activar = async (administrador) => {
 };
 
 let desactivar = async (administrador) => {
-  if (administrador._id == "66b3a6d67e766caa0bd31da7") {
+  if (administrador._id == "66ef4fa68162daaf761cc924") {
     alert("No se puede desactivar este administrador");
     return;
   } else {
