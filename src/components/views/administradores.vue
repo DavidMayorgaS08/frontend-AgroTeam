@@ -123,8 +123,8 @@
           />
         </svg>
         <div class="titulo_form">
-          <p v-if="variable === 0" class="text_titulo_form">crear</p>
-          <p v-else class="text_titulo_form">editar</p>
+          <p v-if="variable === 0" class="text_titulo_form">Crear Administrador</p>
+          <p v-else class="text_titulo_form">Editar Administrador</p>
         </div>
         <div class="part1">
           <div class="cont_inputs">
@@ -384,6 +384,10 @@ function validarFormatoEmail(email) {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return regex.test(email);
 }
+function validpassword(password) {
+  const regex = /^(?=(?:[^A-Za-z]*[A-Za-z]){3})(?=(?:[^\d]*\d){3})[A-Za-z\dñÑáéíóúÁÉÍÓÚüÜ]{6,}$/;
+  return regex.test(password);
+}
 
 let validaciones = () => {
   if (nombre.value === "" || nombre.value.trim() === "") {
@@ -439,6 +443,13 @@ let validaciones = () => {
     ocultar();
     return false;
   }
+  if (!validpassword(password.value)) {
+  console.log('La contraseña no cumple con los requisitos');
+   text.value = "La contraseña debe tener al menos 3 números y 3 letras";
+    registroFallido.value = true;
+    ocultar();
+    return false;
+  };
   if (rol.value === "" || String(rol.value).trim() === "") {
     text.value = "El rol es obligatorio";
     registroFallido.value = true;

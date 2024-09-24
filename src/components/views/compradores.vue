@@ -98,8 +98,8 @@
           />
         </svg>
         <div class="titulo_form">
-          <p v-if="variable === 0" class="text_titulo_form">crear</p>
-          <p v-else class="text_titulo_form">editar</p>
+          <p v-if="variable === 0" class="text_titulo_form">crear comprador</p>
+          <p v-else class="text_titulo_form">editar comprador</p>
         </div>
         <div class="part1">
           <div class="cont_inputs">
@@ -397,6 +397,7 @@ let validaciones = () => {
     ocultar();
     return false;
   }
+  
   if(cantidad.value === "" || String(cantidad.value).trim() === "") {
     text.value = "La cantidad es obligatoria";
     registroFallido.value = true;

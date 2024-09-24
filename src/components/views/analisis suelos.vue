@@ -146,8 +146,8 @@
           />
         </svg>
         <div class="titulo_form">
-          <p v-if="variable === 0" class="text_titulo_form">crear</p>
-          <p v-else class="text_titulo_form">editar</p>
+          <p v-if="variable === 0" class="text_titulo_form">crear análisis de suelo</p>
+          <p v-else class="text_titulo_form">editar análisis de suelo</p>
         </div>
         <div class="part1">
           <div class="cont_inputs">

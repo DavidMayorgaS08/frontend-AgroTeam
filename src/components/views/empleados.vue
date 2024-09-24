@@ -98,8 +98,8 @@
           />
         </svg>
         <div class="titulo_form">
-          <p v-if="variable === 0" class="text_titulo_form">crear</p>
-          <p v-else class="text_titulo_form">editar</p>
+          <p v-if="variable === 0" class="text_titulo_form">crear empleado</p>
+          <p v-else class="text_titulo_form">editar empleado</p>
         </div>
         <div class="cont_inputs">
           <p class="text_inputs">nombre</p>
@@ -334,6 +334,17 @@ let validaciones = () => {
   }
   if(telefono.value === "" || telefono.value.trim() === ""){
     text.value = "El teléfono es obligatorio";
+    registroFallido.value = true;
+    ocultar();
+    return false;
+  }
+    if (
+    telefono.value === "" ||
+    isNaN(telefono.value) ||
+    telefono.value < 0 ||
+    telefono.value.length < 10
+  ) {
+    text.value = "El teléfono es debe tener al menos 10 caracteres";
     registroFallido.value = true;
     ocultar();
     return false;
