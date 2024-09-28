@@ -920,6 +920,7 @@ let cerrarSesion = () => {
   background-color: #2e7d32;
   color: #ffffff;
   transform: scale(1.05);
+  cursor: pointer;
 }
 .menu {
   background-color: #2e7d32;

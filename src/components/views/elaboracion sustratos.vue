@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div class="app">
     <div class="cont_spinner" v-if="spinner">
       <div class="spinner"></div>
@@ -103,14 +103,14 @@
         </div>
         <div class="part1">
           <div class="cont_inputs">
-            <p class="text_inputs">Proceso</p>
-            <select required v-model="procesoOption">
+            <p class="text_inputs">Cultivo</p>
+            <select required v-model="cultivoOption">
               <option value="" disabled selected hidden></option>
               <option
-              v-for="(proceso, index) in procesos"
-              :key="proceso._id"
+              v-for="(cultivo, index) in cultivos"
+              :key="cultivo._id"
               :value="index + 1"
-              >{{ proceso.tipo }}</option>
+              >{{ cultivo.nombre }}</option>
             </select>
           </div>
           <div class="cont_inputs">
@@ -241,11 +241,11 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import { useElaboracionSustratosStore } from "../../stores/elaboracion sustratos.js";
-import { useProcesosStore } from "../../stores/Procesos.js";
+import { useCultivosStore } from "../../stores/cultivos.js";
 import { useEmpleadosStore } from "../../stores/empleados.js";
 
 let useElaboracionSustratos = useElaboracionSustratosStore ();
-let useProcesos = useProcesosStore ();
+let useCultivos = useCultivosStore ();
 let useEmpleados = useEmpleadosStore ();
 
 let spinner = ref(false);
@@ -265,20 +265,19 @@ const cerrar = () => {
   registroFallido.value = false;
 };
 let r = null;
-let p = ref([]);
+let c = ref([]);
 let e = ref([]);
 
 let rows = ref([]);
 let columns = ref([
   {
-    name: "id_proceso",
+    name: "id_cultivo",
     label: "Proceso",
     align: "center",
     field: (row) => {
-      let proceso = p.value.proceso; 
-      proceso = proceso.find((p) => p._id == row.id_proceso);
-      return proceso.tipo;
-      
+      let cultivo = c.value.cultivo
+      cultivo = cultivo.find((c) => c._id == row.id_cultivo);
+      return cultivo.nombre;
     },
   },
   {
@@ -354,7 +353,7 @@ let columns = ref([
 let listarTodos = async () => {
   spinner.value = true;
   r = await useElaboracionSustratos.getElaboracionSustratos();
-  p.value = await useProcesos.getProcesos();
+  c.value = await useCultivos.getCultivos();
   e.value = await useEmpleados.getEmpleados();
   rows.value = r.elaboracionSustratos;
   spinner.value = false;
@@ -396,7 +395,7 @@ let cerrarForm = () => {
   vaciarCampos();
 };
 
-let procesoOption = ref("");
+let cultivoOption = ref("");
 let fecha = ref("");
 let productoComercial = ref("");
 let ingredenteActivo = ref("");
@@ -408,8 +407,8 @@ let observaciones = ref("");
 let estado = ref(1);
 
 let validaciones = () => {
-  if(procesoOption.value === "") {
- text.value = "El proceso es obligatorio";
+  if(cultivoOption.value === "") {
+ text.value = "El cultivo es obligatorio";
     registroFallido.value = true;
     ocultar();
     return false;
@@ -465,7 +464,7 @@ let validaciones = () => {
 }
 
 let vaciarCampos = () => {
-  procesoOption.value = "";
+  cultivoOption.value = "";
   fecha.value = "";
   productoComercial.value = "";
   ingredenteActivo.value = "";
@@ -476,7 +475,7 @@ let vaciarCampos = () => {
   observaciones.value = "";
 }
 
-let procesos = ref([]); 
+let cultivos = ref([]); 
 let empleados = ref([]);
 
 let variable = ref(null);
@@ -484,9 +483,9 @@ let id = ref(null);
 
 let crear = async () => {
   spinner.value = true;
-  await useProcesos.getProcesos();
+  await useCultivos.getCultivos();
   await useEmpleados.getEmpleados();
-  procesos.value = useProcesos.procesos.proceso;
+  cultivos.value = useCultivos.cultivos.cultivo;
   empleados.value = useEmpleados.empleados.empleado;
   variable.value = 0;
   formulario.value = true;
@@ -495,13 +494,13 @@ let crear = async () => {
 
 let editar = async (data) => {
   spinner.value = true;
-  await useProcesos.getProcesos();
+  await useCultivos.getCultivos();
   await useEmpleados.getEmpleados();
-  procesos.value = useProcesos.procesos.proceso;
+  cultivos.value = useCultivos.cultivos.cultivo;
   empleados.value = useEmpleados.empleados.empleado;
   variable.value = 1;
   id.value = data._id;
-  procesoOption.value = procesos.value.findIndex((p) => p._id === data.id_proceso) + 1;
+  cultivoOption.value = cultivos.value.findIndex((c) => c._id === data.id_cultivo) + 1;
   fecha.value = data.fecha.split("T")[0];
   productoComercial.value = data.productoComercial;
   ingredenteActivo.value = data.ingredienteActivo;
@@ -519,7 +518,7 @@ let enviarCrear = async () => {
     return;
   }
   let data = {
-    id_proceso: procesos.value[procesoOption.value - 1]._id,
+    id_cultivo: cultivos.value[cultivoOption.value - 1]._id,
     fecha: fecha.value,
     productoComercial: productoComercial.value,
     ingredienteActivo: ingredenteActivo.value,
@@ -544,7 +543,7 @@ let enviarEditar = async () => {
     return;
   }
   let data = {
-    id_proceso: procesos.value[procesoOption.value - 1]._id,
+    id_cultivo: cultivos.value[cultivoOption.value - 1]._id,
     fecha: fecha.value,
     productoComercial: productoComercial.value,
     ingredienteActivo: ingredenteActivo.value,

@@ -94,61 +94,69 @@
           <path
             transform="translate(503,426)"
             d="m0 0h18l15 3 12 5 13 8 13 11 449 449 4-2 453-453 14-10 12-6 14-4 7-1h18l15 3 12 5 13 8 13 11 8 10 8 13 5 13 3 15v15l-3 16-7 16-7 11-8 10h-2l-2 4-352 352h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-28 28h-2l-2 4-6 5-6 7-4 4h-2l-2 4-8 8h-2l-2 4-4 2v2h-2v2h-2l3 5 449 449 11 14 6 10 5 13 3 15v14l-3 16-5 13-8 14-9 11h-2l-1 3-13 10-16 8-16 4-7 1h-13l-13-2-10-3-12-6-11-8-457-457-4 1-8 7-5 6-7 6-5 6-7 6-5 6-7 6-5 6-7 6-5 6-6 5-6 7-6 5-6 7-6 5-6 7-6 5-6 7h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-272 272h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-12 12h-2l-2 4h-2l-1 3-13 10-16 8-16 4-7 1h-13l-13-2-15-5-13-8-12-11-10-11-8-13-6-16-2-11v-18l3-14 5-13 7-12 11-13 450-450-1-4-455-455-10-14-5-11-4-13-1-6v-19l4-18 8-16 10-14 8-8 14-10 12-6 14-4z"
-            fill="#fff"
+            fill="#000"
           />
         </svg>
         <div class="titulo_form">
           <p v-if="variable === 0" class="text_titulo_form">crear siembra</p>
           <p v-else class="text_titulo_form">editar siembra</p>
         </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">cultivo</p>
-          <select required v-model="cultivoOption">
-            <option value="" disabled selected hidden></option>
-            <option
-            v-for="(cultivo, index) in cultivos"
-            :key="cultivo._id"
-            :value="index + 1"
-            >{{ cultivo.nombre }}</option>
-          </select>
+        <div class="part1">
+          <div class="cont_inputs">
+            <p class="text_inputs">cultivo</p>
+            <select required v-model="cultivoOption">
+              <option value="" disabled selected hidden></option>
+              <option
+              v-for="(cultivo, index) in cultivos"
+              :key="cultivo._id"
+              :value="index + 1"
+              >{{ cultivo.nombre }}</option>
+            </select>
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">empleado</p>
+            <select required v-model="empleadoOption">
+              <option value="" disabled selected hidden></option>
+              <option
+              v-for="(empleado, index) in empleados"
+              :key="empleado._id"
+              :value="index + 1"
+              >{{ empleado.nombre }}</option>
+            </select>
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">fecha de siembra</p>
+            <input type="date" class="inputs" v-model="fechaSiembra">
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">fecha de cosecha</p>
+            <input type="date" class="inputs" v-model="fechaCosecha">
+          </div>
         </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">empleado</p>
-          <select required v-model="empleadoOption">
-            <option value="" disabled selected hidden></option>
-            <option
-            v-for="(empleado, index) in empleados"
-            :key="empleado._id"
-            :value="index + 1"
-            >{{ empleado.nombre }}</option>
-          </select>
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">fecha de siembra</p>
-          <input type="date" class="inputs" v-model="fechaSiembra">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">fecha de cosecha</p>
-          <input type="date" class="inputs" v-model="fechaCosecha">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">transplante</p>
-          <input type="text" class="inputs" v-model="transplante">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">cultivo anterior</p>
-          <input type="text" class="inputs" v-model="cultivoAnterior">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">inventario</p>
-          <select required v-model="inventarioOption">
-            <option value="" disabled selected hidden></option>
-            <option
-            v-for="(inventario, index) in inventarios"
-            :key="inventario._id"
-            :value="index + 1"
-            >{{ inventario.tipo }}</option>
-          </select>
+        <div class="part2">
+          <div class="cont_inputs">
+            <p class="text_inputs">transplante</p>
+            <input type="text" class="inputs" v-model="transplante">
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">cultivo anterior</p>
+            <input type="text" class="inputs" v-model="cultivoAnterior">
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">cantidad</p>
+            <input type="text" class="inputs" v-model="cantidad">
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">semilla</p>
+            <select required v-model="semillaOption">
+              <option value="" disabled selected hidden></option>
+              <option
+              v-for="(semilla, index) in semillas"
+              :key="semilla._id"
+              :value="index + 1"
+              >{{ semilla.nombre }}</option>
+            </select>
+          </div>
         </div>
         <div class="cont_btn_form">
           <button
@@ -233,12 +241,12 @@ import { onMounted, ref } from "vue";
 import { useSiembrasStore} from "../../stores/siembras.js";
 import { useCultivosStore } from "../../stores/cultivos.js";
 import { useEmpleadosStore } from "../../stores/empleados.js";
-import { useInventarioStore } from "../../stores/inventario.js";
+import { useSemillasStore } from "../../stores/Semillas.js";
 
 let useSiembras = useSiembrasStore();
 let useCultivos = useCultivosStore();
 let useEmpleados = useEmpleadosStore();
-let useInventario = useInventarioStore();
+let useSemillas = useSemillasStore();
 
 let spinner = ref(false);
 let registroFallido = ref(false);
@@ -259,7 +267,7 @@ const cerrar = () => {
 let r = null;
 let c = ref([]);
 let e = ref([]);
-let i = ref([]);
+let s = ref([]);
 
 let rows = ref([]);
 let columns = ref([
@@ -308,13 +316,19 @@ let columns = ref([
     field: "cultivoAnterior",
   },
   {
-    name: "id_inventario",
-    label: "Inventario",
+    name: "cantidad",
+    label: "Cantidad",
+    align: "center",
+    field: "cantidad",
+  },
+  {
+    name: "id_semilla",
+    label: "Semilla",
     align: "center",
     field: (row) => {
-      let inventario = i.value.inventarios;
-      inventario = inventario.find((i) => i._id == row.id_inventario);
-      return inventario.tipo;
+      let Semilla = s.value.semillas;
+      Semilla = Semilla.find((s) => s._id == row.id_semilla);
+      return Semilla.nombre;
     },
   },
   {
@@ -336,7 +350,7 @@ let listarTodos = async () => {
   r = await useSiembras.getSiembras();
   c.value = await useCultivos.getCultivos();
   e.value = await useEmpleados.getEmpleados();
-  i.value = await useInventario.getInventarios();
+  s.value = await useSemillas.getSemillas();
   rows.value = r.siembra;
   spinner.value = false;
 };
@@ -383,7 +397,8 @@ let fechaSiembra = ref("");
 let fechaCosecha = ref("");
 let transplante = ref("");
 let cultivoAnterior = ref("");
-let inventarioOption = ref("");
+let cantidad = ref("");
+let semillaOption = ref("");
 let estado = ref(1);
 
 let validaciones = () => {
@@ -423,8 +438,14 @@ let validaciones = () => {
     ocultar();
     return false;
   }
-  if(inventarioOption.value === "") {
-   text.value = "El inventario es obligatorio";
+  if(cantidad.value === "" || String(cantidad.value).trim() === "") {
+   text.value = "La cantidad es obligatoria";
+    registroFallido.value = true;
+    ocultar();
+    return false;
+  }
+  if(semillaOption.value === "") {
+   text.value = "La semilla es obligatoria";
     registroFallido.value = true;
     ocultar();
     return false;
@@ -438,12 +459,13 @@ let vaciarCampos = () => {
   fechaCosecha.value = "";
   transplante.value = "";
   cultivoAnterior.value = "";
-  inventarioOption.value = "";
+  cantidad.value = "";
+  semillaOption.value = "";
 };
 
 let cultivos = ref([]);
 let empleados = ref([]);
-let inventarios = ref([]);
+let semillas = ref([]);
 
 let variable = ref(null);
 let id = ref(null);
@@ -452,10 +474,10 @@ let crear = async () => {
   spinner.value = true;
   await useCultivos.getCultivos();
   await useEmpleados.getEmpleados();
-  await useInventario.getInventarios();
+  await useSemillas.getSemillas();
   cultivos.value = useCultivos.cultivos.cultivo;
   empleados.value = useEmpleados.empleados.empleado;
-  inventarios.value = useInventario.inventario.inventarios;
+  semillas.value = useSemillas.semillas.semillas;
   variable.value = 0;
   formulario.value = true;
   spinner.value = false;
@@ -465,10 +487,10 @@ let editar = async (data) => {
   spinner.value = true;
   await useCultivos.getCultivos();
   await useEmpleados.getEmpleados();
-  await useInventario.getInventarios();
+  await useSemillas.getSemillas();
   cultivos.value = useCultivos.cultivos.cultivo;
   empleados.value = useEmpleados.empleados.empleado;
-  inventarios.value = useInventario.inventario.inventarios;
+  semillas.value = useSemillas.semillas.semillas;
   variable.value = 1;
   id.value = data._id;
   cultivoOption.value = cultivos.value.findIndex((c) => c._id === data.id_cultivo) + 1;
@@ -477,7 +499,8 @@ let editar = async (data) => {
   fechaCosecha.value = data.fechaCosecha.split("T")[0];
   transplante.value = data.transplante;
   cultivoAnterior.value = data.cultivoAnterior;
-  inventarioOption.value = inventarios.value.findIndex((i) => i._id === data.id_inventario) + 1;
+  cantidad.value = data.cantidad;
+  semillaOption.value = semillas.value.findIndex((s) => s._id === data.id_semilla) + 1;
   formulario.value = true;
   spinner.value = false;
 }
@@ -493,7 +516,8 @@ let enviarCrear = async () => {
     fechaCosecha: fechaCosecha.value,
     transplante: transplante.value,
     cultivoAnterior: cultivoAnterior.value,
-    id_inventario: inventarios.value[inventarioOption.value - 1]._id,
+    cantidad: cantidad.value,
+    id_semilla: semillas.value[semillaOption.value - 1]._id,
     estado: estado.value
   };
   spinner.value = true;
@@ -516,7 +540,8 @@ let enviarEditar = async () => {
     fechaCosecha: fechaCosecha.value,
     transplante: transplante.value,
     cultivoAnterior: cultivoAnterior.value,
-    id_inventario: inventarios.value[inventarioOption.value - 1]._id,
+    cantidad: cantidad.value,
+    id_semilla: semillas.value[semillaOption.value - 1]._id,
     estado: estado.value
   };
   spinner.value = true;
@@ -756,6 +781,7 @@ onMounted(() => {
 .error__close path {
   fill: #71192f;
 }
+
 .cont_btns {
   display: flex;
   justify-content: center;
@@ -781,8 +807,8 @@ onMounted(() => {
 }
 
 .btn:hover {
-  background-color: #e9b27c;
-  box-shadow: 0px 15px 20px #eed37a;
+  background-color: #2e7d32;
+  box-shadow: 0px 15px 20px #61ca66;
   color: #fff;
   transform: translateY(-7px);
 }
@@ -815,16 +841,34 @@ onMounted(() => {
 
 .form {
   margin-top: 35px;
-  width: 28%;
-  height: 80%;
-  background: #e9b27c;
+  width: 50%;
+  height: 70%;
+  background: #ffffff;
   border-radius: 10px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
-  margin-right: 10px;
+}
+
+.part1 {
+  width: 50%;
+  height: 65%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-left: 10px;
+}
+
+.part2 {
+  width: 50%;
+  height: 65%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-right: 10px;
 }
 
 .cerrarForm {
@@ -837,6 +881,10 @@ onMounted(() => {
 
 .titulo_form {
   margin-top: 20px;
+  position: absolute;
+  top: 2%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .text_titulo_form {
@@ -858,18 +906,16 @@ onMounted(() => {
 /* Estilo para inputs y select */
 .inputs,
 select {
-  width: 75%;
-  padding: 10px;
+  width: 85%;
   border: none;
   outline: none;
   background: none;
-  border-bottom: 2px solid #f4f4f4;
-  transition: border-color 0.5s ease;
+  border-bottom: 1px solid #000000;
 }
 
 .inputs:focus,
 select:focus {
-  border-bottom-color: #000000;
+  border-bottom: 2px solid #2e7d32;
 }
 
 select {
@@ -884,31 +930,35 @@ select {
 }
 
 .text_inputs {
-  font-size: 12px;
+  font-size: 14px;
   text-transform: uppercase;
   font-weight: bold;
   position: absolute;
   top: 5%;
-  left: 14%;
+  left: 7%;
 }
 
 .cont_btn_form {
-  margin: 16px 0;
+  margin: 20px 0;
+  position: absolute;
+  bottom: 2%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .btn_form {
   padding: 14px 25px;
   border: none;
   border-radius: 25px;
-  font-size: 13px;
+  font-size: 14px;
   cursor: pointer;
   text-transform: uppercase;
-  box-shadow: 0px 8px 15px #0000001a;
   transition: all 0.3s ease;
-  background-color: #f6e4ab;
+  background-color: #2e7d32;
+  color: #ffffff;
 }
 
 .btn_form:hover {
-  background-color: #eed37a;
+  background-color: #589f5c;
 }
 </style>

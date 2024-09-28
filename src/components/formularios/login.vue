@@ -29,9 +29,11 @@
           Ingresar
         </button>
       </form>
-      <p class="forgot-password">
-        <a href="#" class="a2">¿Olvidaste la Contraseña?</a>
-      </p>
+      <router-link to="/RecuperarContrasena">
+        <p class="forgot-password">
+          <a href="#" class="a2">¿Olvidaste la Contraseña?</a>
+        </p>
+      </router-link>
     </div>
     <div class="cont_spinner" v-if="spinner">
       <div class="spinner"></div>

@@ -147,14 +147,14 @@
             <input type="number" class="inputs" v-model="cantidad">
           </div>
           <div class="cont_inputs">
-            <p class="text_inputs">inventario</p>
-            <select required v-model="inventarioOption">
+            <p class="text_inputs">insumo</p>
+            <select required v-model="insumoOption">
               <option value="" disabled selected hidden></option>
               <option
-              v-for="(inventario, index) in inventarios"
-              :key="inventario._id"
+              v-for="(insumo, index) in insumos"
+              :key="insumo._id"
               :value="index + 1"
-              >{{ inventario.tipo }}</option>
+              >{{ insumo.nombre }}</option>
             </select>
           </div>
         </div>
@@ -241,12 +241,12 @@ import { onMounted, ref } from "vue";
 import { useFertilizacionesStore} from "../../stores/fertilizaciones.js";
 import { useCultivosStore } from "../../stores/cultivos.js";
 import { useEmpleadosStore } from "../../stores/empleados.js";
-import { useInventarioStore } from "../../stores/inventario.js";
+import { useInsumosStore } from "../../stores/insumos.js";
 
 let useFertilizaciones = useFertilizacionesStore();
 let useCultivos = useCultivosStore();
 let useEmpleados = useEmpleadosStore();
-let useInventarios = useInventarioStore();
+let useInsumos = useInsumosStore();
 
 let spinner = ref(false);
 let registroFallido = ref(false);
@@ -323,13 +323,14 @@ let columns = ref([
     field: "cantidad",  
   },
   {
-    name: "id_inventario",
-    label: "Inventario",
+    name: "id_insumo",
+    label: "Insumo",
     align: "center",
     field: (row) => {
-      let inventario = i.value.inventarios
-      inventario = inventario.find((i) => i._id == row.id_inventario)
-      return inventario.tipo
+      let insumo = i.value.insumos
+      insumo = insumo.find((i) => i._id == row.id_insumo)
+      return insumo.nombre
+      
     },
   },
   {
@@ -351,7 +352,7 @@ let listarTodos = async () => {
   r = await useFertilizaciones.getFertilizaciones();
   c.value = await useCultivos.getCultivos();
   e.value = await useEmpleados.getEmpleados();
-  i.value = await useInventarios.getInventarios();
+  i.value = await useInsumos.getInsumos();
   rows.value = r.fertilizacion;
   spinner.value = false;
 };
@@ -399,7 +400,7 @@ let estadoFenologico = ref("");
 let tipo = ref("");
 let nombreFertilizante = ref("");
 let cantidad = ref("");
-let inventarioOption = ref("");
+let insumoOption = ref("");
 let estado = ref(1);
 
 let validaciones = () => {
@@ -445,7 +446,7 @@ let validaciones = () => {
     ocultar();
     return false;
   }
-  if(inventarioOption.value ==="") {
+  if(insumoOption.value ==="") {
     text.value = "El inventario es obligatorio";
     registroFallido.value = true;
     ocultar();
@@ -461,12 +462,12 @@ let vaciarCampos = () => {
   tipo.value = "";
   nombreFertilizante.value = "";
   cantidad.value = "";
-  inventarioOption.value = "";
+  insumoOption.value = "";
 };
 
 let cultivos = ref([]);
 let empleados = ref([]);
-let inventarios = ref([]);
+let insumos = ref([]);
 
 let variable = ref(null);
 let id = ref(null);
@@ -475,10 +476,10 @@ let crear = async () => {
   spinner.value = true;
   await useCultivos.getCultivos();
   await useEmpleados.getEmpleados();
-  await useInventarios.getInventarios();
+  await useInsumos.getInsumos();
   cultivos.value = useCultivos.cultivos.cultivo;
   empleados.value = useEmpleados.empleados.empleado;
-  inventarios.value = useInventarios.inventario.inventarios;
+  insumos.value = useInsumos.insumos.insumos;
   variable.value = 0;
   formulario.value = true;
   spinner.value = false;
@@ -488,10 +489,10 @@ let editar = async (data) => {
   spinner.value = true;
   await useCultivos.getCultivos();
   await useEmpleados.getEmpleados();
-  await useInventarios.getInventarios();
+  await useInsumos.getInsumos();
   cultivos.value = useCultivos.cultivos.cultivo;
   empleados.value = useEmpleados.empleados.empleado;
-  inventarios.value = useInventarios.inventario.inventarios;
+  insumos.value = useInsumos.insumos.insumos;
   variable.value = 1;
   id.value = data._id;
   cultivoOption.value = cultivos.value.findIndex((c) => c._id == data.id_cultivo) + 1;
@@ -501,7 +502,7 @@ let editar = async (data) => {
   tipo.value = data.tipo;
   nombreFertilizante.value = data.nombreFertilizante;
   cantidad.value = data.cantidad;
-  inventarioOption.value = inventarios.value.findIndex((i) => i._id == data.id_inventario) + 1;
+  insumoOption.value = insumos.value.findIndex((i) => i._id == data.id_insumo) + 1;
   formulario.value = true;
   spinner.value = false;
 }
@@ -518,7 +519,7 @@ let enviarCrear = async () => {
     tipo: tipo.value,
     nombreFertilizante: nombreFertilizante.value,
     cantidad: cantidad.value,
-    id_inventario: inventarios.value[inventarioOption.value - 1]._id,
+    id_insumo: insumos.value[insumoOption.value - 1]._id,
     estado: estado.value,
   };
   spinner.value = true;
@@ -542,7 +543,7 @@ let enviarEditar = async () => {
     tipo: tipo.value,
     nombreFertilizante: nombreFertilizante.value,
     cantidad: cantidad.value,
-    id_inventario: inventarios.value[inventarioOption.value - 1]._id,
+    id_insumo: insumos.value[insumoOption.value - 1]._id,
     estado: estado.value,
   };
   spinner.value = true;

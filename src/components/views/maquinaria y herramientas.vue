@@ -290,6 +290,18 @@ let columns = ref([
     field: "total",
   },
   {
+    name: "mantenimiento",
+    label: "Mantenimiento",
+    align: "center",
+    field: "mantenimiento",
+  },
+  {
+    name: "desinfeccion",
+    label: "Desinfeccion",
+    align: "center",
+    field: "desinfeccion",
+  },
+  {
     name: "estado",
     label: "Estado",
     align: "center",

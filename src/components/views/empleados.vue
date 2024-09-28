@@ -102,24 +102,39 @@
           <p v-else class="text_titulo_form">editar empleado</p>
         </div>
         <div class="cont_inputs">
+          <p class="text_inputs">finca</p>
+          <select required v-model="fincaOption">
+            <option value="" disabled selected hidden></option>
+            <option
+            v-for="(finca, index) in fincas"
+            :key="finca._id"
+            :value="index + 1"
+            >{{ finca.nombre }}</option>
+          </select>
+        </div>
+        <div class="cont_inputs">
           <p class="text_inputs">nombre</p>
-          <input type="text" class="inputs" v-model="nombre">
+          <input type="text" class="inputs" v-model="nombre" />
         </div>
         <div class="cont_inputs">
           <p class="text_inputs">direccion</p>
-          <input type="text" class="inputs" v-model="direccion">
+          <input type="text" class="inputs" v-model="direccion" />
         </div>
         <div class="cont_inputs">
           <p class="text_inputs">telefono</p>
-          <input type="text" class="inputs" v-model="telefono">
+          <input type="text" class="inputs" v-model="telefono" />
         </div>
         <div class="cont_inputs">
           <p class="text_inputs">estudios</p>
-          <input type="text" class="inputs" v-model="estudios">
+          <input type="text" class="inputs" v-model="estudios" />
         </div>
         <div class="cont_inputs">
           <p class="text_inputs">descripcion</p>
-          <input type="text" class="inputs" v-model="descripcion">
+          <input type="text" class="inputs" v-model="descripcion" />
+        </div>
+        <div class="cont_inputs">
+          <p class="text_inputs">fecha contratacion</p>
+          <input type="Date" class="inputs" v-model="fechaContratacion" />
         </div>
         <div class="cont_btn_form">
           <button
@@ -135,7 +150,7 @@
         </div>
       </div>
     </div>
-        <div :class="registroExitoso ? 'success1' : 'success'">
+    <div :class="registroExitoso ? 'success1' : 'success'">
       <div class="success__icon">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -201,9 +216,11 @@
 </template>
 <script setup>
 import { onMounted, ref } from "vue";
-import { useEmpleadosStore} from "../../stores/empleados.js";
+import { useEmpleadosStore } from "../../stores/empleados.js";
+import { useFincasStore } from "../../stores/fincas.js";
 
 let useEmpleados = useEmpleadosStore();
+let useFincas = useFincasStore();
 
 let spinner = ref(false);
 let registroFallido = ref(false);
@@ -222,9 +239,20 @@ const cerrar = () => {
   registroFallido.value = false;
 };
 let r = null;
+let f = ref([]);
 
 let rows = ref([]);
 let columns = ref([
+  {
+    name: "id_finca",
+    label: "Finca",
+    align: "center",
+    field: (row) => {
+      let finca = f.value.finca;
+      finca = finca.find((f) => f._id == row.id_finca);
+      return finca.nombre;
+    },
+  },
   {
     name: "nombre",
     label: "Nombre",
@@ -256,6 +284,12 @@ let columns = ref([
     field: "descripcion",
   },
   {
+    name: "fechaContratacion",
+    label: "Fecha Contratacion",
+    align: "center",
+    field: (row) => row.fechaContratacion.split("T")[0],
+  },
+  {
     name: "estado",
     label: "Estado",
     align: "center",
@@ -266,12 +300,13 @@ let columns = ref([
     label: "Acciones",
     align: "center",
     field: "acciones",
-  }
+  },
 ]);
 
 let listarTodos = async () => {
   spinner.value = true;
   r = await useEmpleados.getEmpleados();
+  f.value = await useFincas.getFincas();
   rows.value = r.empleado;
   spinner.value = false;
 };
@@ -312,32 +347,43 @@ let cerrarForm = () => {
   vaciarCampos();
 };
 
+let fincaOption = ref("");
 let nombre = ref("");
 let direccion = ref("");
 let telefono = ref("");
 let estudios = ref("");
 let descripcion = ref("");
+let fechaContratacion = ref("");
 let estado = ref(1);
 
 let validaciones = () => {
-  if(nombre.value === "" || nombre.value.trim() === ""){
+  if (fincaOption.value === "") {
+    text.value = "La finca es obligatoria";
+    registroFallido.value = true;
+    ocultar();
+    return false;
+  }
+  if (nombre.value === "" || nombre.value.trim() === "") {
     text.value = "El nombre es obligatorio";
     registroFallido.value = true;
     ocultar();
     return false;
   }
-  if(direccion.value === "" || direccion.value.trim() === ""){
+  if (direccion.value === "" || direccion.value.trim() === "") {
     text.value = "La dirección es obligatoria";
     registroFallido.value = true;
     ocultar();
     return false;
   }
-  if(telefono.value === "" || telefono.value.trim() === ""){
+  if (telefono.value === "" || telefono.value.trim() === "") {
     text.value = "El teléfono es obligatorio";
     registroFallido.value = true;
     ocultar();
     return false;
   }
+<<<<<<< HEAD
+  if (estudios.value === "" || estudios.value.trim() === "") {
+=======
     if (
     telefono.value === "" ||
     isNaN(telefono.value) ||
@@ -350,57 +396,80 @@ let validaciones = () => {
     return false;
   }
   if(estudios.value === "" || estudios.value.trim() === ""){
+>>>>>>> origin/David
     text.value = "Los estudios son obligatorios";
     registroFallido.value = true;
     ocultar();
     return false;
   }
-  if(descripcion.value === "" || descripcion.value.trim() === ""){
+  if (descripcion.value === "" || descripcion.value.trim() === "") {
     text.value = "La descripción es obligatoria";
     registroFallido.value = true;
     ocultar();
     return false;
   }
-}
+  if (fechaContratacion.value === "") {
+    text.value = "La fecha de contratacion es obligatoria";
+    registroFallido.value = true;
+    ocultar();
+    return false;
+  }
+};
 
 let vaciarCampos = () => {
+  fincaOption.value = "";
   nombre.value = "";
   direccion.value = "";
   telefono.value = "";
   estudios.value = "";
   descripcion.value = "";
+  fechaContratacion.value = "";
 };
+
+let fincas = ref([]);
 
 let variable = ref(null);
 let id = ref(null);
 
-let crear = () => {
+let crear = async () => {
+  spinner.value = true;
+  await useFincas.getFincas();
+  fincas.value = useFincas.fincas.finca;
+  spinner.value = false;
   variable.value = 0;
   formulario.value = true;
 };
 
-let editar = (data) => {
+let editar = async (data) => {
+  spinner.value = true;
+  await useFincas.getFincas();
+  fincas.value = useFincas.fincas.finca;
   variable.value = 1;
   id.value = data._id;
+  fincaOption.value = fincas.value.findIndex((f) => f._id == data.id_finca) + 1;
   nombre.value = data.nombre;
   direccion.value = data.direccion;
   telefono.value = data.telefono;
   estudios.value = data.estudios;
   descripcion.value = data.descripcion;
+  fechaContratacion.value = data.fechaContratacion.split("T")[0];
   formulario.value = true;
+  spinner.value = false;
 };
 
 let enviarCrear = async () => {
-  if(validaciones() === false){
+  if (validaciones() === false) {
     return;
   }
   let data = {
+    id_finca: fincas.value[fincaOption.value - 1]._id,
     nombre: nombre.value,
     direccion: direccion.value,
     telefono: telefono.value,
     estudios: estudios.value,
     descripcion: descripcion.value,
-    estado: estado.value
+    fechaContratacion: fechaContratacion.value,
+    estado: estado.value,
   };
   spinner.value = true;
   await useEmpleados.postEmpleados(data);
@@ -409,19 +478,21 @@ let enviarCrear = async () => {
   text.value = "Registro exitoso";
   registroExitoso.value = true;
   ocultar();
-}
+};
 
 let enviarEditar = async () => {
-  if(validaciones() === false){
+  if (validaciones() === false) {
     return;
   }
   let data = {
+    id_finca: fincas.value[fincaOption.value - 1]._id,
     nombre: nombre.value,
     direccion: direccion.value,
     telefono: telefono.value,
     estudios: estudios.value,
     descripcion: descripcion.value,
-    estado: estado.value
+    fechaContratacion: fechaContratacion.value,
+    estado: estado.value,
   };
   spinner.value = true;
   await useEmpleados.putEmpleados(id.value, data);
@@ -430,14 +501,14 @@ let enviarEditar = async () => {
   text.value = "Modificación exitosa";
   registroExitoso.value = true;
   ocultar();
-}
+};
 
 onMounted(() => {
   listarTodos();
 });
 </script>
 <style scoped>
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -464,7 +535,7 @@ onMounted(() => {
 .spinner {
   --size: 30px;
   --first-block-clr: #2e7d32;
-  --second-block-clr: #77DD77;
+  --second-block-clr: #77dd77;
   --clr: #111;
   width: 100px;
   height: 100px;
@@ -718,9 +789,9 @@ onMounted(() => {
 }
 
 .form {
-  margin-top: 35px;
+  margin-top: 55px;
   width: 28%;
-  height: 70%;
+  height: 85%;
   background: #ffffff;
   border-radius: 10px;
   display: flex;
@@ -758,16 +829,29 @@ onMounted(() => {
   position: relative;
 }
 
-.inputs {
-  width: 75%;
+.inputs,
+select {
+  width: 85%;
   border: none;
   outline: none;
   background: none;
   border-bottom: 1px solid #000000;
 }
 
-.inputs:focus {
+.inputs:focus,
+select:focus {
   border-bottom: 2px solid #2e7d32;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: transparent;
+  background-image: url('data:image/svg+xml;utf8,<svg version="1.1" viewBox="0 0 2048 2048" width="80" height="80" xmlns="http://www.w3.org/2000/svg"><path transform="translate(131,440)" d="m0 0h26l15 2 20 6 12 5 17 9 13 10 14 12 774 774 3 1 779-779 11-9 15-11 22-11 25-7 17-2h23l15 2 21 6 12 5 15 8 11 8 11 9 6 5 9 11 9 12 12 23 9 27h1v55h-2l-7 24-11 23-7 10-9 11-11 12-878 878-10 8-11 8-12 7-16 7-21 6-24 3h-12l-20-2-27-8-23-12-14-11-13-11-880-880-9-11-9-12-10-18-5-13-5-18-2-2v-50l3-9 6-19 5-12 9-16 13-16 9-10 10-8 11-8 18-10 19-7 18-4z" fill="%23FFFFFF"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
 }
 
 .text_inputs {
@@ -776,9 +860,8 @@ onMounted(() => {
   font-weight: bold;
   position: absolute;
   top: 5%;
-  left: 12%;
+  left: 8%;
 }
-
 
 .cont_btn_form {
   margin: 20px 0;
@@ -788,7 +871,7 @@ onMounted(() => {
   padding: 14px 25px;
   border: none;
   border-radius: 25px;
-  font-size: 14px;  
+  font-size: 14px;
   cursor: pointer;
   text-transform: uppercase;
   transition: all 0.3s ease;

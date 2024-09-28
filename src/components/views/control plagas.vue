@@ -334,13 +334,13 @@ let columns = ref([
     field: "dosis",
   },
   {
-    name: "id_empleado",
+    name: "id_operario",
     label: "Empleado Operador",
     align: "center",
     field: (row) => {
-      let empleado = e.value.empleado
-      empleado = empleado.find((e) => e._id == row.id_empleado);
-      return empleado.nombre;
+      let operario = e.value.empleado
+      operario = operario.find((e) => e._id == row.id_empleado);
+      return operario.nombre;
     },
   },
   {
@@ -529,7 +529,7 @@ let editar = async (data) => {
   tipo.value = data.tipo;
   ingredienteActivo.value = data.ingredienteActivo;
   dosis.value = data.dosis;
-  empleadoOperadorOption.value = empleados.value.findIndex((e) => e._id == data.id_empleado) + 1;
+  empleadoOperadorOption.value = empleados.value.findIndex((e) => e._id == data.id_operario) + 1;
   observaciones.value = data.observaciones;
   formulario.value = true;
   spinner.value = false;
@@ -548,7 +548,7 @@ let enviarCrear = async () => {
     tipo: tipo.value,
     ingredienteActivo: ingredienteActivo.value,
     dosis: dosis.value,
-    id_empleado_operador: empleados.value[empleadoOperadorOption.value - 1]._id,
+    id_operario: empleados.value[empleadoOperadorOption.value - 1]._id,
     observaciones: observaciones.value,
     estado: estado.value,
   }
@@ -574,7 +574,7 @@ let enviarEditar = async () => {
     tipo: tipo.value,
     ingredienteActivo: ingredienteActivo.value,
     dosis: dosis.value,
-    id_empleado_operador: empleados.value[empleadoOperadorOption.value - 1]._id,
+    id_operario: empleados.value[empleadoOperadorOption.value - 1]._id,
     observaciones: observaciones.value,
     estado: estado.value,
   }
