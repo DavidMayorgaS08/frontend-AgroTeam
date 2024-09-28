@@ -73,12 +73,6 @@
       <div class="cards13" @click="insumos()">
         <p class="text_card">Insumos</p>
       </div>
-      <div class="cards14" @click="inventarios()">
-        <p class="text_card">Inventarios</p>
-      </div>
-      <div class="cards15" @click="mantenimientos()">
-        <p class="text_card">Mantenimientos</p>
-      </div>
       <div class="cards16" @click="maquinariasHerramientas()">
         <p class="text_card">Maquinaria y herramientas</p>
       </div>
@@ -133,19 +127,17 @@
         <button class="btn" @click="finca()">Fincas</button>
         <button class="btn" @click="gasto()">Gastos</button>
         <button class="btn" @click="insumo()">Insumos</button>
-        <button class="btn" @click="inventario()">Inventarios</button>
-        <button class="btn" @click="mantenimiento()">Mantenimientos</button>
-      </div>
-      <div>
         <button class="btn" @click="maquinariaHerramienta()">Maquinaria y Herramientas</button>
         <button class="btn" @click="nomina()">Nominas</button>
+      </div>
+      <div>
         <button class="btn" @click="parcela()">Parcelas</button>
         <button class="btn" @click="preparacionSuelo()">Preparación Suelos</button>
         <button class="btn" @click="proceso()">Procesos</button>
-      </div>
-      <div>
         <button class="btn" @click="produccion()">Producciones</button>
         <button class="btn" @click="proveedor()">Proveedores</button>
+      </div>
+      <div>
         <button class="btn" @click="riego()">Riegos</button>
         <button class="btn" @click="semilla()">Semillas</button>
         <button class="btn" @click="siembra()">Siembras</button>
@@ -691,36 +683,6 @@ let cerrarSesion = () => {
     background-size: cover;
   }
 
-  .cards14 {
-    background-color: #ffffff;
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    position: relative;
-    transition: all 0.2s ease-in-out;
-    background-image: url("src/img/inventario.webp");
-    background-position: center;
-    background-size: cover;
-  }
-
-  .cards15 {
-    background-color: #ffffff;
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    position: relative;
-    transition: all 0.2s ease-in-out;
-    background-image: url("src/img/mantenimientos.jpg");
-    background-position: center;
-    background-size: cover;
-  }
-
   .cards16 {
     background-color: #ffffff;
     width: 100%;
@@ -905,8 +867,6 @@ let cerrarSesion = () => {
 .cards11:hover .text_card,
 .cards12:hover .text_card,
 .cards13:hover .text_card,
-.cards14:hover .text_card,
-.cards15:hover .text_card,
 .cards16:hover .text_card,
 .cards17:hover .text_card,
 .cards18:hover .text_card,
@@ -1018,7 +978,7 @@ let cerrarSesion = () => {
 .cont {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 30px;
   padding: 20px 5%;
   margin-top: 70px;
@@ -1169,6 +1129,8 @@ let cerrarSesion = () => {
 }
 .cont_menu_lateral {
   grid-template-columns: repeat(2, 1fr);
+  overflow-y: auto;
+  height: calc(100vh - 70px);
 }
 .cont_perfil_desplegable {
   width: 20%;

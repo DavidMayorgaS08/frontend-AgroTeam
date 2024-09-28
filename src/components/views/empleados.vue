@@ -381,22 +381,7 @@ let validaciones = () => {
     ocultar();
     return false;
   }
-<<<<<<< HEAD
   if (estudios.value === "" || estudios.value.trim() === "") {
-=======
-    if (
-    telefono.value === "" ||
-    isNaN(telefono.value) ||
-    telefono.value < 0 ||
-    telefono.value.length < 10
-  ) {
-    text.value = "El teléfono es debe tener al menos 10 caracteres";
-    registroFallido.value = true;
-    ocultar();
-    return false;
-  }
-  if(estudios.value === "" || estudios.value.trim() === ""){
->>>>>>> origin/David
     text.value = "Los estudios son obligatorios";
     registroFallido.value = true;
     ocultar();
