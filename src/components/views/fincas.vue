@@ -94,55 +94,81 @@
           <path
             transform="translate(503,426)"
             d="m0 0h18l15 3 12 5 13 8 13 11 449 449 4-2 453-453 14-10 12-6 14-4 7-1h18l15 3 12 5 13 8 13 11 8 10 8 13 5 13 3 15v15l-3 16-7 16-7 11-8 10h-2l-2 4-352 352h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-28 28h-2l-2 4-6 5-6 7-4 4h-2l-2 4-8 8h-2l-2 4-4 2v2h-2v2h-2l3 5 449 449 11 14 6 10 5 13 3 15v14l-3 16-5 13-8 14-9 11h-2l-1 3-13 10-16 8-16 4-7 1h-13l-13-2-10-3-12-6-11-8-457-457-4 1-8 7-5 6-7 6-5 6-7 6-5 6-7 6-5 6-7 6-5 6-6 5-6 7-6 5-6 7-6 5-6 7-6 5-6 7h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-272 272h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-12 12h-2l-2 4h-2l-1 3-13 10-16 8-16 4-7 1h-13l-13-2-15-5-13-8-12-11-10-11-8-13-6-16-2-11v-18l3-14 5-13 7-12 11-13 450-450-1-4-455-455-10-14-5-11-4-13-1-6v-19l4-18 8-16 10-14 8-8 14-10 12-6 14-4z"
-            fill="#fff"
+            fill="#000"
           />
         </svg>
+<<<<<<< HEAD
+        <div class="part1">
+          <div class="titulo_form">
+            <p v-if="variable === 0" class="text_titulo_form">crear</p>
+            <p v-else class="text_titulo_form">editar</p>
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">administrador</p>
+            <select required v-model="adminOption">
+              <option value="" disabled selected hidden></option>
+              <option
+              v-for="(admin, index) in administradores"
+              :key="admin._id"
+              :value="index + 1"
+              >{{ admin.nombre }}</option>
+            </select>
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">nombre</p>
+            <input type="text" class="inputs" v-model="nombre">
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">rut</p>
+            <input type="text" class="inputs" v-model="rut">
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">direccion</p>
+            <input type="text" class="inputs" v-model="direccion">
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">ubicacion geografica</p>
+            <input type="text" class="inputs" v-model="ubicacionGeografica">
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">area</p>
+            <input type="text" class="inputs" v-model="area">
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">ciudad</p>
+            <input type="text" class="inputs" v-model="ciudad">
+          </div>
+=======
         <div class="titulo_form">
           <p v-if="variable === 0" class="text_titulo_form">crear finca</p>
           <p v-else class="text_titulo_form">editar finca</p>
+>>>>>>> origin/David
         </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">administrador</p>
-          <select required v-model="adminOption">
-            <option value="" disabled selected hidden></option>
-            <option
-            v-for="(admin, index) in administradores"
-            :key="admin._id"
-            :value="index + 1"
-            >{{ admin.nombre }}</option>
-          </select>
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">nombre</p>
-          <input type="text" class="inputs" v-model="nombre">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">rut</p>
-          <input type="text" class="inputs" v-model="rut">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">direccion</p>
-          <input type="text" class="inputs" v-model="direccion">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">ubicacion geografica</p>
-          <input type="text" class="inputs" v-model="ubicacionGeografica">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">limites predios</p>
-          <input type="text" class="inputs" v-model="limitesPredios">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">area</p>
-          <input type="text" class="inputs" v-model="area">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">departamento</p>
-          <input type="text" class="inputs" v-model="departamento">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">ciudad</p>
-          <input type="text" class="inputs" v-model="ciudad">
+        <div class="part2">
+          <div class="cont_inputs">
+            <p class="text_inputs">documentos</p>
+            <input type="text" class="inputs" v-model="documentos">
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">departamento</p>
+            <input type="text" class="inputs" v-model="departamento">
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">limite norte</p>
+            <input type="text" class="inputs" v-model="limiteNorte">
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">limite sur</p>
+            <input type="text" class="inputs" v-model="limiteSur">
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">limite este</p>
+            <input type="text" class="inputs" v-model="limiteEste">
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">limite oeste</p>
+            <input type="text" class="inputs" v-model="limiteOeste">
+          </div>
         </div>
         <div class="cont_btn_form">
           <button
@@ -287,12 +313,6 @@ let columns = ref([
     field: "ubicacionGeografica",
   },
   {
-    name: "limitesPredios",
-    label: "Limites Predios",
-    align: "center",
-    field: "limitesPredios",
-  },
-  {
     name: "area",
     label: "Area",
     align: "center",
@@ -303,6 +323,12 @@ let columns = ref([
     label: "Ciudad",
     align: "center",
     field: "ciudad",
+  },
+  {
+    name: "documentos",
+    label: "Documentos",
+    align: "center",
+    field: "documentos",
   },
   {
     name: "departamento",
@@ -376,7 +402,12 @@ let ubicacionGeografica = ref("");
 let limitesPredios = ref("");
 let area = ref("");
 let ciudad = ref("");
+let documentos = ref("");
 let departamento = ref("");
+let limiteNorte = ref("");
+let limiteSur = ref("");
+let limiteEste = ref("");
+let limiteOeste = ref("");
 let estado = ref(1);
 
 let validaciones = () => {
@@ -410,14 +441,14 @@ let validaciones = () => {
     ocultar();
     return false;
   }
-  if(limitesPredios.value === "" || limitesPredios.value.trim() === ""){
-    text.value = "El limite del predio es obligatorio";
+  if(area.value === "" || String(area.value).trim() === ""){
+    text.value = "El área es obligatorio";
     registroFallido.value = true;
     ocultar();
     return false;
   }
-  if(area.value === "" || String(area.value).trim() === ""){
-    text.value = "El área es obligatorio";
+  if (isNaN(area.value)) {
+    text.value = "El área debe ser un valor numérico";
     registroFallido.value = true;
     ocultar();
     return false;
@@ -428,8 +459,38 @@ let validaciones = () => {
     ocultar();
     return false;
   }
+  if(documentos.value === "" || documentos.value.trim() === ""){
+    text.value = "Los documentos son obligatorios";
+    registroFallido.value = true;
+    ocultar();
+    return false;
+  }
   if(departamento.value === "" || departamento.value.trim() === ""){
     text.value = "El departamento es obligatorio";
+    registroFallido.value = true;
+    ocultar();
+    return false;
+  }
+  if(limiteNorte.value === "" || limiteNorte.value.trim() === ""){
+    text.value = "El limite norte es obligatorio";
+    registroFallido.value = true;
+    ocultar();
+    return false;
+  }
+  if(limiteSur.value === "" || limiteSur.value.trim() === ""){
+    text.value = "El limite sur es obligatorio";
+    registroFallido.value = true;
+    ocultar();
+    return false;
+  }
+  if(limiteEste.value === "" || limiteEste.value.trim() === ""){
+    text.value = "El limite este es obligatorio";
+    registroFallido.value = true;
+    ocultar();
+    return false;
+  }
+  if(limiteOeste.value === "" || limiteOeste.value.trim() === ""){
+    text.value = "El limite oeste es obligatorio";
     registroFallido.value = true;
     ocultar();
     return false;
@@ -442,10 +503,14 @@ let vaciarCampos = () => {
   rut.value = "";
   direccion.value = "";
   ubicacionGeografica.value = "";
-  limitesPredios.value = "";
   area.value = "";
   ciudad.value = "";
+  documentos.value = "";
   departamento.value = "";
+  limiteNorte.value = "";
+  limiteSur.value = "";
+  limiteEste.value = "";
+  limiteOeste.value = "";
 };
 
 let administradores = ref([]);
@@ -473,10 +538,14 @@ let editar = async (data) => {
   rut.value = data.rut;
   direccion.value = data.direccion;
   ubicacionGeografica.value = data.ubicacionGeografica;
-  limitesPredios.value = data.limitesPredios;
   area.value = data.area;
   ciudad.value = data.ciudad;
+  documentos.value = data.documentos;
   departamento.value = data.departamento;
+  limiteNorte.value = data.limites[0].norte;
+  limiteSur.value = data.limites[0].sur;
+  limiteEste.value = data.limites[0].este;
+  limiteOeste.value = data.limites[0].oeste;
   formulario.value = true;
   spinner.value = false;
 }
@@ -491,10 +560,16 @@ let enviarCrear = async () => {
     rut: rut.value,
     direccion: direccion.value,
     ubicacionGeografica: ubicacionGeografica.value,
-    limitesPredios: limitesPredios.value,
     area: area.value,
     ciudad: ciudad.value,
+    documentos: documentos.value,
     departamento: departamento.value,
+    limites: [{
+      norte: limiteNorte.value,
+      sur: limiteSur.value,
+      este: limiteEste.value,
+      oeste: limiteOeste.value
+    }],
     estado: estado.value
   };
   spinner.value = true;
@@ -516,10 +591,16 @@ let enviarEditar = async () => {
     rut: rut.value,
     direccion: direccion.value,
     ubicacionGeografica: ubicacionGeografica.value,
-    limitesPredios: limitesPredios.value,
     area: area.value,
     ciudad: ciudad.value,
+    documentos: documentos.value,
     departamento: departamento.value,
+    limites: [{
+      norte: limiteNorte.value,
+      sur: limiteSur.value,
+      este: limiteEste.value,
+      oeste: limiteOeste.value
+    }],
     estado: estado.value
   };
   spinner.value = true;
@@ -758,6 +839,7 @@ onMounted(() => {
 .error__close path {
   fill: #71192f;
 }
+
 .cont_btns {
   display: flex;
   justify-content: center;
@@ -783,8 +865,8 @@ onMounted(() => {
 }
 
 .btn:hover {
-  background-color: #e9b27c;
-  box-shadow: 0px 15px 20px #eed37a;
+  background-color: #2e7d32;
+  box-shadow: 0px 15px 20px #61ca66;
   color: #fff;
   transform: translateY(-7px);
 }
@@ -816,17 +898,35 @@ onMounted(() => {
 }
 
 .form {
-  margin-top: 35px;
-  width: 28%;
-  height: 80%;
-  background: #e9b27c;
+  margin-top: 45px;
+  width: 55%;
+  height: 85%;
+  background: #ffffff;
   border-radius: 10px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
-  margin-right: 10px;
+}
+
+.part1 {
+  width: 50%;
+  height: 75%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-left: 10px;
+}
+
+.part2 {
+  width: 50%;
+  height: 75%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-right: 10px;
 }
 
 .cerrarForm {
@@ -839,6 +939,10 @@ onMounted(() => {
 
 .titulo_form {
   margin-top: 20px;
+  position: absolute;
+  top: 2%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .text_titulo_form {
@@ -860,18 +964,16 @@ onMounted(() => {
 /* Estilo para inputs y select */
 .inputs,
 select {
-  width: 75%;
-  padding: 10px;
+  width: 85%;
   border: none;
   outline: none;
   background: none;
-  border-bottom: 2px solid #f4f4f4;
-  transition: border-color 0.5s ease;
+  border-bottom: 1px solid #000000;
 }
 
 .inputs:focus,
 select:focus {
-  border-bottom-color: #000000;
+  border-bottom: 2px solid #2e7d32;
 }
 
 select {
@@ -886,31 +988,35 @@ select {
 }
 
 .text_inputs {
-  font-size: 12px;
+  font-size: 14px;
   text-transform: uppercase;
   font-weight: bold;
   position: absolute;
   top: 5%;
-  left: 14%;
+  left: 7%;
 }
 
 .cont_btn_form {
-  margin: 16px 0;
+  margin: 20px 0;
+  position: absolute;
+  bottom: 2%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .btn_form {
   padding: 14px 25px;
   border: none;
   border-radius: 25px;
-  font-size: 13px;
+  font-size: 14px;
   cursor: pointer;
   text-transform: uppercase;
-  box-shadow: 0px 8px 15px #0000001a;
   transition: all 0.3s ease;
-  background-color: #f6e4ab;
+  background-color: #2e7d32;
+  color: #ffffff;
 }
 
 .btn_form:hover {
-  background-color: #eed37a;
+  background-color: #589f5c;
 }
 </style>

@@ -235,14 +235,14 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import { useGastosStore} from "../../stores/gastos.js";
+import { useFincasStore } from "../../stores/fincas.js";
 import { useInsumosStore } from "../../stores/insumos.js";
-import { useSemillasStore } from "../../stores/Semillas.js";
-import { useMantenimientosStore } from "../../stores/mantenimientos.js";
+import { useSemillasStore } from "../../stores/Semillas.js"; 
 
 let useGastos = useGastosStore();
+let useFincas = useFincasStore();
 let useInsumos = useInsumosStore();
 let useSemillas = useSemillasStore();
-let useMantenimientos = useMantenimientosStore();
 
 let spinner = ref(false);
 let registroFallido = ref(false);
@@ -261,12 +261,23 @@ const cerrar = () => {
   registroFallido.value = false;
 };
 let r = null;
+let f = ref([]);
 let i = ref([]);
 let s = ref([]);
 let m = ref([]);
 
 let rows = ref([]);
 let columns = ref([
+{
+    name: "id_finca",
+    label: "Finca",
+    align: "center",
+    field: (row) => {
+      let finca = f.value.finca;
+      finca = finca.find((f) => f._id == row.id_finca);
+      return finca.nombre;
+    },
+  },
   {
     name: "nombre",
     label: "Nombre",
@@ -298,34 +309,16 @@ let columns = ref([
     field: "total",
   },
   {
-    name: "id_insumo",
+    name: "insumos",
     label: "Insumo",
     align: "center",
-    field: (row) => {
-      let insumo = i.value.insumos
-      insumo = insumo.find((i) => i._id === row.id_insumo);
-      return insumo.nombre;
-    },
+    field: "insumos"
   },
   {
-    name: "id_semillas",
+    name: "semillas",
     label: "Semillas",
     align: "center",
-    field: (row) => {
-      let semilla = s.value.semillas
-      semilla = semilla.find((s) => s._id === row.id_semillas);
-      return semilla.especieVariedad;
-    },
-  },
-  {
-    name: "id_mantenimiento",
-    label: "Mantenimiento",
-    align: "center",
-    field: (row) => {
-      let mantenimiento = m.value.mantenimiento
-      mantenimiento = mantenimiento.find((m) => m._id === row.id_mantenimiento);
-      return mantenimiento.fecha.split("T")[0];
-    },
+    field: "semillas"
   },
   {
     name: "estado",
@@ -344,9 +337,9 @@ let columns = ref([
 let listarTodos = async () => {
   spinner.value = true;
   r = await useGastos.getGastos();
+  f.value = await useFincas.getFincas();
   i.value = await useInsumos.getInsumos();
   s.value = await useSemillas.getSemillas();
-  m.value = await useMantenimientos.getMantenimientos();
   rows.value = r.gasto;
   spinner.value = false;
 };

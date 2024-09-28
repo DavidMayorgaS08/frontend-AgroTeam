@@ -94,53 +94,57 @@
           <path
             transform="translate(503,426)"
             d="m0 0h18l15 3 12 5 13 8 13 11 449 449 4-2 453-453 14-10 12-6 14-4 7-1h18l15 3 12 5 13 8 13 11 8 10 8 13 5 13 3 15v15l-3 16-7 16-7 11-8 10h-2l-2 4-352 352h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-28 28h-2l-2 4-6 5-6 7-4 4h-2l-2 4-8 8h-2l-2 4-4 2v2h-2v2h-2l3 5 449 449 11 14 6 10 5 13 3 15v14l-3 16-5 13-8 14-9 11h-2l-1 3-13 10-16 8-16 4-7 1h-13l-13-2-10-3-12-6-11-8-457-457-4 1-8 7-5 6-7 6-5 6-7 6-5 6-7 6-5 6-7 6-5 6-6 5-6 7-6 5-6 7-6 5-6 7-6 5-6 7h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-272 272h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-12 12h-2l-2 4h-2l-1 3-13 10-16 8-16 4-7 1h-13l-13-2-15-5-13-8-12-11-10-11-8-13-6-16-2-11v-18l3-14 5-13 7-12 11-13 450-450-1-4-455-455-10-14-5-11-4-13-1-6v-19l4-18 8-16 10-14 8-8 14-10 12-6 14-4z"
-            fill="#fff"
+            fill="#000"
           />
         </svg>
         <div class="titulo_form">
           <p v-if="variable === 0" class="text_titulo_form">crear insumo</p>
           <p v-else class="text_titulo_form">editar insumo</p>
         </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">proveedor</p>
-          <select required v-model="proveedorOption">
-            <option value="" disabled selected hidden></option>
-            <option
-              v-for="(proveedor, index) in proveedores"
-              :key="proveedor._id"
-              :value="index + 1"
-            >
-              {{ proveedor.nombre }}
-            </option>
-          </select>
+        <div class="part1">
+          <div class="cont_inputs">
+            <p class="text_inputs">finca</p>
+            <select required v-model="fincaOption">
+              <option value="" disabled selected hidden></option>
+              <option
+                v-for="(finca, index) in fincas"
+                :key="finca._id"
+                :value="index + 1"
+              >
+                {{ finca.nombre }}
+              </option>
+            </select>
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">nombre</p>
+            <input type="text" class="inputs" v-model="nombre" />
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">registro ICA</p>
+            <input type="text" class="inputs" v-model="registroICA" />
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">registro Invima</p>
+            <input type="text" class="inputs" v-model="registroInvima" />
+          </div>
         </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">nombre</p>
-          <input type="text" class="inputs" v-model="nombre" />
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">relacion NPK</p>
-          <input type="text" class="inputs" v-model="relacionNPK" />
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">cantidad</p>
-          <input type="text" class="inputs" v-model="cantidad" />
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">unidad</p>
-          <input type="text" class="inputs" v-model="unidad" />
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">responsable</p>
-          <input type="text" class="inputs" v-model="responsable" />
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">observaciones</p>
-          <input type="text" class="inputs" v-model="observaciones" />
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">total</p>
-          <input type="text" class="inputs" v-model="total" />
+        <div class="part2">
+          <div class="cont_inputs">
+            <p class="text_inputs">relacion NPK</p>
+            <input type="text" class="inputs" v-model="relacionNPK" />
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">cantidad</p>
+            <input type="text" class="inputs" v-model="cantidad" />
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">unidad</p>
+            <input type="text" class="inputs" v-model="unidad" />
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">observaciones</p>
+            <input type="text" class="inputs" v-model="observaciones" />
+          </div>
         </div>
         <div class="cont_btn_form">
           <button
@@ -223,10 +227,10 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import { useInsumosStore } from "../../stores/insumos.js";
-import { useProveedoresStore } from "../../stores/Proveedores.js";
+import { useFincasStore } from "../../stores/fincas.js";
 
 let useInsumos = useInsumosStore();
-let useProveedores = useProveedoresStore();
+let useFincas = useFincasStore();
 
 let spinner = ref(false);
 let registroFallido = ref(false);
@@ -245,18 +249,18 @@ const cerrar = () => {
   registroFallido.value = false;
 };
 let r = null;
-let p = ref([]);
+let f = ref([]);
 
 let rows = ref([]);
 let columns = ref([
   {
-    name: "id_proveedor",
-    label: "Proveedor",
+    name: "id_finca",
+    label: "Finca",
     align: "center",
     field: (row) => {
-      let proveedor = p.value.proveedor;
-      proveedor = proveedor.find((p) => p._id == row.id_proveedor);
-      return proveedor.nombre;
+      let finca = f.value.finca;
+      finca = finca.find((f) => f._id === row.id_finca);
+      return finca.nombre;
     },
   },
   {
@@ -264,6 +268,18 @@ let columns = ref([
     label: "Nombre",
     align: "center",
     field: "nombre",
+  },
+  {
+    name: "registroICA",
+    label: "Registro ICA",
+    align: "center",
+    field: "registroICA",
+  },
+  {
+    name: "registroInvima",
+    label: "Registro Invima",
+    align: "center",
+    field: "registroInvima",
   },
   {
     name: "relacionNPK",
@@ -284,16 +300,10 @@ let columns = ref([
     field: "unidad",
   },
   {
-    name: "responsable",
-    label: "Responsable",
+    name: "observaciones",
+    label: "Observaciones",
     align: "center",
-    field: "responsable",
-  },
-  {
-    name: "total",
-    label: "Total",
-    align: "center",
-    field: "total",
+    field: "observaciones",
   },
   {
     name: "estado",
@@ -312,7 +322,7 @@ let columns = ref([
 let listarTodos = async () => {
   spinner.value = true;
   r = await useInsumos.getInsumos();
-  p.value = await useProveedores.getProveedores();
+  f.value = await useFincas.getFincas();
   rows.value = r.insumos;
   spinner.value = false;
 };
@@ -353,25 +363,37 @@ let cerrarForm = () => {
   vaciarCampos();
 };
 
-let proveedorOption = ref("");
+let fincaOption = ref("");
 let nombre = ref("");
+let registroICA = ref("");
+let registroInvima = ref("");
 let relacionNPK = ref("");
 let cantidad = ref("");
 let unidad = ref("");
-let responsable = ref("");
 let observaciones = ref("");
-let total = ref("");
 let estado = ref(1);
 
 let validaciones = () => {
-  if (proveedorOption.value === "") {
-    text.value = "El proveedor es obligatorio";
+  if (fincaOption.value === "") {
+    text.value = "La finca es obligatoria";
     registroFallido.value = true;
     ocultar();
     return false;
   }
   if (nombre.value === "" || nombre.value.trim() === "") {
     text.value = "El nombre es obligatorio";
+    registroFallido.value = true;
+    ocultar();
+    return false;
+  }
+  if (registroICA.value === "" || registroICA.value.trim() === "") {
+    text.value = "El registro ICA es obligatorio";
+    registroFallido.value = true;
+    ocultar();
+    return false;
+  }
+  if (registroInvima.value === "" || registroInvima.value.trim() === "") {
+    text.value = "El registro Invima es obligatorio";
     registroFallido.value = true;
     ocultar();
     return false;
@@ -394,20 +416,8 @@ let validaciones = () => {
     ocultar();
     return false;
   }
-  if (responsable.value === "" || responsable.value.trim() === "") {
-    text.value = "El responsable es obligatorio";
-    registroFallido.value = true;
-    ocultar();
-    return false;
-  }
   if (observaciones.value === "" || observaciones.value.trim() === "") {
     text.value = "Las observaciones son obligatorias";
-    registroFallido.value = true;
-    ocultar();
-    return false;
-  }
-  if (total.value === "" || String(total.value).trim() === "") {
-    text.value = "El total es obligatorio";
     registroFallido.value = true;
     ocultar();
     return false;
@@ -415,25 +425,25 @@ let validaciones = () => {
 };
 
 let vaciarCampos = () => {
-  proveedorOption.value = "";
+  fincaOption.value = "";
   nombre.value = "";
+  registroICA.value = "";
+  registroInvima.value = "";
   relacionNPK.value = "";
   cantidad.value = "";
   unidad.value = "";
-  responsable.value = "";
   observaciones.value = "";
-  total.value = "";
 };
 
-let proveedores = ref([]);
+let fincas = ref([]);
 
 let variable = ref(null);
 let id = ref(null);
 
 let crear = async () => {
   spinner.value = true;
-  await useProveedores.getProveedores();
-  proveedores.value = useProveedores.proveedores.proveedor;
+  await useFincas.getFincas();
+  fincas.value = useFincas.fincas.finca;
   variable.value = 0;
   formulario.value = true;
   spinner.value = false;
@@ -441,19 +451,18 @@ let crear = async () => {
 
 let editar = async (data) => {
   spinner.value = true;
-  await useProveedores.getProveedores();
-  proveedores.value = useProveedores.proveedores.proveedor;
+  await useFincas.getFincas();
+  fincas.value = useFincas.fincas.finca;
   variable.value = 1;
   id.value = data._id;
-  proveedorOption.value =
-    proveedores.value.findIndex((p) => p._id == data.id_proveedor) + 1;
+  fincaOption.value = fincas.value.findIndex((f) => f._id === data.id_finca) + 1;
   nombre.value = data.nombre;
+  registroICA.value = data.registroICA;
+  registroInvima.value = data.registroInvima;
   relacionNPK.value = data.relacionNPK;
   cantidad.value = data.cantidad;
   unidad.value = data.unidad;
-  responsable.value = data.responsable;
   observaciones.value = data.observaciones;
-  total.value = data.total;
   formulario.value = true;
   spinner.value = false;
 };
@@ -463,14 +472,14 @@ let enviarCrear = async () => {
     return;
   }
   let data = {
-    id_proveedor: proveedores.value[proveedorOption.value - 1]._id,
+    id_finca: fincas.value[fincaOption.value - 1]._id,
     nombre: nombre.value,
+    registroICA: registroICA.value,
+    registroInvima: registroInvima.value,
     relacionNPK: relacionNPK.value,
     cantidad: cantidad.value,
     unidad: unidad.value,
-    responsable: responsable.value,
     observaciones: observaciones.value,
-    total: total.value,
     estado: estado.value,
   };
   spinner.value = true;
@@ -487,14 +496,14 @@ let enviarEditar = async () => {
     return;
   }
   let data = {
-    id_proveedor: proveedores.value[proveedorOption.value - 1]._id,
+    id_finca: fincas.value[fincaOption.value - 1]._id,
     nombre: nombre.value,
+    registroICA: registroICA.value,
+    registroInvima: registroInvima.value,
     relacionNPK: relacionNPK.value,
     cantidad: cantidad.value,
     unidad: unidad.value,
-    responsable: responsable.value,
     observaciones: observaciones.value,
-    total: total.value,
     estado: estado.value,
   };
   spinner.value = true;
@@ -734,6 +743,7 @@ onMounted(() => {
 .error__close path {
   fill: #71192f;
 }
+
 .cont_btns {
   display: flex;
   justify-content: center;
@@ -759,8 +769,8 @@ onMounted(() => {
 }
 
 .btn:hover {
-  background-color: #e9b27c;
-  box-shadow: 0px 15px 20px #eed37a;
+  background-color: #2e7d32;
+  box-shadow: 0px 15px 20px #61ca66;
   color: #fff;
   transform: translateY(-7px);
 }
@@ -793,16 +803,34 @@ onMounted(() => {
 
 .form {
   margin-top: 35px;
-  width: 28%;
-  height: 80%;
-  background: #e9b27c;
+  width: 50%;
+  height: 70%;
+  background: #ffffff;
   border-radius: 10px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
-  margin-right: 10px;
+}
+
+.part1 {
+  width: 50%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-left: 10px;
+}
+
+.part2 {
+  width: 50%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-right: 10px;
 }
 
 .cerrarForm {
@@ -815,6 +843,10 @@ onMounted(() => {
 
 .titulo_form {
   margin-top: 20px;
+  position: absolute;
+  top: 2%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .text_titulo_form {
@@ -836,18 +868,16 @@ onMounted(() => {
 /* Estilo para inputs y select */
 .inputs,
 select {
-  width: 75%;
-  padding: 10px;
+  width: 85%;
   border: none;
   outline: none;
   background: none;
-  border-bottom: 2px solid #f4f4f4;
-  transition: border-color 0.5s ease;
+  border-bottom: 1px solid #000000;
 }
 
 .inputs:focus,
 select:focus {
-  border-bottom-color: #000000;
+  border-bottom: 2px solid #2e7d32;
 }
 
 select {
@@ -862,31 +892,35 @@ select {
 }
 
 .text_inputs {
-  font-size: 12px;
+  font-size: 14px;
   text-transform: uppercase;
   font-weight: bold;
   position: absolute;
   top: 5%;
-  left: 14%;
+  left: 7%;
 }
 
 .cont_btn_form {
-  margin: 16px 0;
+  margin: 20px 0;
+  position: absolute;
+  bottom: 2%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .btn_form {
   padding: 14px 25px;
   border: none;
   border-radius: 25px;
-  font-size: 13px;
+  font-size: 14px;
   cursor: pointer;
   text-transform: uppercase;
-  box-shadow: 0px 8px 15px #0000001a;
   transition: all 0.3s ease;
-  background-color: #f6e4ab;
+  background-color: #2e7d32;
+  color: #ffffff;
 }
 
 .btn_form:hover {
-  background-color: #eed37a;
+  background-color: #589f5c;
 }
 </style>

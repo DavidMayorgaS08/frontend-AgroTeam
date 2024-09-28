@@ -140,8 +140,8 @@
             <input type="text" class="inputs" v-model="NroGuiaTransporte">
           </div>
           <div class="cont_inputs">
-            <p class="text_inputs">Nro Lote Comecial</p>
-            <input type="text" class="inputs" v-model="NroLoteComecial">
+            <p class="text_inputs">Valor</p>
+            <input type="text" class="inputs" v-model="valor">
           </div>
         </div>
         <div class="cont_btn_form">
@@ -299,10 +299,10 @@ let columns = ref([
     field: "NroGuiaTransporte",
   },
   {
-    name: "NroLoteComecial",
-    label: "Nro Lote Comercial",
+    name: "valor",
+    label: "Valor",
     align: "center",
-    field: "NroLoteComecial",
+    field: "valor",
   },
   {
     name: "estado",
@@ -369,7 +369,7 @@ let nombre = ref("");
 let telefono = ref("");
 let cantidad = ref("");
 let NroGuiaTransporte = ref("");
-let NroLoteComecial = ref("");
+let valor = ref("");
 let estado = ref(1);
 
 let validaciones = () => {
@@ -410,8 +410,8 @@ let validaciones = () => {
     ocultar();
     return false;
   }
-  if(NroLoteComecial.value === "" || NroLoteComecial.value.trim() === "") {
-    text.value = "El Nro de Lote Comercial es obligatorio";
+  if(valor.value === "" || String(valor.value).trim() === "") {
+    text.value = "El valor es obligatorio";
     registroFallido.value = true;
     ocultar();
     return false;
@@ -426,7 +426,7 @@ let vaciarCampos = () => {
   telefono.value = "";
   cantidad.value = "";
   NroGuiaTransporte.value = "";
-  NroLoteComecial.value = "";
+  valor.value = "";
 };
 
 let produccion = ref([]);
@@ -456,7 +456,7 @@ let editar = async (data) => {
   telefono.value = data.telefono;
   cantidad.value = data.cantidad;
   NroGuiaTransporte.value = data.NroGuiaTransporte;
-  NroLoteComecial.value = data.NroLoteComecial;
+  valor.value = data.valor;
   formulario.value = true;
   spinner.value = false;
 }
@@ -473,7 +473,7 @@ let enviarCrear = async () => {
     telefono: telefono.value,
     cantidad: cantidad.value,
     NroGuiaTransporte: NroGuiaTransporte.value,
-    NroLoteComecial: NroLoteComecial.value,
+    valor: valor.value,
     estado: estado.value,
   };
   spinner.value = true;
@@ -497,7 +497,7 @@ let enviarEditar = async () => {
     telefono: telefono.value,
     cantidad: cantidad.value,
     NroGuiaTransporte: NroGuiaTransporte.value,
-    NroLoteComecial: NroLoteComecial.value,
+    valor: valor.value,
     estado: estado.value,
   };
   spinner.value = true;

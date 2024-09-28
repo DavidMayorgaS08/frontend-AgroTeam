@@ -16,8 +16,6 @@ import fertilizaciones from "../components/views/fertilizaciones.vue";
 import fincas from "../components/views/fincas.vue";
 import gastos from "../components/views/gastos.vue";
 import insumos from "../components/views/insumos.vue";
-import inventarios from "../components/views/inventarios.vue";
-import mantenimientos from "../components/views/mantenimientos.vue";
 import maquinariaHerramientas from "../components/views/maquinaria y herramientas.vue";
 import nominas from "../components/views/nominas.vue";
 import parcelas from "../components/views/parcelas.vue";
@@ -28,6 +26,16 @@ import proveedores from "../components/views/proveedores.vue";
 import riegos from "../components/views/riegos.vue";
 import semillas from "../components/views/semillas.vue";
 import siembras from "../components/views/siembras.vue";
+import { useLoginStore } from "../stores/login.js";
+
+const checkAuth = () => {
+    const loginStore = useLoginStore();
+    let token = loginStore.token;
+    console.log(loginStore.token);
+    if(!token) {
+        return "/";
+    }
+}
 
 const routes = [
     { path: "/",
@@ -41,15 +49,25 @@ const routes = [
     },
 
     {
-        path: "/NuevaContrasena",
+        path: "/NuevaContrasena/:token",
         name: "NuevaContrasena",
-        component: NuevaContrasena
+        component: NuevaContrasena,
+        beforeEnter: (to, from, next) => {
+            // Lógica para verificar el token o cualquier otra condición
+            const token = to.params.token;
+            if (token) {
+                next();
+            } else {
+                next({ name: 'login' });
+            }
+        }
     },
 
     {
         path: "/menu",
         name: "menu",
         component: menu,
+        beforeEnter: checkAuth,
         children: [
             {
                 path: "/administradores",
@@ -115,16 +133,6 @@ const routes = [
                 path: "/insumos",
                 name: "insumos",
                 component: insumos
-            },
-            {
-                path: "/inventarios",
-                name: "inventarios",
-                component: inventarios
-            },
-            {
-                path: "/mantenimientos",
-                name: "mantenimientos",
-                component: mantenimientos
             },
             {
                 path: "/maquinariaHerramientas",

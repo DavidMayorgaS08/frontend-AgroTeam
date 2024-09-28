@@ -74,18 +74,24 @@ export const useSiembrasStore = defineStore("siembras", () => {
         } 
     }
     
-    let postSiembras = async () => {
+    let postSiembras = async (siembras) => {
         try {
-            let res = await axios.post('/api/siembras', {
+            console.log("Token value:", token.value); // Verificar el valor del token
+            let res = await axios.post('/api/siembras', siembras, {
                 headers: {
                     "x-token": token.value
                 }
-            })
+            });
             console.log(res);
-            return res.data
-        } catch(error){
-            console.log(error);
-            return error
+            return res.data;
+        } catch (error) {
+            console.error("Error en la solicitud:", error); // Registro detallado del error
+            if (error.response) {
+                console.error("Datos de respuesta del error:", error.response.data);
+                console.error("Estado de respuesta del error:", error.response.status);
+                console.error("Encabezados de respuesta del error:", error.response.headers);
+            }
+            return error;
         }
     }
 

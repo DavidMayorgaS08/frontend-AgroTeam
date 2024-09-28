@@ -289,7 +289,7 @@
 import { onMounted, ref } from "vue";
 import { useFacturasStore } from "../../stores/facturas.js";
 import { useCompradores } from "../../stores/compradores.js";
-import { useInventarioStore } from "../../stores/inventario.js";
+// import { useInventarioStore } from "../../stores/inventario.js";
 
 let useFacturas = useFacturasStore();
 let useComprador = useCompradores();
@@ -344,6 +344,12 @@ let columns = ref([
       comprador = comprador.find((c) => c._id == row.id_comprador);
       return comprador.nombre;
     },
+  },
+  {
+    name: "NroLoteComercial",
+    label: "Numero Lote Comercial",
+    align: "center",
+    field: "NroLoteComercial",
   },
   {
     name: "estado",

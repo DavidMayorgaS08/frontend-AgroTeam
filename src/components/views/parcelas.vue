@@ -94,55 +94,55 @@
           <path
             transform="translate(503,426)"
             d="m0 0h18l15 3 12 5 13 8 13 11 449 449 4-2 453-453 14-10 12-6 14-4 7-1h18l15 3 12 5 13 8 13 11 8 10 8 13 5 13 3 15v15l-3 16-7 16-7 11-8 10h-2l-2 4-352 352h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-28 28h-2l-2 4-6 5-6 7-4 4h-2l-2 4-8 8h-2l-2 4-4 2v2h-2v2h-2l3 5 449 449 11 14 6 10 5 13 3 15v14l-3 16-5 13-8 14-9 11h-2l-1 3-13 10-16 8-16 4-7 1h-13l-13-2-10-3-12-6-11-8-457-457-4 1-8 7-5 6-7 6-5 6-7 6-5 6-7 6-5 6-7 6-5 6-6 5-6 7-6 5-6 7-6 5-6 7-6 5-6 7h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-272 272h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4h-2l-2 4-12 12h-2l-2 4h-2l-1 3-13 10-16 8-16 4-7 1h-13l-13-2-15-5-13-8-12-11-10-11-8-13-6-16-2-11v-18l3-14 5-13 7-12 11-13 450-450-1-4-455-455-10-14-5-11-4-13-1-6v-19l4-18 8-16 10-14 8-8 14-10 12-6 14-4z"
-            fill="#fff"
+            fill="#000"
           />
         </svg>
         <div class="titulo_form">
           <p v-if="variable === 0" class="text_titulo_form">crear parcela</p>
           <p v-else class="text_titulo_form">editar parcela</p>
         </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">numero</p>
-          <input type="Number" class="inputs" v-model="numero">
+        <div class="part1">
+          <div class="cont_inputs">
+            <p class="text_inputs">numero</p>
+            <input type="Number" class="inputs" v-model="numero">
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">ubicación geográfica</p>
+            <input type="text" class="inputs" v-model="ubicacionGeografica">
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">cultivo anterior</p>
+            <input type="text" class="inputs" v-model="cultivoAnterior">
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">cultivo actual</p>
+            <input type="text" class="inputs" v-model="cultivoActual">
+          </div>
         </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">ubicación geográfica</p>
-          <input type="text" class="inputs" v-model="ubicacionGeografica">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">cultivo anterior</p>
-          <input type="text" class="inputs" v-model="cultivoAnterior">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">cultivo actual</p>
-          <input type="text" class="inputs" v-model="cultivoActual">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">detalles</p>
-          <input type="text" class="inputs" v-model="detalles">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">área</p>
-          <input type="text" class="inputs" v-model="area">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">asistente técnico</p>
-          <input type="text" class="inputs" v-model="asistenteTecnico">
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">finca</p>
-          <select required v-model="fincaOption">
-            <option value="" disabled selected hidden></option>
-            <option
-            v-for="(finca, index) in fincas"
-            :key="finca._id"
-            :value="index + 1"
-            >{{ finca.nombre }}</option>
-          </select>
-        </div>
-        <div class="cont_inputs">
-          <p class="text_inputs">fecha de creacion</p>
-          <input type="date" class="inputs" v-model="fechaCreacion">
+        <div class="part2">
+          <div class="cont_inputs">
+            <p class="text_inputs">detalles</p>
+            <input type="text" class="inputs" v-model="detalles">
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">área</p>
+            <input type="text" class="inputs" v-model="area">
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">asistente técnico</p>
+            <input type="text" class="inputs" v-model="asistenteTecnico">
+          </div>
+          <div class="cont_inputs">
+            <p class="text_inputs">finca</p>
+            <select required v-model="fincaOption">
+              <option value="" disabled selected hidden></option>
+              <option
+              v-for="(finca, index) in fincas"
+              :key="finca._id"
+              :value="index + 1"
+              >{{ finca.nombre }}</option>
+            </select>
+          </div>
         </div>
         <div class="cont_btn_form">
           <button
@@ -304,12 +304,6 @@ let columns = ref([
     },
   },
   {
-    name: "fecha_Creacion",
-    label: "Fecha de creación",
-    align: "center",
-    field: (row) => row.fecha_Creacion.split("T")[0],
-  },
-  {
     name: "estado",
     label: "Estado",
     align: "center",
@@ -375,7 +369,6 @@ let detalles = ref("");
 let area = ref("");
 let asistenteTecnico = ref("");
 let fincaOption = ref("");
-let fechaCreacion = ref("");
 let estado = ref(1);
 
 let validaciones = () => {
@@ -427,12 +420,6 @@ let validaciones = () => {
     ocultar();
     return false;
   }
-  if(fechaCreacion.value === "" || fechaCreacion.value.trim() === ""){
-    text.value = "La fecha de creación es obligatoria";
-    registroFallido.value = true;
-    ocultar();
-    return false;
-  }
 }
 
 let vaciarCampos = () => {
@@ -444,7 +431,6 @@ let vaciarCampos = () => {
   area.value = "";
   asistenteTecnico.value = "";
   fincaOption.value = "";
-  fechaCreacion.value = "";
 };
 
 let fincas = ref([]);
@@ -475,7 +461,6 @@ let editar = async (data) => {
   area.value = data.area;
   asistenteTecnico.value = data.asistenteTecnico;
   fincaOption.value = fincas.value.findIndex((f) => f._id == data.id_finca) + 1;
-  fechaCreacion.value = data.fecha_Creacion.split("T")[0];
   formulario.value = true;
   spinner.value = false;
 }
@@ -493,7 +478,6 @@ let enviarCrear = async () => {
     area: area.value,
     asistenteTecnico: asistenteTecnico.value,
     id_finca: fincas.value[fincaOption.value - 1]._id,
-    fecha_Creacion: fechaCreacion.value,
     estado: estado.value,
   };
   spinner.value = true;
@@ -518,7 +502,6 @@ let enviarEditar = async () => {
     area: area.value,
     asistenteTecnico: asistenteTecnico.value,
     id_finca: fincas.value[fincaOption.value - 1]._id,
-    fecha_Creacion: fechaCreacion.value,
     estado: estado.value,
   };
   spinner.value = true;
@@ -758,6 +741,7 @@ onMounted(() => {
 .error__close path {
   fill: #71192f;
 }
+
 .cont_btns {
   display: flex;
   justify-content: center;
@@ -783,8 +767,8 @@ onMounted(() => {
 }
 
 .btn:hover {
-  background-color: #e9b27c;
-  box-shadow: 0px 15px 20px #eed37a;
+  background-color: #2e7d32;
+  box-shadow: 0px 15px 20px #61ca66;
   color: #fff;
   transform: translateY(-7px);
 }
@@ -817,16 +801,34 @@ onMounted(() => {
 
 .form {
   margin-top: 35px;
-  width: 28%;
-  height: 80%;
-  background: #e9b27c;
+  width: 50%;
+  height: 70%;
+  background: #ffffff;
   border-radius: 10px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
-  margin-right: 10px;
+}
+
+.part1 {
+  width: 50%;
+  height: 65%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-left: 10px;
+}
+
+.part2 {
+  width: 50%;
+  height: 65%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-right: 10px;
 }
 
 .cerrarForm {
@@ -839,6 +841,10 @@ onMounted(() => {
 
 .titulo_form {
   margin-top: 20px;
+  position: absolute;
+  top: 2%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .text_titulo_form {
@@ -860,18 +866,16 @@ onMounted(() => {
 /* Estilo para inputs y select */
 .inputs,
 select {
-  width: 75%;
-  padding: 10px;
+  width: 85%;
   border: none;
   outline: none;
   background: none;
-  border-bottom: 2px solid #f4f4f4;
-  transition: border-color 0.5s ease;
+  border-bottom: 1px solid #000000;
 }
 
 .inputs:focus,
 select:focus {
-  border-bottom-color: #000000;
+  border-bottom: 2px solid #2e7d32;
 }
 
 select {
@@ -886,31 +890,35 @@ select {
 }
 
 .text_inputs {
-  font-size: 12px;
+  font-size: 14px;
   text-transform: uppercase;
   font-weight: bold;
   position: absolute;
   top: 5%;
-  left: 14%;
+  left: 7%;
 }
 
 .cont_btn_form {
-  margin: 16px 0;
+  margin: 20px 0;
+  position: absolute;
+  bottom: 2%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .btn_form {
   padding: 14px 25px;
   border: none;
   border-radius: 25px;
-  font-size: 13px;
+  font-size: 14px;
   cursor: pointer;
   text-transform: uppercase;
-  box-shadow: 0px 8px 15px #0000001a;
   transition: all 0.3s ease;
-  background-color: #f6e4ab;
+  background-color: #2e7d32;
+  color: #ffffff;
 }
 
 .btn_form:hover {
-  background-color: #eed37a;
+  background-color: #589f5c;
 }
 </style>
