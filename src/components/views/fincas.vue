@@ -97,7 +97,6 @@
             fill="#000"
           />
         </svg>
-<<<<<<< HEAD
         <div class="part1">
           <div class="titulo_form">
             <p v-if="variable === 0" class="text_titulo_form">crear</p>
@@ -138,11 +137,6 @@
             <p class="text_inputs">ciudad</p>
             <input type="text" class="inputs" v-model="ciudad">
           </div>
-=======
-        <div class="titulo_form">
-          <p v-if="variable === 0" class="text_titulo_form">crear finca</p>
-          <p v-else class="text_titulo_form">editar finca</p>
->>>>>>> origin/David
         </div>
         <div class="part2">
           <div class="cont_inputs">
