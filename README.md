@@ -1,5 +1,3 @@
 # Sistema de Buenas Prácticas Agrícolas
 
-Descripción del Proyecto
-
-Características del Sistema
+Software desarrollado y enfocado en el control y apoyo para la certificación de agricultores en buenas prácticas agrícolas
