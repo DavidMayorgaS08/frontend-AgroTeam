@@ -10,7 +10,7 @@
         </label>
       </div>
       <div class="cont_perfil" @click="perfil()">
-        <input id="checkbox2" type="checkbox" v-model="isChecked2">
+        <input id="checkbox2" type="checkbox" v-model="isChecked2" />
         <svg
           for="checkbox2"
           version="1.1"
@@ -118,7 +118,9 @@
       </div>
       <div>
         <button class="btn" @click="cultivo()">Cultivos</button>
-        <button class="btn" @click="elaboracionSustrato()">Elaboración Sustratos</button>
+        <button class="btn" @click="elaboracionSustrato()">
+          Elaboración Sustratos
+        </button>
         <button class="btn" @click="empleado()">Empleados</button>
         <button class="btn" @click="factura()">Facturas</button>
         <button class="btn" @click="fertilizacion()">Fertilizaciones</button>
@@ -127,12 +129,16 @@
         <button class="btn" @click="finca()">Fincas</button>
         <button class="btn" @click="gasto()">Gastos</button>
         <button class="btn" @click="insumo()">Insumos</button>
-        <button class="btn" @click="maquinariaHerramienta()">Maquinaria y Herramientas</button>
+        <button class="btn" @click="maquinariaHerramienta()">
+          Maquinaria y Herramientas
+        </button>
         <button class="btn" @click="nomina()">Nominas</button>
       </div>
       <div>
         <button class="btn" @click="parcela()">Parcelas</button>
-        <button class="btn" @click="preparacionSuelo()">Preparación Suelos</button>
+        <button class="btn" @click="preparacionSuelo()">
+          Preparación Suelos
+        </button>
         <button class="btn" @click="proceso()">Procesos</button>
         <button class="btn" @click="produccion()">Producciones</button>
         <button class="btn" @click="proveedor()">Proveedores</button>
@@ -143,9 +149,12 @@
         <button class="btn" @click="siembra()">Siembras</button>
       </div>
     </div>
-    <div class="cont_perfil_desplegable" :class="{ cont_perfil2: true, 'perfil2-open': perfilOpen }">
+    <div
+      class="cont_perfil_desplegable"
+      :class="{ cont_perfil2: true, 'perfil2-open': perfilOpen }"
+    >
       <div class="cont_nombre">
-        <p class="text_nombre">Jesus</p>
+        <p class="text_nombre">{{ nombre }}</p>
       </div>
       <div class="cont_rol">
         <p class="text_rol">Administrador</p>
@@ -159,6 +168,12 @@
 <script setup>
 import { ref } from "vue";
 import { router } from "../../routes/routes";
+import { useLoginStore } from "../../stores/login.js";
+
+let login = useLoginStore();
+
+let nombre = login.user.nombre
+
 
 let menuOpen = ref(false);
 let isChecked = ref(false);
@@ -183,7 +198,7 @@ let adiministradores = () => {
 };
 
 let administrador = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/administradores");
 };
@@ -195,7 +210,7 @@ let analisisSuelos = () => {
 };
 
 let analisisSuelo = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/analisisSuelos");
 };
@@ -207,7 +222,7 @@ let climas = () => {
 };
 
 let clima = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/climas");
 };
@@ -219,7 +234,7 @@ let compradores = () => {
 };
 
 let comprador = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/compradores");
 };
@@ -231,7 +246,7 @@ let controlPlagas = () => {
 };
 
 let controlPlaga = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/controlPlagas");
 };
@@ -243,7 +258,7 @@ let cultivos = () => {
 };
 
 let cultivo = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/cultivos");
 };
@@ -255,7 +270,7 @@ let elaboracionSustratos = () => {
 };
 
 let elaboracionSustrato = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/elaboracionSustratos");
 };
@@ -267,7 +282,7 @@ let empleados = () => {
 };
 
 let empleado = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/empleados");
 };
@@ -279,7 +294,7 @@ let facturas = () => {
 };
 
 let factura = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/facturas");
 };
@@ -291,7 +306,7 @@ let fertilizaciones = () => {
 };
 
 let fertilizacion = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/fertilizaciones");
 };
@@ -303,7 +318,7 @@ let fincas = () => {
 };
 
 let finca = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/fincas");
 };
@@ -315,7 +330,7 @@ let gastos = () => {
 };
 
 let gasto = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/gastos");
 };
@@ -327,7 +342,7 @@ let insumos = () => {
 };
 
 let insumo = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/insumos");
 };
@@ -339,7 +354,7 @@ let inventarios = () => {
 };
 
 let inventario = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/inventarios");
 };
@@ -351,7 +366,7 @@ let mantenimientos = () => {
 };
 
 let mantenimiento = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/mantenimientos");
 };
@@ -363,7 +378,7 @@ let maquinariasHerramientas = () => {
 };
 
 let maquinariaHerramienta = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/maquinariaHerramientas");
 };
@@ -375,7 +390,7 @@ let nominas = () => {
 };
 
 let nomina = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/nominas");
 };
@@ -387,7 +402,7 @@ let parcelas = () => {
 };
 
 let parcela = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/parcelas");
 };
@@ -399,7 +414,7 @@ let preparacionSuelos = () => {
 };
 
 let preparacionSuelo = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/preparcionSuelos");
 };
@@ -411,7 +426,7 @@ let procesos = () => {
 };
 
 let proceso = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/procesos");
 };
@@ -423,7 +438,7 @@ let producciones = () => {
 };
 
 let produccion = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/producciones");
 };
@@ -435,7 +450,7 @@ let proveedores = () => {
 };
 
 let proveedor = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/proveedores");
 };
@@ -447,7 +462,7 @@ let riegos = () => {
 };
 
 let riego = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/riegos");
 };
@@ -459,7 +474,7 @@ let semillas = () => {
 };
 
 let semilla = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/semillas");
 };
@@ -471,7 +486,7 @@ let siembras = () => {
 };
 
 let siembra = () => {
-  menu()
+  menu();
   isChecked.value = false;
   router.push("/siembras");
 };
@@ -480,7 +495,6 @@ let cerrarSesion = () => {
   localStorage.removeItem("login");
   router.push("/");
 };
-
 </script>
   <style scoped>
 * {
@@ -490,348 +504,348 @@ let cerrarSesion = () => {
 }
 
 .cards1 {
-    background-color: #ffffff;
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    position: relative;
-    transition: all 0.2s ease-in-out;
-    background-image: url("src/img/admin.jpeg");
-    background-position: center;
-    background-size: cover;
-  }
-  .cards2 {
-    background-color: #ffffff;
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    position: relative;
-    transition: all 0.2s ease-in-out;
-    background-image: url("src/img/anasuelos.jpg");
-    background-position: center;
-    background-size: cover;
-  }
-  
-  .cards3 {
-    background-color: #ffffff;
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    position: relative;
-    transition: all 0.2s ease-in-out;
-    background-image: url("src/img/climas.jpg");
-    background-position: center;
-    background-size: cover;
-  }
-  
-  .cards4 {
-    background-color: #ffffff;
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    position: relative;
-    transition: all 0.2s ease-in-out;
-    background-image: url("src/img/compradores.jpg");
-    background-position: center;
-    background-size: cover;
-  }
+  background-color: #ffffff;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  background-image: url("../../img/admin.jpeg");
+  background-position: center;
+  background-size: cover;
+}
+.cards2 {
+  background-color: #ffffff;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  background-image: url("../../img/anasuelos.jpg");
+  background-position: center;
+  background-size: cover;
+}
 
-  .cards5 {
-    background-color: #ffffff;
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    position: relative;
-    transition: all 0.2s ease-in-out;
-    background-image: url("src/img/plagas.jpg");
-    background-position: center;
-    background-size: cover;
-  }
+.cards3 {
+  background-color: #ffffff;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  background-image: url("../../img/climas.jpg");
+  background-position: center;
+  background-size: cover;
+}
 
-  .cards6 {
-    background-color: #ffffff;
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    position: relative;
-    transition: all 0.2s ease-in-out;
-    background-image: url("src/img/cultivos.jpg");
-    background-position: center;
-    background-size: cover;
-  }
+.cards4 {
+  background-color: #ffffff;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  background-image: url("../../img/compradores.jpg");
+  background-position: center;
+  background-size: cover;
+}
 
-  .cards7 {
-    background-color: #ffffff;
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    position: relative;
-    transition: all 0.2s ease-in-out;
-    background-image: url("src/img/sustratos.jpg");
-    background-position: center;
-    background-size: cover;
-  }
+.cards5 {
+  background-color: #ffffff;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  background-image: url("../../img/plagas.jpg");
+  background-position: center;
+  background-size: cover;
+}
 
-  .cards8 {
-    background-color: #ffffff;
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    position: relative;
-    transition: all 0.2s ease-in-out;
-    background-image: url("src/img/empleados.webp");
-    background-position: center;
-    background-size: cover;
-  }
+.cards6 {
+  background-color: #ffffff;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  background-image: url("../../img/cultivos.jpg");
+  background-position: center;
+  background-size: cover;
+}
 
-  .cards9 {
-    background-color: #ffffff;
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    position: relative;
-    transition: all 0.2s ease-in-out;
-    background-image: url("src/img/fact.jpeg");
-    background-position: center;
-    background-size: cover;
-  }
+.cards7 {
+  background-color: #ffffff;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  background-image: url("../../img/sustratos.jpg");
+  background-position: center;
+  background-size: cover;
+}
 
-  .cards10 {
-    background-color: #ffffff;
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    position: relative;
-    transition: all 0.2s ease-in-out;
-    background-image: url("src/img/fertilizantes.jpg");
-    background-position: center;
-    background-size: cover;
-  }
+.cards8 {
+  background-color: #ffffff;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  background-image: url("../../img/empleados.webp");
+  background-position: center;
+  background-size: cover;
+}
 
-  .cards11 {
-    background-color: #ffffff;
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    position: relative;
-    transition: all 0.2s ease-in-out;
-    background-image: url("src/img/finca.webp");
-    background-position: center;
-    background-size: cover;
-  }
+.cards9 {
+  background-color: #ffffff;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  background-image: url("../../img/fact.jpeg");
+  background-position: center;
+  background-size: cover;
+}
 
-  .cards12 {
-    background-color: #ffffff;
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    position: relative;
-    transition: all 0.2s ease-in-out;
-    background-image: url("src/img/gastos.avif");
-    background-position: center;
-    background-size: cover;
-  }
+.cards10 {
+  background-color: #ffffff;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  background-image: url("../../img/fertilizantes.jpg");
+  background-position: center;
+  background-size: cover;
+}
 
-  .cards13 {
-    background-color: #ffffff;
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    position: relative;
-    transition: all 0.2s ease-in-out;
-    background-image: url("src/img/insumos.webp");
-    background-position: center;
-    background-size: cover;
-  }
+.cards11 {
+  background-color: #ffffff;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  background-image: url("../../img/finca.webp");
+  background-position: center;
+  background-size: cover;
+}
 
-  .cards16 {
-    background-color: #ffffff;
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    position: relative;
-    transition: all 0.2s ease-in-out;
-    background-image: url("src/img/maquinaria.jpg");
-    background-position: center;
-    background-size: cover;
-  }
+.cards12 {
+  background-color: #ffffff;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  background-image: url("../../img/gastos.avif");
+  background-position: center;
+  background-size: cover;
+}
 
-  .cards17 {
-    background-color: #ffffff;
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    position: relative;
-    transition: all 0.2s ease-in-out;
-    background-image: url("src/img/nomina.jpg");
-    background-position: center;
-    background-size: cover;
-  }
+.cards13 {
+  background-color: #ffffff;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  background-image: url("../../img/insumos.webp");
+  background-position: center;
+  background-size: cover;
+}
 
-  .cards18 {
-    background-color: #ffffff;
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    position: relative;
-    transition: all 0.2s ease-in-out;
-    background-image: url("src/img/parcelas.avif");
-    background-position: center;
-    background-size: cover;
-  }
+.cards16 {
+  background-color: #ffffff;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  background-image: url("../../img/maquinaria.jpg");
+  background-position: center;
+  background-size: cover;
+}
 
-  .cards19 {
-    background-color: #ffffff;
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    position: relative;
-    transition: all 0.2s ease-in-out;
-    background-image: url("src/img/suelos.jpg");
-    background-position: center;
-    background-size: cover;
-  }
+.cards17 {
+  background-color: #ffffff;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  background-image: url("../../img/nomina.jpg");
+  background-position: center;
+  background-size: cover;
+}
 
-  .cards20 {
-    background-color: #ffffff;
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    position: relative;
-    transition: all 0.2s ease-in-out;
-    background-image: url("src/img/procesos.JPG");
-    background-position: center;
-    background-size: cover;
-  }
+.cards18 {
+  background-color: #ffffff;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  background-image: url("../../img/parcelas.avif");
+  background-position: center;
+  background-size: cover;
+}
 
-  .cards21 {
-    background-color: #ffffff;
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    position: relative;
-    transition: all 0.2s ease-in-out;
-    background-image: url("src/img/produccion.jpeg");
-    background-position: center;
-    background-size: cover;
-  }
+.cards19 {
+  background-color: #ffffff;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  background-image: url("../../img/suelos.jpg");
+  background-position: center;
+  background-size: cover;
+}
 
-  .cards22 {
-    background-color: #ffffff;
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    position: relative;
-    transition: all 0.2s ease-in-out;
-    background-image: url("src/img/proveedores.jpg");
-    background-position: center;
-    background-size: cover;
-  }
+.cards20 {
+  background-color: #ffffff;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  background-image: url("../../img/procesos.JPG");
+  background-position: center;
+  background-size: cover;
+}
 
-  .cards23 {
-    background-color: #ffffff;
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    position: relative;
-    transition: all 0.2s ease-in-out;
-    background-image: url("src/img/riego.avif");
-    background-position: center;
-    background-size: cover;
-  }
+.cards21 {
+  background-color: #ffffff;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  background-image: url("../../img/produccion.jpeg");
+  background-position: center;
+  background-size: cover;
+}
 
-  .cards24 {
-    background-color: #ffffff;
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    position: relative;
-    transition: all 0.2s ease-in-out;
-    background-image: url("src/img/semillas.jpg");
-    background-position: center;
-    background-size: cover;
-  }
+.cards22 {
+  background-color: #ffffff;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  background-image: url("../../img/proveedores.jpg");
+  background-position: center;
+  background-size: cover;
+}
 
-  .cards25 {
-    background-color: #ffffff;
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    position: relative;
-    transition: all 0.2s ease-in-out;
-    background-image: url("src/img/siembra.webp");
-    background-position: center;
-    background-size: cover;
-  }
+.cards23 {
+  background-color: #ffffff;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  background-image: url("../../img/riego.avif");
+  background-position: center;
+  background-size: cover;
+}
+
+.cards24 {
+  background-color: #ffffff;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  background-image: url("../../img/semillas.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.cards25 {
+  background-color: #ffffff;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  background-image: url("../../img/siembra.webp");
+  background-position: center;
+  background-size: cover;
+}
 
 .cards:hover {
   cursor: pointer;
@@ -984,7 +998,6 @@ let cerrarSesion = () => {
   margin-top: 70px;
 }
 
-
 .cont_menu_lateral {
   width: 100%;
   background-color: #2e7d32;
@@ -1063,14 +1076,15 @@ let cerrarSesion = () => {
   clip-path: circle(141.2% at 100% 0);
 }
 
-.cont_nombre, .cont_rol {
+.cont_nombre,
+.cont_rol {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 45px;
 }
 
-.cont_salir{
+.cont_salir {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1105,71 +1119,77 @@ let cerrarSesion = () => {
   background-color: #e3e3e3;
 }
 
-@media(max-width: 1440px){
-.text_card {
-  font-size: 27px;
-}
-}
-
-@media(max-width: 1366px){
-  .cont {
-  grid-template-columns: repeat(4, 1fr);
-}
-}
-
-@media(max-width: 1000px){
-.text_card {
-  font-size: 24px;
-}
-}
-
-@media(max-width: 900px){
-  .cont {
-  grid-template-columns: repeat(3, 1fr);
-}
-.cont_menu_lateral {
-  grid-template-columns: repeat(2, 1fr);
-  overflow-y: auto;
-  height: calc(100vh - 70px);
-}
-.cont_perfil_desplegable {
-  width: 20%;
-}
-}
-
-@media(max-width: 700px){
+@media (max-width: 1440px) {
   .text_card {
-  font-size: 21px;
-}
-.cont_perfil_desplegable {
-  width: 35%;
-}
+    font-size: 27px;
+  }
 }
 
-@media(max-width: 600px){
+@media (max-width: 1366px) {
   .cont {
-  grid-template-columns: repeat(2, 1fr);
-}
-.cont_perfil_desplegable {
-  width: 40%;
-}
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
-@media(max-width: 450px){
-.cont_perfil_desplegable {
-  width: 45%;
-}
+@media (max-width: 1000px) {
+  .text_card {
+    font-size: 24px;
+  }
 }
 
-@media(max-width: 400px){
+@media (max-width: 900px) {
   .cont {
-  grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .cont_menu_lateral {
+    grid-template-columns: repeat(2, 1fr);
+    overflow-y: auto;
+    height: calc(100vh - 70px);
+  }
+
+  .cont_perfil_desplegable {
+    width: 20%;
+  }
 }
-.cont_menu_lateral {
-  grid-template-columns: repeat(1, 1fr);
+
+@media (max-width: 700px) {
+  .text_card {
+    font-size: 21px;
+  }
+
+  .cont_perfil_desplegable {
+    width: 35%;
+  }
 }
-.cont_perfil_desplegable {
-  width: 50%;
+
+@media (max-width: 600px) {
+  .cont {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cont_perfil_desplegable {
+    width: 40%;
+  }
 }
+
+@media (max-width: 450px) {
+  .cont_perfil_desplegable {
+    width: 45%;
+  }
+}
+
+@media (max-width: 400px) {
+  .cont {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .cont_menu_lateral {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  
+  .cont_perfil_desplegable {
+    width: 50%;
+  }
 }
 </style>

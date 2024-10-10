@@ -139,17 +139,17 @@
             <p class="text_inputs">Teléfono</p>
             <input type="text" class="inputs" v-model="telefono" />
           </div>
+        </div>
+        <div class="part2">
           <div class="cont_inputs">
             <p class="text_inputs">Correo</p>
             <input type="text" class="inputs" v-model="email" />
           </div>
-        </div>
-        <div class="part2">
           <div class="cont_inputs">
             <p class="text_inputs">Municipio</p>
             <input type="text" class="inputs" v-model="municipio" />
           </div>
-          <div class="cont_inputs">
+          <div class="cont_inputs" v-if="contraseña">
             <p class="text_inputs">Contraseña</p>
             <input type="text" class="inputs" v-model="password" />
           </div>
@@ -158,9 +158,6 @@
             <select required v-model="rol">
               <option value="" disabled selected hidden></option>
               <option value="1">Administrador</option>
-              <option value="2">Usuario 1</option>
-              <option value="3">Usuario 2</option>
-              <option value="4">Usuario 3</option>
             </select>
           </div>
         </div>
@@ -353,7 +350,8 @@ let activar = async (administrador) => {
 
 let desactivar = async (administrador) => {
   if (administrador._id == "66ef4fa68162daaf761cc924") {
-    alert("No se puede desactivar este administrador");
+    text.value = "No se puede desactivar este administrador";
+    registroFallido.value = true;
     return;
   } else {
     spinner.value = true;
@@ -383,10 +381,6 @@ let estado = ref(1);
 function validarFormatoEmail(email) {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return regex.test(email);
-}
-function validpassword(password) {
-  const regex = /^(?=(?:[^A-Za-z]*[A-Za-z]){3})(?=(?:[^\d]*\d){3})[A-Za-z\dñÑáéíóúÁÉÍÓÚüÜ]{6,}$/;
-  return regex.test(password);
 }
 
 let validaciones = () => {
@@ -437,19 +431,6 @@ let validaciones = () => {
     ocultar();
     return false;
   }
-  if (password.value === "" || password.value.trim() === "") {
-    text.value = "La contraseña es obligatoria";
-    registroFallido.value = true;
-    ocultar();
-    return false;
-  }
-  if (!validpassword(password.value)) {
-  console.log('La contraseña no cumple con los requisitos');
-   text.value = "La contraseña debe tener al menos 3 números y 3 letras";
-    registroFallido.value = true;
-    ocultar();
-    return false;
-  };
   if (rol.value === "" || String(rol.value).trim() === "") {
     text.value = "El rol es obligatorio";
     registroFallido.value = true;
@@ -838,7 +819,7 @@ onMounted(() => {
 
 .part1 {
   width: 50%;
-  height: 65%;
+  height: 55%;
   display: flex;
   flex-direction: column;
   align-items: center;
